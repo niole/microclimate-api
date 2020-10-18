@@ -1,11 +1,11 @@
 package main
 
 import (
+	pb "api/protobuf/tutorial/tutorialpb"
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"io/ioutil"
 	"log"
-	pb "protobuf/tutorial/tutorialpb"
 	"rsc.io/quote"
 )
 
