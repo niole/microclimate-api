@@ -2,16 +2,17 @@ package main
 
 import (
 	pb "api/protobuf/tutorial/tutorialpb"
+	"context"
 	"fmt"
-	"github.com/golang/protobuf/proto"
-	"io/ioutil"
+	"google.golang.org/grpc"
 	"log"
 	"rsc.io/quote"
+	"time"
 )
 
 func main() {
 	fmt.Println(quote.Go())
-	p := &pb.AddressBook{
+	addressbook := &pb.AddressBook{
 		People: []*pb.Person{{
 			Id:    1234,
 			Name:  "John Doe",
@@ -23,14 +24,17 @@ func main() {
 		},
 	}
 
-	fmt.Println(p)
-
-	out, err := proto.Marshal(p)
+	opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
+	serverAddr := fmt.Sprintf("localhost:%d", 6000)
+	conn, err := grpc.Dial(serverAddr, opts...)
 	if err != nil {
-		log.Fatalln("Failed to encode address book:", err)
+		log.Fatalf("fail to dial: %v", err)
 	}
-	fname := "/tmp/cat.txt"
-	if err := ioutil.WriteFile(fname, out, 0644); err != nil {
-		log.Fatalln("Failed to write address book:", err)
-	}
+	defer conn.Close()
+	client := pb.NewSearchServiceClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	fmt.Println(cancel)
+	person, err := client.Search(ctx, addressbook)
+	fmt.Println(person)
+	fmt.Println(err)
 }
