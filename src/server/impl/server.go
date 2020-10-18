@@ -9,12 +9,13 @@ import (
 	"net"
 )
 
-var port int = 10000
+var port int = 6000
 
 type searchServiceServer struct {
+	pb.UnimplementedSearchServiceServer
 }
 
-func (s *searchServiceServer) Search(context.Context, *pb.AddressBook) (*pb.Person, error) {
+func (s searchServiceServer) Search(context.Context, *pb.AddressBook) (*pb.Person, error) {
 	return &pb.Person{
 		Name:  "niole",
 		Id:    123,
@@ -23,9 +24,6 @@ func (s *searchServiceServer) Search(context.Context, *pb.AddressBook) (*pb.Pers
 			{Number: "123", Type: pb.Person_MOBILE},
 		},
 	}, nil
-}
-
-func (s *searchServiceServer) mustEmbedUnimplementedSearchServiceServer() {
 }
 
 func newServer() searchServiceServer {
