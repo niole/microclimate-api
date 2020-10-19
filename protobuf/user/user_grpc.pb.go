@@ -18,10 +18,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
-	UpdateUserEmail(ctx context.Context, in *NewUserEmail, opts ...grpc.CallOption) (*User, error)
-	UpdateUserDeployment(ctx context.Context, in *NewDeploymentDomain, opts ...grpc.CallOption) (*User, error)
-	RemoveUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*apipb.Empty, error)
+	CreateUser(ctx context.Context, in *NewUser, opts ...grpc.CallOption) (*User, error)
+	UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*User, error)
+	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*apipb.Empty, error)
 }
 
 type userServiceClient struct {
@@ -32,7 +31,7 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
 }
 
-func (c *userServiceClient) CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error) {
+func (c *userServiceClient) CreateUser(ctx context.Context, in *NewUser, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, "/api.UserService/CreateUser", in, out, opts...)
 	if err != nil {
@@ -41,7 +40,7 @@ func (c *userServiceClient) CreateUser(ctx context.Context, in *User, opts ...gr
 	return out, nil
 }
 
-func (c *userServiceClient) UpdateUserEmail(ctx context.Context, in *NewUserEmail, opts ...grpc.CallOption) (*User, error) {
+func (c *userServiceClient) UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, "/api.UserService/UpdateUserEmail", in, out, opts...)
 	if err != nil {
@@ -50,16 +49,7 @@ func (c *userServiceClient) UpdateUserEmail(ctx context.Context, in *NewUserEmai
 	return out, nil
 }
 
-func (c *userServiceClient) UpdateUserDeployment(ctx context.Context, in *NewDeploymentDomain, opts ...grpc.CallOption) (*User, error) {
-	out := new(User)
-	err := c.cc.Invoke(ctx, "/api.UserService/UpdateUserDeployment", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) RemoveUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*apipb.Empty, error) {
+func (c *userServiceClient) RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*apipb.Empty, error) {
 	out := new(apipb.Empty)
 	err := c.cc.Invoke(ctx, "/api.UserService/RemoveUser", in, out, opts...)
 	if err != nil {
@@ -72,10 +62,9 @@ func (c *userServiceClient) RemoveUser(ctx context.Context, in *User, opts ...gr
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
-	CreateUser(context.Context, *User) (*User, error)
-	UpdateUserEmail(context.Context, *NewUserEmail) (*User, error)
-	UpdateUserDeployment(context.Context, *NewDeploymentDomain) (*User, error)
-	RemoveUser(context.Context, *User) (*apipb.Empty, error)
+	CreateUser(context.Context, *NewUser) (*User, error)
+	UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*User, error)
+	RemoveUser(context.Context, *RemoveUserRequest) (*apipb.Empty, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -83,16 +72,13 @@ type UserServiceServer interface {
 type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) CreateUser(context.Context, *User) (*User, error) {
+func (UnimplementedUserServiceServer) CreateUser(context.Context, *NewUser) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (UnimplementedUserServiceServer) UpdateUserEmail(context.Context, *NewUserEmail) (*User, error) {
+func (UnimplementedUserServiceServer) UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserEmail not implemented")
 }
-func (UnimplementedUserServiceServer) UpdateUserDeployment(context.Context, *NewDeploymentDomain) (*User, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserDeployment not implemented")
-}
-func (UnimplementedUserServiceServer) RemoveUser(context.Context, *User) (*apipb.Empty, error) {
+func (UnimplementedUserServiceServer) RemoveUser(context.Context, *RemoveUserRequest) (*apipb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveUser not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
@@ -109,7 +95,7 @@ func RegisterUserServiceServer(s *grpc.Server, srv UserServiceServer) {
 }
 
 func _UserService_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+	in := new(NewUser)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -121,13 +107,13 @@ func _UserService_CreateUser_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/api.UserService/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CreateUser(ctx, req.(*User))
+		return srv.(UserServiceServer).CreateUser(ctx, req.(*NewUser))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_UpdateUserEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewUserEmail)
+	in := new(UpdateUserEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -139,31 +125,13 @@ func _UserService_UpdateUserEmail_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/api.UserService/UpdateUserEmail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UpdateUserEmail(ctx, req.(*NewUserEmail))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_UpdateUserDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewDeploymentDomain)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).UpdateUserDeployment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.UserService/UpdateUserDeployment",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UpdateUserDeployment(ctx, req.(*NewDeploymentDomain))
+		return srv.(UserServiceServer).UpdateUserEmail(ctx, req.(*UpdateUserEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_RemoveUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+	in := new(RemoveUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -175,7 +143,7 @@ func _UserService_RemoveUser_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/api.UserService/RemoveUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).RemoveUser(ctx, req.(*User))
+		return srv.(UserServiceServer).RemoveUser(ctx, req.(*RemoveUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -191,10 +159,6 @@ var _UserService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserEmail",
 			Handler:    _UserService_UpdateUserEmail_Handler,
-		},
-		{
-			MethodName: "UpdateUserDeployment",
-			Handler:    _UserService_UpdateUserDeployment_Handler,
 		},
 		{
 			MethodName: "RemoveUser",

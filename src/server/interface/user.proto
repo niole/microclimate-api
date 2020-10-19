@@ -8,20 +8,23 @@ option go_package = "protobuf/user";
 message User {
   int32 id = 1;
   string email = 2;
-  string deployment_domain = 3;
 }
 
-message NewUserEmail {
+message NewUser {
   string email = 1;
 }
 
-message NewDeploymentDomain {
-  string domain = 1;
+message UpdateUserEmailRequest {
+  int32 userId = 1;
+  string email = 2;
+}
+
+message RemoveUserRequest {
+  int32 userId = 1;
 }
 
 service UserService {
-  rpc CreateUser(User) returns (User);
-  rpc UpdateUserEmail(NewUserEmail) returns (User);
-  rpc UpdateUserDeployment(NewDeploymentDomain) returns (User);
-  rpc RemoveUser(User) returns (Empty);
+  rpc CreateUser(NewUser) returns (User);
+  rpc UpdateUserEmail(UpdateUserEmailRequest) returns (User);
+  rpc RemoveUser(RemoveUserRequest) returns (Empty);
 }

@@ -15,5 +15,8 @@
 
 - has peripherals, has a deployment, has an email address
 - add new user
-- update deployment metadata
 - update email address
+
+# Deployment
+- create deployment for user
+- has domain, user
