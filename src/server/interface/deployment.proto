@@ -1,0 +1,39 @@
+syntax = "proto3";
+package api;
+
+import "empty.proto";
+
+option go_package = "protobuf/deployment";
+
+message Deployment {
+  int32 id = 1;
+  int32 ownerUserId = 2;
+  string domain = 3;
+  Status status = 4;
+
+  enum Status {
+    STARTING_UP = 0;
+    FAILED = 1;
+    RUNNING = 2;
+    SHUTTING_DOWN = 3;
+    UNREACHABLE = 4;
+  }
+}
+
+message NewDeployment {
+  int32 ownerUserId = 1;
+}
+
+message GetDeploymentRequest {
+  int32 ownerUserId = 1;
+}
+
+message RemoveDeploymentRequest {
+  int32 deploymentId = 1;
+}
+
+service DeploymentManagementService {
+  rpc CreateDeployment(NewDeployment) returns (Deployment);
+  rpc GetDeployment(GetDeploymentRequest) returns (Deployment);
+  rpc RemoveDeployment(RemoveDeploymentRequest) returns (Empty);
+}
