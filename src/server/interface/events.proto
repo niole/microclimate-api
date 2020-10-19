@@ -1,0 +1,25 @@
+syntax = "proto3";
+package api;
+
+import "empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "protobuf/events";
+
+message MeasurementEvent {
+  int32 peripheralId = 1;
+  int32 deploymentId = 2;
+  int32 value = 3;
+}
+
+message MeasurementEventFilterRequest {
+  repeated int32 peripheralIds = 1;
+  int32 deploymentId = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+}
+
+service PeripheralMeasurementEventService {
+  rpc ReceiveEvent(MeasurementEvent) returns (Empty);
+  rpc FilterEvents(MeasurementEventFilterRequest) returns (stream MeasurementEvent);
+}
