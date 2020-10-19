@@ -8,5 +8,10 @@
 ```
 - 
 ```sh
+go run src/server/impl/server.go
+```
+- 
+```sh
 go run src/main.go
 ```
+- watch client-server interaction
