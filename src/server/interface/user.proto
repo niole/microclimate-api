@@ -1,0 +1,26 @@
+syntax = "proto3";
+package api;
+
+import "empty.proto";
+
+option go_package = "protobuf/user";
+
+message User {
+  string email = 1;
+  string deployment_domain = 2;
+}
+
+message NewUserEmail {
+  string email = 1;
+}
+
+message NewDeploymentDomain {
+  string domain = 1;
+}
+
+service UserService {
+  rpc CreateUser(User) returns (User);
+  rpc UpdateUserEmail(NewUserEmail) returns (User);
+  rpc UpdateUserDeployment(NewDeploymentDomain) returns (User);
+  rpc RemoveUser(User) returns (Empty);
+}
