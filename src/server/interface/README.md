@@ -8,8 +8,8 @@
 
 ## Peripheral
 
-- peripheral setup for a user, for a type of peripheral
-- save/update/delete single peripheral for user/deployment
+- peripheral setup for a user, for a type of peripheral, and deployment
+- save/delete single peripheral for user/deployment, don't see much reason for update
 
 ## User
 

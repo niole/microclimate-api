@@ -6,8 +6,9 @@ import "empty.proto";
 option go_package = "protobuf/user";
 
 message User {
-  string email = 1;
-  string deployment_domain = 2;
+  int32 id = 1;
+  string email = 2;
+  string deployment_domain = 3;
 }
 
 message NewUserEmail {

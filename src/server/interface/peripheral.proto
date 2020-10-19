@@ -1,0 +1,23 @@
+syntax = "proto3";
+package api;
+
+import "empty.proto";
+
+option go_package = "protobuf/peripheral";
+
+message Peripheral {
+  int32 userId = 1;
+  int32 deploymentId = 2;
+  int32 peripheralId = 3;
+  PeripheralType type = 4;
+
+  enum PeripheralType {
+    THERMAL = 0;
+    PARTICLE = 1;
+  }
+}
+
+service PeripheralManagementService {
+  rpc CreatePeripheral(Peripheral) returns (Peripheral);
+  rpc RemovePeripheral(Peripheral) returns (Empty);
+}
