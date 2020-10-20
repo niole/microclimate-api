@@ -10,6 +10,7 @@ message MeasurementEvent {
   int32 peripheralId = 1;
   int32 deploymentId = 2;
   int32 value = 3;
+  google.protobuf.Timestamp time_stamp = 4;
 }
 
 message MeasurementEventFilterRequest {
