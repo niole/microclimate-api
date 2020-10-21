@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "api/protobuf/tutorial/tutorialpb"
+	api "api/protobuf"
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
@@ -11,23 +11,33 @@ import (
 
 var port int = 6000
 
-type searchServiceServer struct {
-	pb.UnimplementedSearchServiceServer
+type deploymentServiceServer struct {
+	api.UnimplementedDeploymentManagementServiceServer
 }
 
-func (s searchServiceServer) Search(context.Context, *pb.AddressBook) (*pb.Person, error) {
-	return &pb.Person{
-		Name:  "niole",
-		Id:    123,
-		Email: "e@mail.com",
-		Phones: []*pb.Person_PhoneNumber{
-			{Number: "123", Type: pb.Person_MOBILE},
-		},
-	}, nil
+func (s deploymentServiceServer) CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*api.Deployment, error) {
+	deployment := &api.Deployment{
+		Id:          1,
+		OwnerUserId: newDeployment.OwnerUserId,
+		Domain:      "localhost",
+		Status:      api.Deployment_UNREACHABLE,
+	}
+
+	return deployment, nil
 }
 
-func newServer() searchServiceServer {
-	return searchServiceServer{}
+func (s deploymentServiceServer) GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Deployment, error) {
+	deployment := &api.Deployment{
+		Id:          1,
+		OwnerUserId: in.OwnerUserId,
+		Domain:      "localhost",
+		Status:      api.Deployment_UNREACHABLE,
+	}
+	return deployment, nil
+}
+
+func (s deploymentServiceServer) RemoveDeployment(ctx context.Context, in *api.RemoveDeploymentRequest) (*api.Empty, error) {
+	return &api.Empty{}, nil
 }
 
 func main() {
@@ -37,6 +47,9 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	pb.RegisterSearchServiceServer(grpcServer, newServer())
+	api.RegisterDeploymentManagementServiceServer(
+		grpcServer,
+		deploymentServiceServer{},
+	)
 	grpcServer.Serve(lis)
 }

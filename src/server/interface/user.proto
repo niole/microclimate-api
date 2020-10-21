@@ -3,7 +3,7 @@ package api;
 
 import "empty.proto";
 
-option go_package = "protobuf/user";
+option go_package = "api/protobuf";
 
 message User {
   int32 id = 1;

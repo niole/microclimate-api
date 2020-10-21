@@ -3,7 +3,7 @@ package api;
 
 import "empty.proto";
 
-option go_package = "protobuf/peripheral";
+option go_package = "api/protobuf";
 
 message Peripheral {
   int32 userId = 1;
