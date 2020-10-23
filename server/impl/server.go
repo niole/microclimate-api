@@ -2,8 +2,7 @@ package main
 
 import (
 	api "api/protobuf"
-	deploymentManagementService "api/server/impl"
-	"context"
+	deployment "api/server/impl/deployment"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -21,7 +20,7 @@ func main() {
 	grpcServer := grpc.NewServer(opts...)
 	api.RegisterDeploymentManagementServiceServer(
 		grpcServer,
-		deploymentManagementService{},
+		new(deployment.DeploymentManagementService),
 	)
 	grpcServer.Serve(lis)
 }
