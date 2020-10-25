@@ -36,4 +36,8 @@ func main() {
 	})
 
 	log.Printf("%v, err %v", p, pErr)
+
+	_, removeErr := client.RemovePeripheral(ctx, p)
+
+	log.Printf("remove err %v", removeErr)
 }

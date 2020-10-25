@@ -23,7 +23,10 @@ func (s PeripheralManagementService) CreatePeripheral(ctx context.Context, newPe
 }
 
 func (s PeripheralManagementService) RemovePeripheral(ctx context.Context, peripheral *api.Peripheral) (*api.Empty, error) {
-	_, cancel := context.WithTimeout(ctx, 5*time.Second)
+	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
-	return &api.Empty{}, nil
+
+	err := persister.RemovePeripheral(cancellableCtx, peripheral)
+
+	return &api.Empty{}, err
 }

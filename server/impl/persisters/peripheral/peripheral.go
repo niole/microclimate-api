@@ -43,3 +43,16 @@ func CreatePeripheral(ctx context.Context, newPeripheral *api.NewPeripheral) (*a
 
 	return &peripheral, err
 }
+
+func RemovePeripheral(ctx context.Context, peripheral *api.Peripheral) error {
+	db := connector.GetConnectionPool()
+
+	_, err := db.ExecContext(
+		ctx,
+		`DELETE FROM Peripherals
+		WHERE ID = ? `,
+		&peripheral.Id,
+	)
+
+	return err
+}
