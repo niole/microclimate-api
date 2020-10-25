@@ -6,8 +6,8 @@ import "empty.proto";
 option go_package = "api/protobuf";
 
 message Deployment {
-  int32 id = 1;
-  int32 ownerUserId = 2;
+  string id = 1;
+  string ownerUserId = 2;
   string domain = 3;
   Status status = 4;
 
@@ -21,16 +21,16 @@ message Deployment {
 }
 
 message NewDeployment {
-  int32 ownerUserId = 1;
+  string ownerUserId = 1;
 }
 
 message GetDeploymentRequest {
-  int32 ownerUserId = 1;
-  int32 deploymentId = 2;
+  string ownerUserId = 1;
+  string deploymentId = 2;
 }
 
 message RemoveDeploymentRequest {
-  int32 deploymentId = 1;
+  string deploymentId = 1;
 }
 
 service DeploymentManagementService {

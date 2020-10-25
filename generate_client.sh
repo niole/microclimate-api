@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SRC_DIR=./src/server/interface DST_DIR=./protobuf GO111MODULE=on
+export SRC_DIR=./server/interface DST_DIR=./protobuf GO111MODULE=on
 
 mkdir -p $DST_DIR
 

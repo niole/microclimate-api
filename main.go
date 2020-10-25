@@ -4,11 +4,16 @@ import (
 	api "api/protobuf"
 	"context"
 	"fmt"
+	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"log"
 	"rsc.io/quote"
 	"time"
 )
+
+func newUuidString() string {
+	return uuid.New().String()
+}
 
 func main() {
 	fmt.Println(quote.Go())
@@ -22,11 +27,10 @@ func main() {
 	client := api.NewDeploymentManagementServiceClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	in := &api.GetDeploymentRequest{
-		OwnerUserId:  1,
-		DeploymentId: 1,
-	}
-	deployment, err := client.GetDeployment(ctx, in)
-	fmt.Println(deployment)
-	fmt.Println(err)
+
+	newDeployment, _ := client.CreateDeployment(ctx, &api.NewDeployment{
+		OwnerUserId: newUuidString(),
+	})
+
+	fmt.Println(newDeployment)
 }
