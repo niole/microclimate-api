@@ -36,3 +36,17 @@ func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*a
 
 	return &deployment, err
 }
+
+func GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Deployment, error) {
+	db := connector.GetConnectionPool()
+	var deployment api.Deployment
+
+	err := ScanOneDeployment(db.QueryRowContext(
+		ctx,
+		"SELECT * FROM Deployments WHERE OwnerUserId = ? AND Id = ? LIMIT 1;",
+		&in.OwnerUserId,
+		&in.DeploymentId,
+	), &deployment)
+
+	return &deployment, err
+}

@@ -28,8 +28,10 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	newDeployment, _ := client.CreateDeployment(ctx, &api.NewDeployment{
-		OwnerUserId: newUuidString(),
+	log.Println("Testing get deployment")
+	newDeployment, _ := client.GetDeployment(ctx, &api.GetDeploymentRequest{
+		OwnerUserId:  "e5f1f661-679c-4f6e-a2ab-6edbcf05a3df",
+		DeploymentId: "819d0ce7-16eb-11eb-888c-0242ac110002",
 	})
 
 	fmt.Println(newDeployment)

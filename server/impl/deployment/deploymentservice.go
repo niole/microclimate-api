@@ -30,13 +30,20 @@ func (s DeploymentManagementService) CreateDeployment(ctx context.Context, newDe
 }
 
 func (s DeploymentManagementService) GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Deployment, error) {
-	deployment := &api.Deployment{
-		Id:          "sf",
-		OwnerUserId: in.OwnerUserId,
-		Domain:      "localhost",
-		Status:      api.Deployment_UNREACHABLE,
+	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	deployment, err := persister.GetDeployment(cancellableCtx, in)
+
+	if err != nil {
+		log.Printf(
+			"Failed to get deployment out of db. requested user and deployment: %v, err: %v",
+			&in,
+			err,
+		)
 	}
-	return deployment, nil
+
+	return deployment, err
 }
 
 func (s DeploymentManagementService) RemoveDeployment(ctx context.Context, in *api.RemoveDeploymentRequest) (*api.Empty, error) {
