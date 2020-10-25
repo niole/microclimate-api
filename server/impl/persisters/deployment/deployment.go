@@ -50,3 +50,11 @@ func GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Depl
 
 	return &deployment, err
 }
+
+func RemoveDeployment(ctx context.Context, in *api.RemoveDeploymentRequest) error {
+	db := connector.GetConnectionPool()
+
+	_, err := db.ExecContext(ctx, `DELETE FROM Deployments WHERE ID = ? `, &in.DeploymentId)
+
+	return err
+}

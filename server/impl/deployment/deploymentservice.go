@@ -47,5 +47,14 @@ func (s DeploymentManagementService) GetDeployment(ctx context.Context, in *api.
 }
 
 func (s DeploymentManagementService) RemoveDeployment(ctx context.Context, in *api.RemoveDeploymentRequest) (*api.Empty, error) {
-	return &api.Empty{}, nil
+	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	err := persister.RemoveDeployment(cancellableCtx, in)
+
+	if err != nil {
+		log.Printf("Failed to remove deployment %v", in)
+	}
+
+	return &api.Empty{}, err
 }

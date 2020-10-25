@@ -28,11 +28,26 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
+	log.Println("Testing create deployment")
+
+	newDeployment, err := client.CreateDeployment(ctx, &api.NewDeployment{
+		OwnerUserId: newUuidString(),
+	})
+	log.Println(newDeployment.Id)
+	log.Println(err)
+
 	log.Println("Testing get deployment")
-	newDeployment, _ := client.GetDeployment(ctx, &api.GetDeploymentRequest{
-		OwnerUserId:  "e5f1f661-679c-4f6e-a2ab-6edbcf05a3df",
-		DeploymentId: "819d0ce7-16eb-11eb-888c-0242ac110002",
+	gottenDeployment, gottenDeploymentErr := client.GetDeployment(ctx, &api.GetDeploymentRequest{
+		OwnerUserId:  newDeployment.OwnerUserId,
+		DeploymentId: newDeployment.Id,
+	})
+	log.Print(gottenDeployment.Id)
+	log.Println(gottenDeploymentErr)
+
+	log.Println("Testing delete deployment")
+	_, err = client.RemoveDeployment(ctx, &api.RemoveDeploymentRequest{
+		DeploymentId: newDeployment.Id,
 	})
 
-	fmt.Println(newDeployment)
+	log.Println(err)
 }
