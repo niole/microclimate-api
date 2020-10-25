@@ -2,7 +2,8 @@ package main
 
 import (
 	api "api/protobuf"
-	deployment "api/server/impl/deployment"
+	//deployment "api/server/impl/deployment"
+	peripherals "api/server/impl/peripheral"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -18,9 +19,14 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	api.RegisterDeploymentManagementServiceServer(
+	// TODO what should we do about the multiple servers situation
+	//api.RegisterDeploymentManagementServiceServer(
+	//	grpcServer,
+	//	new(deployment.DeploymentManagementService),
+	//)
+	api.RegisterPeripheralManagementServiceServer(
 		grpcServer,
-		new(deployment.DeploymentManagementService),
+		new(peripherals.PeripheralManagementService),
 	)
 	grpcServer.Serve(lis)
 }

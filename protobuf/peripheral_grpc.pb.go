@@ -17,7 +17,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PeripheralManagementServiceClient interface {
-	CreatePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Peripheral, error)
+	CreatePeripheral(ctx context.Context, in *NewPeripheral, opts ...grpc.CallOption) (*Peripheral, error)
 	RemovePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Empty, error)
 }
 
@@ -29,7 +29,7 @@ func NewPeripheralManagementServiceClient(cc grpc.ClientConnInterface) Periphera
 	return &peripheralManagementServiceClient{cc}
 }
 
-func (c *peripheralManagementServiceClient) CreatePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Peripheral, error) {
+func (c *peripheralManagementServiceClient) CreatePeripheral(ctx context.Context, in *NewPeripheral, opts ...grpc.CallOption) (*Peripheral, error) {
 	out := new(Peripheral)
 	err := c.cc.Invoke(ctx, "/api.PeripheralManagementService/CreatePeripheral", in, out, opts...)
 	if err != nil {
@@ -51,7 +51,7 @@ func (c *peripheralManagementServiceClient) RemovePeripheral(ctx context.Context
 // All implementations must embed UnimplementedPeripheralManagementServiceServer
 // for forward compatibility
 type PeripheralManagementServiceServer interface {
-	CreatePeripheral(context.Context, *Peripheral) (*Peripheral, error)
+	CreatePeripheral(context.Context, *NewPeripheral) (*Peripheral, error)
 	RemovePeripheral(context.Context, *Peripheral) (*Empty, error)
 	mustEmbedUnimplementedPeripheralManagementServiceServer()
 }
@@ -60,7 +60,7 @@ type PeripheralManagementServiceServer interface {
 type UnimplementedPeripheralManagementServiceServer struct {
 }
 
-func (UnimplementedPeripheralManagementServiceServer) CreatePeripheral(context.Context, *Peripheral) (*Peripheral, error) {
+func (UnimplementedPeripheralManagementServiceServer) CreatePeripheral(context.Context, *NewPeripheral) (*Peripheral, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePeripheral not implemented")
 }
 func (UnimplementedPeripheralManagementServiceServer) RemovePeripheral(context.Context, *Peripheral) (*Empty, error) {
@@ -81,7 +81,7 @@ func RegisterPeripheralManagementServiceServer(s *grpc.Server, srv PeripheralMan
 }
 
 func _PeripheralManagementService_CreatePeripheral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Peripheral)
+	in := new(NewPeripheral)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ func _PeripheralManagementService_CreatePeripheral_Handler(srv interface{}, ctx 
 		FullMethod: "/api.PeripheralManagementService/CreatePeripheral",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PeripheralManagementServiceServer).CreatePeripheral(ctx, req.(*Peripheral))
+		return srv.(PeripheralManagementServiceServer).CreatePeripheral(ctx, req.(*NewPeripheral))
 	}
 	return interceptor(ctx, in, info, handler)
 }

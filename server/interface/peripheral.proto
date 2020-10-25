@@ -5,10 +5,10 @@ import "empty.proto";
 
 option go_package = "api/protobuf";
 
-message Peripheral {
-  int32 userId = 1;
-  int32 deploymentId = 2;
-  int32 peripheralId = 3;
+message NewPeripheral {
+  string ownerUserId = 1;
+  string deploymentId = 2;
+  string hardwareId = 3;
   PeripheralType type = 4;
 
   enum PeripheralType {
@@ -17,7 +17,20 @@ message Peripheral {
   }
 }
 
+message Peripheral {
+  string ownerUserId = 1;
+  string deploymentId = 2;
+  string id = 3;
+  string hardwareId = 4;
+  PeripheralType type = 5;
+
+  enum PeripheralType {
+    THERMAL = 0;
+    PARTICLE = 1;
+  }
+}
+
 service PeripheralManagementService {
-  rpc CreatePeripheral(Peripheral) returns (Peripheral);
+  rpc CreatePeripheral(NewPeripheral) returns (Peripheral);
   rpc RemovePeripheral(Peripheral) returns (Empty);
 }

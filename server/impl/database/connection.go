@@ -28,7 +28,7 @@ func GetConnectionPool() *sql.DB {
 		pool.SetMaxOpenConns(10)
 		pool.SetMaxIdleConns(10)
 
-		ctx, stop := context.WithCancel(context.Background())
+		stopCtx, stop := context.WithCancel(context.Background())
 		defer stop()
 
 		appSignal := make(chan os.Signal, 3)
@@ -41,14 +41,14 @@ func GetConnectionPool() *sql.DB {
 			}
 		}()
 
-		ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
+		ctx, cancel := context.WithTimeout(stopCtx, 5*time.Second)
 		defer cancel()
 
 		DoPing(pool)
 
 		// create tables
 
-		_, tableCreateErr := pool.ExecContext(ctx,
+		_, deploymentTableCreateErr := pool.ExecContext(ctx,
 			`CREATE TABLE IF NOT EXISTS Deployments (
                 Id varchar(36) PRIMARY KEY NOT NULL,
                 OwnerUserId varchar(36) NOT NULL,
@@ -56,8 +56,21 @@ func GetConnectionPool() *sql.DB {
                 Status ENUM('unreachable', 'starting_up', 'failed', 'running', 'shutting_down') NOT NULL
             );`,
 		)
-		if tableCreateErr != nil {
-			log.Printf("Failed to create deployments table. error: %v", tableCreateErr)
+		if deploymentTableCreateErr != nil {
+			log.Printf("Failed to create deployments table. error: %v", deploymentTableCreateErr)
+		}
+
+		_, peripheralTableCreateErr := pool.ExecContext(ctx,
+			`CREATE TABLE IF NOT EXISTS Peripherals (
+                Id varchar(36) PRIMARY KEY NOT NULL,
+                OwnerUserId varchar(36) NOT NULL,
+                DeploymentId varchar(36) NOT NULL,
+                HardwareId varchar(36) NOT NULL,
+                Type ENUM('THERMAL', 'PARTICLE') NOT NULL
+            );`,
+		)
+		if peripheralTableCreateErr != nil {
+			log.Printf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
 		}
 	}
 	return pool
