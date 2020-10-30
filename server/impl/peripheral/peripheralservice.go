@@ -30,3 +30,21 @@ func (s PeripheralManagementService) RemovePeripheral(ctx context.Context, perip
 
 	return &api.Empty{}, err
 }
+
+func (s PeripheralManagementService) GetDeploymentPeripherals(
+	request *api.GetDeploymentPeripheralsRequest,
+	peripheralStream api.PeripheralManagementService_GetDeploymentPeripheralsServer,
+) error {
+	cancellableCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	peripherals, err := persister.GetDeploymentPeripherals(cancellableCtx, request.DeploymentId)
+	for _, p := range peripherals {
+		err = peripheralStream.Send(&p)
+		if err != nil {
+			log.Fatalf("Failed to send peripheral over stream %v", p)
+		}
+	}
+
+	return err
+}

@@ -39,7 +39,7 @@ func CreatePeripheral(ctx context.Context, newPeripheral *api.NewPeripheral) (*a
 		&newPeripheral.OwnerUserId,
 		&newPeripheral.DeploymentId,
 		&newPeripheral.HardwareId,
-	), &peripheral)
+	).Scan, &peripheral)
 
 	return &peripheral, err
 }
@@ -55,4 +55,22 @@ func RemovePeripheral(ctx context.Context, peripheral *api.Peripheral) error {
 	)
 
 	return err
+}
+
+func GetDeploymentPeripherals(ctx context.Context, deploymentId string) ([]api.Peripheral, error) {
+	db := connector.GetConnectionPool()
+
+	peripherals, err := ScanPeripherals(db.QueryContext(
+		ctx,
+		`SELECT * FROM Peripherals
+		WHERE DeploymentId = ?
+		LIMIT 1;`,
+		deploymentId,
+	))
+
+	if err != nil {
+		log.Fatalf("Failed to get peripherals for deployment: %v, err: %v", deploymentId, err)
+	}
+
+	return peripherals, err
 }

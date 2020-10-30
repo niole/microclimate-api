@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
+	"io"
 	"log"
 	"rsc.io/quote"
 	"time"
@@ -28,16 +29,61 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	p, pErr := client.CreatePeripheral(ctx, &api.NewPeripheral{
-		OwnerUserId:  newUuidString(),
-		DeploymentId: newUuidString(),
+	deploymentId := newUuidString()
+	ownerUserId := newUuidString()
+
+	_, pErr := client.CreatePeripheral(ctx, &api.NewPeripheral{
+		OwnerUserId:  ownerUserId,
+		DeploymentId: deploymentId,
+		HardwareId:   "duniqueindeployemnthwid",
+		Type:         api.NewPeripheral_THERMAL,
+	})
+
+	_, pErr = client.CreatePeripheral(ctx, &api.NewPeripheral{
+		OwnerUserId:  ownerUserId,
+		DeploymentId: deploymentId,
 		HardwareId:   "uniqueindeployemnthwid",
 		Type:         api.NewPeripheral_THERMAL,
 	})
 
-	log.Printf("%v, err %v", p, pErr)
+	if pErr != nil {
+		log.Printf("add peripheral err %v", pErr)
+	}
 
-	_, removeErr := client.RemovePeripheral(ctx, p)
+	//_, removeErr := client.RemovePeripheral(ctx, p)
 
-	log.Printf("remove err %v", removeErr)
+	//if removeErr != nil {
+	//	log.Printf("remove ed one, errerr %v", removeErr)
+	//}
+
+	peripheralsClient, streamError := client.GetDeploymentPeripherals(
+		ctx,
+		&api.GetDeploymentPeripheralsRequest{
+			DeploymentId: deploymentId,
+		},
+	)
+
+	log.Print("Receiveing stream peripherals")
+
+	if streamError != nil {
+		log.Fatalf("Failed to start receiving peripherals, error %v", streamError)
+	}
+
+	for {
+		newPeripheral, receiveError := peripheralsClient.Recv()
+		if err == io.EOF {
+			return
+		}
+		if err != nil {
+			log.Fatalf("Failed to receive single peripheral, error %v", receiveError)
+			return
+		}
+		if newPeripheral != nil {
+			log.Print(newPeripheral)
+		} else {
+			log.Print("DONE")
+			return
+		}
+	}
+
 }

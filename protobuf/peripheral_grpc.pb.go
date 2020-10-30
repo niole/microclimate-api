@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 type PeripheralManagementServiceClient interface {
 	CreatePeripheral(ctx context.Context, in *NewPeripheral, opts ...grpc.CallOption) (*Peripheral, error)
 	RemovePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Empty, error)
+	GetDeploymentPeripherals(ctx context.Context, in *GetDeploymentPeripheralsRequest, opts ...grpc.CallOption) (PeripheralManagementService_GetDeploymentPeripheralsClient, error)
 }
 
 type peripheralManagementServiceClient struct {
@@ -47,12 +48,45 @@ func (c *peripheralManagementServiceClient) RemovePeripheral(ctx context.Context
 	return out, nil
 }
 
+func (c *peripheralManagementServiceClient) GetDeploymentPeripherals(ctx context.Context, in *GetDeploymentPeripheralsRequest, opts ...grpc.CallOption) (PeripheralManagementService_GetDeploymentPeripheralsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PeripheralManagementService_serviceDesc.Streams[0], "/api.PeripheralManagementService/GetDeploymentPeripherals", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &peripheralManagementServiceGetDeploymentPeripheralsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PeripheralManagementService_GetDeploymentPeripheralsClient interface {
+	Recv() (*Peripheral, error)
+	grpc.ClientStream
+}
+
+type peripheralManagementServiceGetDeploymentPeripheralsClient struct {
+	grpc.ClientStream
+}
+
+func (x *peripheralManagementServiceGetDeploymentPeripheralsClient) Recv() (*Peripheral, error) {
+	m := new(Peripheral)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PeripheralManagementServiceServer is the server API for PeripheralManagementService service.
 // All implementations must embed UnimplementedPeripheralManagementServiceServer
 // for forward compatibility
 type PeripheralManagementServiceServer interface {
 	CreatePeripheral(context.Context, *NewPeripheral) (*Peripheral, error)
 	RemovePeripheral(context.Context, *Peripheral) (*Empty, error)
+	GetDeploymentPeripherals(*GetDeploymentPeripheralsRequest, PeripheralManagementService_GetDeploymentPeripheralsServer) error
 	mustEmbedUnimplementedPeripheralManagementServiceServer()
 }
 
@@ -65,6 +99,9 @@ func (UnimplementedPeripheralManagementServiceServer) CreatePeripheral(context.C
 }
 func (UnimplementedPeripheralManagementServiceServer) RemovePeripheral(context.Context, *Peripheral) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePeripheral not implemented")
+}
+func (UnimplementedPeripheralManagementServiceServer) GetDeploymentPeripherals(*GetDeploymentPeripheralsRequest, PeripheralManagementService_GetDeploymentPeripheralsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetDeploymentPeripherals not implemented")
 }
 func (UnimplementedPeripheralManagementServiceServer) mustEmbedUnimplementedPeripheralManagementServiceServer() {
 }
@@ -116,6 +153,27 @@ func _PeripheralManagementService_RemovePeripheral_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PeripheralManagementService_GetDeploymentPeripherals_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDeploymentPeripheralsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PeripheralManagementServiceServer).GetDeploymentPeripherals(m, &peripheralManagementServiceGetDeploymentPeripheralsServer{stream})
+}
+
+type PeripheralManagementService_GetDeploymentPeripheralsServer interface {
+	Send(*Peripheral) error
+	grpc.ServerStream
+}
+
+type peripheralManagementServiceGetDeploymentPeripheralsServer struct {
+	grpc.ServerStream
+}
+
+func (x *peripheralManagementServiceGetDeploymentPeripheralsServer) Send(m *Peripheral) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _PeripheralManagementService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.PeripheralManagementService",
 	HandlerType: (*PeripheralManagementServiceServer)(nil),
@@ -129,6 +187,12 @@ var _PeripheralManagementService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _PeripheralManagementService_RemovePeripheral_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetDeploymentPeripherals",
+			Handler:       _PeripheralManagementService_GetDeploymentPeripherals_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "peripheral.proto",
 }

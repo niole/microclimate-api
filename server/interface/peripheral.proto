@@ -30,7 +30,12 @@ message Peripheral {
   }
 }
 
+message GetDeploymentPeripheralsRequest {
+  string deploymentId = 1;
+}
+
 service PeripheralManagementService {
   rpc CreatePeripheral(NewPeripheral) returns (Peripheral);
   rpc RemovePeripheral(Peripheral) returns (Empty);
+  rpc GetDeploymentPeripherals(GetDeploymentPeripheralsRequest) returns (stream Peripheral) {}
 }
