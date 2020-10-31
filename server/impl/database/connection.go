@@ -72,6 +72,22 @@ func GetConnectionPool() *sql.DB {
 		if peripheralTableCreateErr != nil {
 			log.Printf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
 		}
+
+		_, peripheralEventsTableCreateErr := pool.ExecContext(ctx,
+			`CREATE TABLE IF NOT EXISTS PeripheralEvents (
+                Id varchar(36) PRIMARY KEY NOT NULL,
+				PeripheralId varchar(36) NOT NULL,
+                DeploymentId varchar(36) NOT NULL,
+                Value smallint NOT NULL,
+				Timestamp timestamp NOT NULL
+            );`,
+		)
+		if peripheralEventsTableCreateErr != nil {
+			log.Printf(
+				"Failed to create peripheral events table. error: %v",
+				peripheralEventsTableCreateErr,
+			)
+		}
 	}
 	return pool
 }

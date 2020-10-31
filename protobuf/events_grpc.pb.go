@@ -17,7 +17,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PeripheralMeasurementEventServiceClient interface {
-	ReceiveEvent(ctx context.Context, in *MeasurementEvent, opts ...grpc.CallOption) (*Empty, error)
+	SendEvent(ctx context.Context, in *MeasurementEvent, opts ...grpc.CallOption) (*Empty, error)
 	FilterEvents(ctx context.Context, in *MeasurementEventFilterRequest, opts ...grpc.CallOption) (PeripheralMeasurementEventService_FilterEventsClient, error)
 }
 
@@ -29,9 +29,9 @@ func NewPeripheralMeasurementEventServiceClient(cc grpc.ClientConnInterface) Per
 	return &peripheralMeasurementEventServiceClient{cc}
 }
 
-func (c *peripheralMeasurementEventServiceClient) ReceiveEvent(ctx context.Context, in *MeasurementEvent, opts ...grpc.CallOption) (*Empty, error) {
+func (c *peripheralMeasurementEventServiceClient) SendEvent(ctx context.Context, in *MeasurementEvent, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/api.PeripheralMeasurementEventService/ReceiveEvent", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.PeripheralMeasurementEventService/SendEvent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func (x *peripheralMeasurementEventServiceFilterEventsClient) Recv() (*Measureme
 // All implementations must embed UnimplementedPeripheralMeasurementEventServiceServer
 // for forward compatibility
 type PeripheralMeasurementEventServiceServer interface {
-	ReceiveEvent(context.Context, *MeasurementEvent) (*Empty, error)
+	SendEvent(context.Context, *MeasurementEvent) (*Empty, error)
 	FilterEvents(*MeasurementEventFilterRequest, PeripheralMeasurementEventService_FilterEventsServer) error
 	mustEmbedUnimplementedPeripheralMeasurementEventServiceServer()
 }
@@ -83,8 +83,8 @@ type PeripheralMeasurementEventServiceServer interface {
 type UnimplementedPeripheralMeasurementEventServiceServer struct {
 }
 
-func (UnimplementedPeripheralMeasurementEventServiceServer) ReceiveEvent(context.Context, *MeasurementEvent) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReceiveEvent not implemented")
+func (UnimplementedPeripheralMeasurementEventServiceServer) SendEvent(context.Context, *MeasurementEvent) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEvent not implemented")
 }
 func (UnimplementedPeripheralMeasurementEventServiceServer) FilterEvents(*MeasurementEventFilterRequest, PeripheralMeasurementEventService_FilterEventsServer) error {
 	return status.Errorf(codes.Unimplemented, "method FilterEvents not implemented")
@@ -103,20 +103,20 @@ func RegisterPeripheralMeasurementEventServiceServer(s *grpc.Server, srv Periphe
 	s.RegisterService(&_PeripheralMeasurementEventService_serviceDesc, srv)
 }
 
-func _PeripheralMeasurementEventService_ReceiveEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PeripheralMeasurementEventService_SendEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MeasurementEvent)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PeripheralMeasurementEventServiceServer).ReceiveEvent(ctx, in)
+		return srv.(PeripheralMeasurementEventServiceServer).SendEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.PeripheralMeasurementEventService/ReceiveEvent",
+		FullMethod: "/api.PeripheralMeasurementEventService/SendEvent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PeripheralMeasurementEventServiceServer).ReceiveEvent(ctx, req.(*MeasurementEvent))
+		return srv.(PeripheralMeasurementEventServiceServer).SendEvent(ctx, req.(*MeasurementEvent))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -147,8 +147,8 @@ var _PeripheralMeasurementEventService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*PeripheralMeasurementEventServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ReceiveEvent",
-			Handler:    _PeripheralMeasurementEventService_ReceiveEvent_Handler,
+			MethodName: "SendEvent",
+			Handler:    _PeripheralMeasurementEventService_SendEvent_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

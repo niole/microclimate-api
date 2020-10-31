@@ -3,7 +3,8 @@ package main
 import (
 	api "api/protobuf"
 	//deployment "api/server/impl/deployment"
-	peripherals "api/server/impl/peripheral"
+	// peripherals "api/server/impl/peripheral"
+	event "api/server/impl/event"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -24,9 +25,9 @@ func main() {
 	//	grpcServer,
 	//	new(deployment.DeploymentManagementService),
 	//)
-	api.RegisterPeripheralManagementServiceServer(
+	api.RegisterPeripheralMeasurementEventServiceServer(
 		grpcServer,
-		new(peripherals.PeripheralManagementService),
+		new(event.PeripheralEventService),
 	)
 	grpcServer.Serve(lis)
 }
