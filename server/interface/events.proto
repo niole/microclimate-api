@@ -7,6 +7,14 @@ import "google/protobuf/timestamp.proto";
 option go_package = "api/protobuf";
 
 message MeasurementEvent {
+  string id = 1;
+  string peripheralId = 2;
+  string deploymentId = 3;
+  int32 value = 4;
+  google.protobuf.Timestamp time_stamp = 5;
+}
+
+message NewMeasurementEvent {
   string peripheralId = 1;
   string deploymentId = 2;
   int32 value = 3;
@@ -21,6 +29,6 @@ message MeasurementEventFilterRequest {
 }
 
 service PeripheralMeasurementEventService {
-  rpc SendEvent(MeasurementEvent) returns (Empty);
+  rpc SendEvent(NewMeasurementEvent) returns (Empty);
   rpc FilterEvents(MeasurementEventFilterRequest) returns (stream MeasurementEvent);
 }

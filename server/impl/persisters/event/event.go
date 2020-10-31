@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-func SaveEvent(ctx context.Context, event *api.MeasurementEvent) error {
+func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 	db := connection.GetConnectionPool()
 
 	time, conversionErr := ptypes.Timestamp(event.TimeStamp)
@@ -28,4 +28,19 @@ func SaveEvent(ctx context.Context, event *api.MeasurementEvent) error {
 	)
 
 	return err
+}
+
+func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterRequest) ([]api.MeasurementEvent, error) {
+	db := connection.GetConnectionPool()
+
+	events, err := ScanEvents(db.QueryContext(
+		ctx,
+		`SELECT * FROM PeripheralEvents;`,
+	))
+
+	if err != nil {
+		log.Printf("Failed to get events out of db, error %v", err)
+	}
+
+	return events, err
 }

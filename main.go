@@ -7,6 +7,7 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
+	"io"
 	"log"
 	"rsc.io/quote"
 	"time"
@@ -29,37 +30,46 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	_, err = client.SendEvent(
-		ctx,
-		&api.MeasurementEvent{
-			PeripheralId: "51e6f06e-1a68-11eb-888c-0242ac110002",
-			DeploymentId: "c1e2052c-06f3-4a2b-a8a5-73ac7651c022",
-			Value:        80,
-			TimeStamp:    ptypes.TimestampNow(),
-		},
-	)
+	deploymentId := "c1e2052c-06f3-4a2b-a8a5-73ac7651c022"
+	peripheralId := "51e6f06e-1a68-11eb-888c-0242ac110002"
 
-	log.Printf("Sent a request did it fail %v", err)
+	//_, err = client.SendEvent(
+	//	ctx,
+	//	&api.NewMeasurementEvent{
+	//		PeripheralId: peripheralId,
+	//		DeploymentId: deploymentId,
+	//		Value:        80,
+	//		TimeStamp:    ptypes.TimestampNow(),
+	//	},
+	//)
 
-	//if streamError != nil {
-	//	log.Fatalf("Failed to start receiving peripherals, error %v", streamError)
-	//}
+	//log.Printf("Sent a request did it fail %v", err)
+	eventStreamClient, streamError := client.FilterEvents(ctx, &api.MeasurementEventFilterRequest{
+		PeripheralIds: []string{peripheralId},
+		DeploymentId:  deploymentId,
+		StartTime:     ptypes.TimestampNow(),
+		EndTime:       ptypes.TimestampNow(),
+	})
 
-	//for {
-	//	newPeripheral, receiveError := peripheralsClient.Recv()
-	//	if err == io.EOF {
-	//		return
-	//	}
-	//	if err != nil {
-	//		log.Fatalf("Failed to receive single peripheral, error %v", receiveError)
-	//		return
-	//	}
-	//	if newPeripheral != nil {
-	//		log.Print(newPeripheral)
-	//	} else {
-	//		log.Print("DONE")
-	//		return
-	//	}
-	//}
+	if streamError != nil {
+		log.Fatalf("Failed to start receiving events, error %v", streamError)
+	}
+
+	for {
+		newEvent, err := eventStreamClient.Recv()
+		if err == io.EOF {
+			return
+		}
+		if err != nil {
+			log.Fatalf("Failed to receive single event, error %v", err)
+			return
+		}
+		if newEvent != nil {
+			log.Print(newEvent)
+		} else {
+			log.Print("DONE")
+			return
+		}
+	}
 
 }

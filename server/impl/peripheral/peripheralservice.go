@@ -39,10 +39,14 @@ func (s PeripheralManagementService) GetDeploymentPeripherals(
 	defer cancel()
 
 	peripherals, err := persister.GetDeploymentPeripherals(cancellableCtx, request.DeploymentId)
-	for _, p := range peripherals {
-		err = peripheralStream.Send(&p)
-		if err != nil {
-			log.Fatalf("Failed to send peripheral over stream %v", p)
+	if err != nil {
+		log.Printf("Failed to det deployment peripherals, error %v", err)
+	} else {
+		for _, p := range peripherals {
+			err = peripheralStream.Send(&p)
+			if err != nil {
+				log.Printf("Failed to send peripheral over stream %v", p)
+			}
 		}
 	}
 

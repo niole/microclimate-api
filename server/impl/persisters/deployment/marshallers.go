@@ -5,6 +5,7 @@ import (
 	sql "database/sql"
 )
 
+// TODO use generated enum map things
 var statusMap = map[string]api.Deployment_Status{
 	"unreachable":   api.Deployment_UNREACHABLE,
 	"starting_up":   api.Deployment_STARTING_UP,
