@@ -63,8 +63,7 @@ func GetDeploymentPeripherals(ctx context.Context, deploymentId string) ([]api.P
 	peripherals, err := ScanPeripherals(db.QueryContext(
 		ctx,
 		`SELECT * FROM Peripherals
-		WHERE DeploymentId = ?
-		LIMIT 1;`,
+		WHERE DeploymentId = ?;`,
 		deploymentId,
 	))
 

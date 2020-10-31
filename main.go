@@ -29,33 +29,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	deploymentId := newUuidString()
-	ownerUserId := newUuidString()
-
-	_, pErr := client.CreatePeripheral(ctx, &api.NewPeripheral{
-		OwnerUserId:  ownerUserId,
-		DeploymentId: deploymentId,
-		HardwareId:   "duniqueindeployemnthwid",
-		Type:         api.NewPeripheral_THERMAL,
-	})
-
-	_, pErr = client.CreatePeripheral(ctx, &api.NewPeripheral{
-		OwnerUserId:  ownerUserId,
-		DeploymentId: deploymentId,
-		HardwareId:   "uniqueindeployemnthwid",
-		Type:         api.NewPeripheral_THERMAL,
-	})
-
-	if pErr != nil {
-		log.Printf("add peripheral err %v", pErr)
-	}
-
-	//_, removeErr := client.RemovePeripheral(ctx, p)
-
-	//if removeErr != nil {
-	//	log.Printf("remove ed one, errerr %v", removeErr)
-	//}
-
+	deploymentId := "c1e2052c-06f3-4a2b-a8a5-73ac7651c022"
 	peripheralsClient, streamError := client.GetDeploymentPeripherals(
 		ctx,
 		&api.GetDeploymentPeripheralsRequest{
