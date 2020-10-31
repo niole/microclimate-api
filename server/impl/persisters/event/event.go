@@ -47,8 +47,6 @@ func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterReques
 	endtime, _ := ConvertPBTimeToTime(request.EndTime)
 	starttime, _ := ConvertPBTimeToTime(request.StartTime)
 
-	log.Print(in)
-
 	events, err := ScanEvents(db.QueryContext(
 		ctx,
 		`SELECT * FROM PeripheralEvents WHERE
