@@ -44,11 +44,16 @@ func main() {
 	//)
 
 	//log.Printf("Sent a request did it fail %v", err)
+	start, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 15, 0, 0, time.UTC))
+	end, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 20, 0, 0, time.UTC))
+	if err != nil {
+		log.Fatalf("The times are bad, err %v", err)
+	}
 	eventStreamClient, streamError := client.FilterEvents(ctx, &api.MeasurementEventFilterRequest{
 		PeripheralIds: []string{peripheralId},
 		DeploymentId:  deploymentId,
-		StartTime:     ptypes.TimestampNow(),
-		EndTime:       ptypes.TimestampNow(),
+		StartTime:     start,
+		EndTime:       end,
 	})
 
 	if streamError != nil {

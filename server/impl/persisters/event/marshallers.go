@@ -59,5 +59,7 @@ func ScanEvents(rows *sql.Rows, err error) ([]api.MeasurementEvent, error) {
 		log.Printf("Something went wrong while doing events query, err %v", err)
 	}
 
+	log.Print(events)
+	log.Print(err)
 	return events, err
 }

@@ -5,16 +5,25 @@ import (
 	connection "api/server/impl/database"
 	"context"
 	"github.com/golang/protobuf/ptypes"
+	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"log"
+	"strings"
+	"time"
 )
+
+func ConvertPBTimeToTime(pbtime *timestamppb.Timestamp) (time.Time, error) {
+	time, err := ptypes.Timestamp(pbtime)
+	if err != nil {
+		log.Fatalf("Failed to convert timestamp to sql consumable type, error %v", err)
+	}
+
+	return time, err
+}
 
 func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 	db := connection.GetConnectionPool()
 
-	time, conversionErr := ptypes.Timestamp(event.TimeStamp)
-	if conversionErr != nil {
-		log.Fatalf("Failed to convert timestamp to sql consumable type, erorr %v", conversionErr)
-	}
+	time, _ := ConvertPBTimeToTime(event.TimeStamp)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -33,9 +42,23 @@ func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterRequest) ([]api.MeasurementEvent, error) {
 	db := connection.GetConnectionPool()
 
+	in := strings.Join(request.PeripheralIds, ",")
+
+	endtime, _ := ConvertPBTimeToTime(request.EndTime)
+	starttime, _ := ConvertPBTimeToTime(request.StartTime)
+
+	log.Print(in)
+
 	events, err := ScanEvents(db.QueryContext(
 		ctx,
-		`SELECT * FROM PeripheralEvents;`,
+		`SELECT * FROM PeripheralEvents WHERE
+		Timestamp BETWEEN ? AND ?
+		AND DeploymentId = ?
+		AND PeripheralId IN (?);`,
+		starttime,
+		endtime,
+		&request.DeploymentId,
+		&in,
 	))
 
 	if err != nil {
