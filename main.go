@@ -33,19 +33,24 @@ func main() {
 	deploymentId := "c1e2052c-06f3-4a2b-a8a5-73ac7651c022"
 	peripheralId := "51e6f06e-1a68-11eb-888c-0242ac110002"
 
-	//_, err = client.SendEvent(
-	//	ctx,
-	//	&api.NewMeasurementEvent{
-	//		PeripheralId: peripheralId,
-	//		DeploymentId: deploymentId,
-	//		Value:        80,
-	//		TimeStamp:    ptypes.TimestampNow(),
-	//	},
-	//)
+	//for i := 0; i < 5; i++ {
+	//	thetime, err := ptypes.TimestampProto(
+	//		time.Date(2020, 10, 31, 19, 2*i, 0, 0, time.UTC),
+	//	)
+	//	_, err = client.SendEvent(
+	//		ctx,
+	//		&api.NewMeasurementEvent{
+	//			PeripheralId: peripheralId,
+	//			DeploymentId: deploymentId,
+	//			Value:        80,
+	//			TimeStamp:    thetime,
+	//		},
+	//	)
 
-	//log.Printf("Sent a request did it fail %v", err)
-	start, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 15, 0, 0, time.UTC))
-	end, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 20, 0, 0, time.UTC))
+	//	log.Printf("Sent a request did it fail %v", err)
+	//}
+	start, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 0, 0, 0, time.UTC))
+	end, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 7, 0, 0, time.UTC))
 	if err != nil {
 		log.Fatalf("The times are bad, err %v", err)
 	}
