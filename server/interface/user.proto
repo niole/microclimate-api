@@ -26,5 +26,5 @@ message RemoveUserRequest {
 service UserService {
   rpc CreateUser(NewUser) returns (User);
   rpc UpdateUserEmail(UpdateUserEmailRequest) returns (User);
-  rpc RemoveUser(RemoveUserRequest) returns (Empty);
+  rpc RemoveUser(RemoveUserRequest) returns (Empty); // TODO i think there is a packaged golang empty data type
 }
