@@ -4,6 +4,7 @@ import (
 	api "api/protobuf"
 	"api/server/impl/database"
 	"context"
+	"database/sql"
 	"github.com/golang/protobuf/ptypes"
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"log"
