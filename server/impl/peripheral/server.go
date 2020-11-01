@@ -3,14 +3,18 @@ package main
 import (
 	api "api/protobuf"
 	"api/server/impl/peripheral"
+	"flag"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
 	"net"
 )
 
-// TODO get from env
-var port int = 6003
+var port int
+
+func init() {
+	flag.IntVar(&port, "serverPort", 6003, "Port for peripheralservice server")
+}
 
 func main() {
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
