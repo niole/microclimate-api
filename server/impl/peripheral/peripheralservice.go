@@ -2,7 +2,7 @@ package peripheral
 
 import (
 	api "api/protobuf"
-	persister "api/server/impl/persisters/peripheral"
+	"api/server/impl/peripheral/persister"
 	"context"
 	"log"
 	"time"
