@@ -73,3 +73,19 @@ func GetDeploymentPeripherals(ctx context.Context, deploymentId string) ([]api.P
 
 	return peripherals, err
 }
+
+func GetPeripheralById(ctx context.Context, peripheralId string) (*api.Peripheral, error) {
+	db := connector.GetConnectionPool()
+
+	var peripheral api.Peripheral
+
+	err := ScanOnePeripheral(db.QueryRowContext(
+		ctx,
+		`SELECT * FROM Peripherals
+		WHERE Id = ?
+		LIMIT 1;`,
+		&peripheralId,
+	).Scan, &peripheral)
+
+	return &peripheral, err
+}

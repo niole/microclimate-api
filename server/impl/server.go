@@ -2,7 +2,7 @@ package main
 
 import (
 	api "api/protobuf"
-	user "api/server/impl/user"
+	"api/server/impl/peripheral"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -19,9 +19,9 @@ func main() {
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 	// TODO what should we do about the multiple servers situation
-	api.RegisterUserServiceServer(
+	api.RegisterPeripheralManagementServiceServer(
 		grpcServer,
-		new(user.UserServiceServer),
+		new(peripheral.PeripheralManagementService),
 	)
 	grpcServer.Serve(lis)
 }

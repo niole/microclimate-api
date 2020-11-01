@@ -24,37 +24,19 @@ func main() {
 		log.Fatalf("fail to dial: %v", err)
 	}
 	defer conn.Close()
-	client := api.NewUserServiceClient(conn)
+	client := api.NewPeripheralManagementServiceClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	//startemail := "catdog"
-	newemail := "dog"
-	//user, err := client.CreateUser(ctx, &api.NewUser{Email: startemail})
-
-	//log.Print(user)
-	//log.Print(err)
-
-	user, err := client.GetUserByEmail(ctx, &api.GetUserByEmailRequest{
-		Email: newemail,
-	})
-
-	if err != nil {
-		log.Fatalf("Failed to get user by email %v error %v", user, err)
-	}
-
-	newUser, err := client.UpdateUserEmail(ctx, &api.UpdateUserEmailRequest{
-		UserId: user.Id,
-		Email:  newemail,
-	})
-
-	log.Print(newUser)
-	log.Print(err)
-
-	client.RemoveUser(ctx, &api.RemoveUserRequest{UserId: user.Id})
-
 	//deploymentId := "c1e2052c-06f3-4a2b-a8a5-73ac7651c022"
-	//peripheralId := "51e6f06e-1a68-11eb-888c-0242ac110002"
+	peripheralId := "51e6f06e-1a68-11eb-888c-0242ac110002"
+
+	found, err := client.GetPeripheral(ctx, &api.GetPeripheralRequest{
+		PeripheralId: peripheralId,
+	})
+
+	log.Print(found)
+	log.Print(err)
 
 	//for i := 0; i < 5; i++ {
 	//	thetime, err := ptypes.TimestampProto(

@@ -17,6 +17,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PeripheralManagementServiceClient interface {
+	GetPeripheral(ctx context.Context, in *GetPeripheralRequest, opts ...grpc.CallOption) (*Peripheral, error)
 	CreatePeripheral(ctx context.Context, in *NewPeripheral, opts ...grpc.CallOption) (*Peripheral, error)
 	RemovePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Empty, error)
 	GetDeploymentPeripherals(ctx context.Context, in *GetDeploymentPeripheralsRequest, opts ...grpc.CallOption) (PeripheralManagementService_GetDeploymentPeripheralsClient, error)
@@ -28,6 +29,15 @@ type peripheralManagementServiceClient struct {
 
 func NewPeripheralManagementServiceClient(cc grpc.ClientConnInterface) PeripheralManagementServiceClient {
 	return &peripheralManagementServiceClient{cc}
+}
+
+func (c *peripheralManagementServiceClient) GetPeripheral(ctx context.Context, in *GetPeripheralRequest, opts ...grpc.CallOption) (*Peripheral, error) {
+	out := new(Peripheral)
+	err := c.cc.Invoke(ctx, "/api.PeripheralManagementService/GetPeripheral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *peripheralManagementServiceClient) CreatePeripheral(ctx context.Context, in *NewPeripheral, opts ...grpc.CallOption) (*Peripheral, error) {
@@ -84,6 +94,7 @@ func (x *peripheralManagementServiceGetDeploymentPeripheralsClient) Recv() (*Per
 // All implementations must embed UnimplementedPeripheralManagementServiceServer
 // for forward compatibility
 type PeripheralManagementServiceServer interface {
+	GetPeripheral(context.Context, *GetPeripheralRequest) (*Peripheral, error)
 	CreatePeripheral(context.Context, *NewPeripheral) (*Peripheral, error)
 	RemovePeripheral(context.Context, *Peripheral) (*Empty, error)
 	GetDeploymentPeripherals(*GetDeploymentPeripheralsRequest, PeripheralManagementService_GetDeploymentPeripheralsServer) error
@@ -94,6 +105,9 @@ type PeripheralManagementServiceServer interface {
 type UnimplementedPeripheralManagementServiceServer struct {
 }
 
+func (UnimplementedPeripheralManagementServiceServer) GetPeripheral(context.Context, *GetPeripheralRequest) (*Peripheral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPeripheral not implemented")
+}
 func (UnimplementedPeripheralManagementServiceServer) CreatePeripheral(context.Context, *NewPeripheral) (*Peripheral, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePeripheral not implemented")
 }
@@ -115,6 +129,24 @@ type UnsafePeripheralManagementServiceServer interface {
 
 func RegisterPeripheralManagementServiceServer(s *grpc.Server, srv PeripheralManagementServiceServer) {
 	s.RegisterService(&_PeripheralManagementService_serviceDesc, srv)
+}
+
+func _PeripheralManagementService_GetPeripheral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPeripheralRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PeripheralManagementServiceServer).GetPeripheral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.PeripheralManagementService/GetPeripheral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PeripheralManagementServiceServer).GetPeripheral(ctx, req.(*GetPeripheralRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _PeripheralManagementService_CreatePeripheral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -178,6 +210,10 @@ var _PeripheralManagementService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.PeripheralManagementService",
 	HandlerType: (*PeripheralManagementServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetPeripheral",
+			Handler:    _PeripheralManagementService_GetPeripheral_Handler,
+		},
 		{
 			MethodName: "CreatePeripheral",
 			Handler:    _PeripheralManagementService_CreatePeripheral_Handler,
