@@ -2,14 +2,15 @@ package main
 
 import (
 	api "api/protobuf"
-	"api/server/impl/peripheral"
+	"api/server/impl/deployment"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
 	"net"
 )
 
-var port int = 6000
+// TODO get from env
+var port int = 6001
 
 func main() {
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
@@ -18,10 +19,9 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	// TODO what should we do about the multiple servers situation
-	api.RegisterPeripheralManagementServiceServer(
+	api.RegisterDeploymentManagementServiceServer(
 		grpcServer,
-		new(peripheral.PeripheralManagementService),
+		new(deployment.DeploymentManagementService),
 	)
 	grpcServer.Serve(lis)
 }
