@@ -11,7 +11,9 @@ import (
 func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*api.Deployment, error) {
 	db := connector.GetConnectionPool()
 
-	_, err := db.ExecContext(ctx, `INSERT INTO Deployments (Id, OwnerUserId, Domain, Status) VALUES (UUID(), ?, ?, ?)`,
+	_, err := db.ExecContext(
+		ctx,
+		`INSERT INTO Deployments (Id, OwnerUserId, Domain, Status) VALUES (UUID(), ?, ?, ?)`,
 		&newDeployment.OwnerUserId,
 		"localhost",
 		"unreachable",

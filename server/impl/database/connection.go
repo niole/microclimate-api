@@ -46,7 +46,7 @@ func GetConnectionPool() *sql.DB {
 
 		DoPing(pool)
 
-		// create tables
+		log.Print("Creating tables if not exists")
 
 		_, deploymentTableCreateErr := pool.ExecContext(ctx,
 			`CREATE TABLE IF NOT EXISTS Deployments (
@@ -57,7 +57,7 @@ func GetConnectionPool() *sql.DB {
             );`,
 		)
 		if deploymentTableCreateErr != nil {
-			log.Printf("Failed to create deployments table. error: %v", deploymentTableCreateErr)
+			log.Fatalf("Failed to create deployments table. error: %v", deploymentTableCreateErr)
 		}
 
 		_, peripheralTableCreateErr := pool.ExecContext(ctx,
@@ -70,7 +70,7 @@ func GetConnectionPool() *sql.DB {
             );`,
 		)
 		if peripheralTableCreateErr != nil {
-			log.Printf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
+			log.Fatalf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
 		}
 
 		_, peripheralEventsTableCreateErr := pool.ExecContext(ctx,
@@ -83,9 +83,23 @@ func GetConnectionPool() *sql.DB {
             );`,
 		)
 		if peripheralEventsTableCreateErr != nil {
-			log.Printf(
+			log.Fatalf(
 				"Failed to create peripheral events table. error: %v",
 				peripheralEventsTableCreateErr,
+			)
+		}
+
+		_, userTableCreateErr := pool.ExecContext(ctx,
+			`CREATE TABLE IF NOT EXISTS Users (
+                Id varchar(36) PRIMARY KEY NOT NULL,
+				Email varchar(255) NOT NULL UNIQUE
+            );`,
+		)
+
+		if userTableCreateErr != nil {
+			log.Fatalf(
+				"Failed to create user table. error: %v",
+				userTableCreateErr,
 			)
 		}
 	}

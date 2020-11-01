@@ -2,9 +2,7 @@ package main
 
 import (
 	api "api/protobuf"
-	//deployment "api/server/impl/deployment"
-	// peripherals "api/server/impl/peripheral"
-	event "api/server/impl/event"
+	user "api/server/impl/user"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -21,13 +19,9 @@ func main() {
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 	// TODO what should we do about the multiple servers situation
-	//api.RegisterDeploymentManagementServiceServer(
-	//	grpcServer,
-	//	new(deployment.DeploymentManagementService),
-	//)
-	api.RegisterPeripheralMeasurementEventServiceServer(
+	api.RegisterUserServiceServer(
 		grpcServer,
-		new(event.PeripheralEventService),
+		new(user.UserServiceServer),
 	)
 	grpcServer.Serve(lis)
 }
