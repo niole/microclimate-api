@@ -1,8 +1,8 @@
 package deployment
 
 import (
+	"api/deployment/persister"
 	api "api/protobuf"
-	"api/server/impl/deployment/persister"
 	"context"
 	"log"
 	"time"

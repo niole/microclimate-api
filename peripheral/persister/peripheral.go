@@ -1,8 +1,8 @@
 package persister
 
 import (
+	"api/database"
 	api "api/protobuf"
-	"api/server/impl/database"
 	"context"
 	"database/sql"
 	"log"

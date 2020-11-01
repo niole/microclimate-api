@@ -1,8 +1,8 @@
 package main
 
 import (
+	"api/peripheral"
 	api "api/protobuf"
-	"api/server/impl/event"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -13,7 +13,7 @@ import (
 var port int
 
 func init() {
-	flag.IntVar(&port, "serverPort", 6002, "Port for eventservice server")
+	flag.IntVar(&port, "serverPort", 6003, "Port for peripheralservice server")
 }
 
 func main() {
@@ -23,9 +23,9 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	api.RegisterPeripheralMeasurementEventServiceServer(
+	api.RegisterPeripheralManagementServiceServer(
 		grpcServer,
-		new(event.PeripheralEventService),
+		new(peripheral.PeripheralManagementService),
 	)
 	grpcServer.Serve(lis)
 }

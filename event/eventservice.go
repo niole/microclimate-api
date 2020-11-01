@@ -1,8 +1,8 @@
 package event
 
 import (
+	"api/event/persister"
 	api "api/protobuf"
-	"api/server/impl/event/persister"
 	"context"
 	"log"
 	"time"

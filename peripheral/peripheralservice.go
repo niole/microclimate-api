@@ -1,8 +1,8 @@
 package peripheral
 
 import (
+	"api/peripheral/persister"
 	api "api/protobuf"
-	"api/server/impl/peripheral/persister"
 	"context"
 	"log"
 	"time"

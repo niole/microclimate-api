@@ -2,7 +2,7 @@ package user
 
 import (
 	api "api/protobuf"
-	"api/server/impl/user/persister"
+	"api/user/persister"
 	"context"
 	"log"
 	"time"

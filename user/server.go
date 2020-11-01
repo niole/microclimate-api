@@ -2,7 +2,7 @@ package main
 
 import (
 	api "api/protobuf"
-	"api/server/impl/deployment"
+	"api/user"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -13,7 +13,7 @@ import (
 var port int
 
 func init() {
-	flag.IntVar(&port, "serverPort", 6001, "Port for deploymentservice server")
+	flag.IntVar(&port, "serverPort", 6004, "Port for userservice server")
 }
 
 func main() {
@@ -23,9 +23,9 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	api.RegisterDeploymentManagementServiceServer(
+	api.RegisterUserServiceServer(
 		grpcServer,
-		new(deployment.DeploymentManagementService),
+		new(peripheral.UserServiceServer),
 	)
 	grpcServer.Serve(lis)
 }
