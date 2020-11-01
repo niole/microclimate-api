@@ -2,7 +2,7 @@ package event
 
 import (
 	api "api/protobuf"
-	connection "api/server/impl/database"
+	"api/server/impl/database"
 	"context"
 	"github.com/golang/protobuf/ptypes"
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
@@ -11,17 +11,8 @@ import (
 	"time"
 )
 
-func ConvertPBTimeToTime(pbtime *timestamppb.Timestamp) (time.Time, error) {
-	time, err := ptypes.Timestamp(pbtime)
-	if err != nil {
-		log.Fatalf("Failed to convert timestamp to sql consumable type, error %v", err)
-	}
-
-	return time, err
-}
-
 func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
-	db := connection.GetConnectionPool()
+	db := database.Get(initTable)
 
 	time, _ := ConvertPBTimeToTime(event.TimeStamp)
 
@@ -40,7 +31,7 @@ func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 }
 
 func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterRequest) ([]api.MeasurementEvent, error) {
-	db := connection.GetConnectionPool()
+	db := database.Get(initTable)
 
 	in := strings.Join(request.PeripheralIds, ",")
 
@@ -64,4 +55,32 @@ func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterReques
 	}
 
 	return events, err
+}
+
+func initTable(ctx context.Context, pool *sql.DB) error {
+	_, peripheralEventsTableCreateErr := pool.ExecContext(ctx,
+		`CREATE TABLE IF NOT EXISTS PeripheralEvents (
+                Id varchar(36) PRIMARY KEY NOT NULL,
+				PeripheralId varchar(36) NOT NULL,
+                DeploymentId varchar(36) NOT NULL,
+                Value smallint NOT NULL,
+				Timestamp timestamp NOT NULL
+            );`,
+	)
+	if peripheralEventsTableCreateErr != nil {
+		log.Fatalf(
+			"Failed to create peripheral events table. error: %v",
+			peripheralEventsTableCreateErr,
+		)
+	}
+	return peripheralEventsTableCreateErr
+}
+
+func ConvertPBTimeToTime(pbtime *timestamppb.Timestamp) (time.Time, error) {
+	time, err := ptypes.Timestamp(pbtime)
+	if err != nil {
+		log.Fatalf("Failed to convert timestamp to sql consumable type, error %v", err)
+	}
+
+	return time, err
 }

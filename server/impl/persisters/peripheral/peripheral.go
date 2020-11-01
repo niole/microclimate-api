@@ -2,13 +2,30 @@ package peripheral
 
 import (
 	api "api/protobuf"
-	connector "api/server/impl/database"
+	"api/server/impl/database"
 	"context"
+	"database/sql"
 	"log"
 )
 
+func initTable(ctx context.Context, pool *sql.DB) error {
+	_, peripheralTableCreateErr := pool.ExecContext(ctx,
+		`CREATE TABLE IF NOT EXISTS Peripherals (
+			Id varchar(36) PRIMARY KEY NOT NULL,
+			OwnerUserId varchar(36) NOT NULL,
+			DeploymentId varchar(36) NOT NULL,
+			HardwareId varchar(36) NOT NULL,
+			Type ENUM('THERMAL', 'PARTICLE') NOT NULL
+		);`,
+	)
+	if peripheralTableCreateErr != nil {
+		log.Fatalf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
+	}
+	return peripheralTableCreateErr
+}
+
 func CreatePeripheral(ctx context.Context, newPeripheral *api.NewPeripheral) (*api.Peripheral, error) {
-	db := connector.GetConnectionPool()
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -45,7 +62,7 @@ func CreatePeripheral(ctx context.Context, newPeripheral *api.NewPeripheral) (*a
 }
 
 func RemovePeripheral(ctx context.Context, peripheral *api.Peripheral) error {
-	db := connector.GetConnectionPool()
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -58,7 +75,7 @@ func RemovePeripheral(ctx context.Context, peripheral *api.Peripheral) error {
 }
 
 func GetDeploymentPeripherals(ctx context.Context, deploymentId string) ([]api.Peripheral, error) {
-	db := connector.GetConnectionPool()
+	db := database.Get(initTable)
 
 	peripherals, err := ScanPeripherals(db.QueryContext(
 		ctx,
@@ -75,7 +92,7 @@ func GetDeploymentPeripherals(ctx context.Context, deploymentId string) ([]api.P
 }
 
 func GetPeripheralById(ctx context.Context, peripheralId string) (*api.Peripheral, error) {
-	db := connector.GetConnectionPool()
+	db := database.Get(initTable)
 
 	var peripheral api.Peripheral
 

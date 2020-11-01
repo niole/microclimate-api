@@ -2,14 +2,14 @@ package deployment
 
 import (
 	api "api/protobuf"
-	connector "api/server/impl/database"
+	"api/server/impl/database"
 	"context"
 	"log"
 )
 
 // creates deployment for user
 func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*api.Deployment, error) {
-	db := connector.GetConnectionPool()
+	db := database.Get(init)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -40,7 +40,7 @@ func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*a
 }
 
 func GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Deployment, error) {
-	db := connector.GetConnectionPool()
+	db := database.Get(ctx, init)
 	var deployment api.Deployment
 
 	err := ScanOneDeployment(db.QueryRowContext(
@@ -54,9 +54,24 @@ func GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Depl
 }
 
 func RemoveDeployment(ctx context.Context, in *api.RemoveDeploymentRequest) error {
-	db := connector.GetConnectionPool()
+	db := database.Get(init)
 
 	_, err := db.ExecContext(ctx, `DELETE FROM Deployments WHERE ID = ? `, &in.DeploymentId)
 
 	return err
+}
+
+func init(ctx context.Context, pool *sql.DB) error {
+	_, deploymentTableCreateErr := pool.ExecContext(ctx,
+		`CREATE TABLE IF NOT EXISTS Deployments (
+                Id varchar(36) PRIMARY KEY NOT NULL,
+                OwnerUserId varchar(36) NOT NULL,
+                Domain varchar(255) NOT NULL,
+                Status ENUM('unreachable', 'starting_up', 'failed', 'running', 'shutting_down') NOT NULL
+            );`,
+	)
+	if deploymentTableCreateErr != nil {
+		log.Fatalf("Failed to create deployments table. error: %v", deploymentTableCreateErr)
+	}
+	return deploymentTableCreateErr
 }

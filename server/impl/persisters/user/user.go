@@ -2,11 +2,28 @@ package user
 
 import (
 	api "api/protobuf"
-	connection "api/server/impl/database"
+	"api/server/impl/database"
 	"context"
 	"database/sql"
 	"log"
 )
+
+func initTable(ctx context.Context, pool *sql.DB) error {
+	_, userTableCreateErr := pool.ExecContext(ctx,
+		`CREATE TABLE IF NOT EXISTS Users (
+                Id varchar(36) PRIMARY KEY NOT NULL,
+				Email varchar(255) NOT NULL UNIQUE
+            );`,
+	)
+
+	if userTableCreateErr != nil {
+		log.Fatalf(
+			"Failed to create user table. error: %v",
+			userTableCreateErr,
+		)
+	}
+	return userTableCreateErr
+}
 
 func findByEmail(ctx context.Context, db *sql.DB, email string) (*api.User, error) {
 	var user api.User
@@ -48,7 +65,7 @@ func findById(ctx context.Context, db *sql.DB, userId string) (*api.User, error)
 }
 
 func CreateUser(ctx context.Context, newUserEmail string) (*api.User, error) {
-	db := connection.GetConnectionPool()
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -66,7 +83,7 @@ func CreateUser(ctx context.Context, newUserEmail string) (*api.User, error) {
 }
 
 func UpdateUserEmail(ctx context.Context, userId string, newEmail string) (*api.User, error) {
-	db := connection.GetConnectionPool()
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -87,7 +104,7 @@ func UpdateUserEmail(ctx context.Context, userId string, newEmail string) (*api.
 }
 
 func RemoveUser(ctx context.Context, userId string) (*api.Empty, error) {
-	db := connection.GetConnectionPool()
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -100,7 +117,7 @@ func RemoveUser(ctx context.Context, userId string) (*api.Empty, error) {
 }
 
 func GetUser(ctx context.Context, userId *string, email *string) (*api.User, error) {
-	db := connection.GetConnectionPool()
+	db := database.Get(initTable)
 
 	if userId != nil {
 		return findById(ctx, db, *userId)
