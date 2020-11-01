@@ -1,7 +1,7 @@
 package main
 
 import (
-	"api/deployment"
+	"api/deployment/service"
 	api "api/protobuf"
 	"flag"
 	"fmt"
@@ -17,7 +17,8 @@ func init() {
 }
 
 func main() {
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
+	log.Printf("Starting deployment serve at port %v", port)
+	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -25,7 +26,7 @@ func main() {
 	grpcServer := grpc.NewServer(opts...)
 	api.RegisterDeploymentManagementServiceServer(
 		grpcServer,
-		new(deployment.DeploymentManagementService),
+		new(service.DeploymentManagementService),
 	)
 	grpcServer.Serve(lis)
 }

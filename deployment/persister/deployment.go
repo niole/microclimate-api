@@ -4,12 +4,13 @@ import (
 	"api/database"
 	api "api/protobuf"
 	"context"
+	"database/sql"
 	"log"
 )
 
 // creates deployment for user
 func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*api.Deployment, error) {
-	db := database.Get(init)
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
@@ -40,7 +41,7 @@ func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*a
 }
 
 func GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Deployment, error) {
-	db := database.Get(ctx, init)
+	db := database.Get(initTable)
 	var deployment api.Deployment
 
 	err := ScanOneDeployment(db.QueryRowContext(
@@ -54,14 +55,14 @@ func GetDeployment(ctx context.Context, in *api.GetDeploymentRequest) (*api.Depl
 }
 
 func RemoveDeployment(ctx context.Context, in *api.RemoveDeploymentRequest) error {
-	db := database.Get(init)
+	db := database.Get(initTable)
 
 	_, err := db.ExecContext(ctx, `DELETE FROM Deployments WHERE ID = ? `, &in.DeploymentId)
 
 	return err
 }
 
-func init(ctx context.Context, pool *sql.DB) error {
+func initTable(ctx context.Context, pool *sql.DB) error {
 	_, deploymentTableCreateErr := pool.ExecContext(ctx,
 		`CREATE TABLE IF NOT EXISTS Deployments (
                 Id varchar(36) PRIMARY KEY NOT NULL,

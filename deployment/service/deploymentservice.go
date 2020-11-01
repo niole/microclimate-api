@@ -1,4 +1,4 @@
-package deployment
+package service
 
 import (
 	"api/deployment/persister"

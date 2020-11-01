@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"os"
@@ -22,10 +23,14 @@ func Get(initBlock func(context.Context, *sql.DB) error) *sql.DB {
 	if pool == nil {
 		var err error
 
-		pool, err = sql.Open("mysql", "niole:pw@tcp(127.0.0.1:3306)/default")
+		log.Print("Pool was nil. Creating database connection pool")
+		// TODO this needs to timeout
+		host := "db" // "127.0.0.1"
+		pool, err = sql.Open("mysql", fmt.Sprintf("niole:pw@tcp(%v:3306)/default", host))
 		if err != nil {
 			panic(err)
 		}
+		log.Print("Done creating database connection pool")
 		//defer pool.Close()
 
 		pool.SetConnMaxLifetime(time.Minute * 3)

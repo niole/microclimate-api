@@ -1,18 +1,21 @@
 FROM golang
 
-RUN mkdir -p /go/src/api/server/impl/deployment
+RUN mkdir -p /go/src
 
-RUN mkdir -p /go/src/api/protobuf
-# Copy the local package files to the container's workspace.
-ADD . /server/impl/deployment
+ADD go.mod /go/src/
 
-# Build the outyet command inside the container.
-# (You may fetch or manage dependencies here,
-# either manually or with a tool like "godep".)
-RUN go install github.com/golang/example/outyet
+ADD ./deployment /go/src/deployment
 
-# Run the outyet command by default when the container starts.
-ENTRYPOINT /go/bin/outyet
+ADD ./database /go/src/database
 
-# Document that the service listens on port 8080.
-EXPOSE 6003
+ADD ./protobuf /go/src/protobuf
+
+WORKDIR /go/src
+
+ENV GO111MODULE=on
+
+RUN go install all
+
+ENTRYPOINT go run ./deployment/main/server.go
+
+EXPOSE 6001
