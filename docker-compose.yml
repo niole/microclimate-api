@@ -1,11 +1,35 @@
 version: "3.8"
 services:
+  peripheral:
+    build:
+      context: .
+      dockerfile: ./peripheral/Dockerfile
+    ports:
+      - "6001:8080"
+    links:
+      - db
+  deployment:
+    build:
+      context: .
+      dockerfile: ./deployment/Dockerfile
+    ports:
+      - "6003:8080"
+    links:
+      - db
+  user:
+    build:
+      context: .
+      dockerfile: ./user/Dockerfile
+    ports:
+      - "6002:8080"
+    links:
+      - db
   events:
     build:
       context: .
       dockerfile: ./event/Dockerfile
     ports:
-      - "80:8080"
+      - "8080:8080"
     links:
       - db
   db:

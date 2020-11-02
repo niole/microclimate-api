@@ -20,4 +20,4 @@ RUN go install all
 
 ENTRYPOINT go run ./deployment/main/server.go
 
-EXPOSE 8080
+EXPOSE 6003
