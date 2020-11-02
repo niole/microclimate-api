@@ -14,6 +14,8 @@ WORKDIR /go/src
 
 ENV GO111MODULE=on
 
+ENV DB_HOST=db
+
 RUN go install all
 
 ENTRYPOINT go run ./event/main/server.go

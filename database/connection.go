@@ -12,7 +12,8 @@ import (
 )
 
 var (
-	pool *sql.DB
+	pool   *sql.DB
+	dbHost = os.Getenv("DB_HOST")
 )
 
 // should just initialize tables on startup
@@ -25,8 +26,7 @@ func Get(initBlock func(context.Context, *sql.DB) error) *sql.DB {
 
 		log.Print("Pool was nil. Creating database connection pool")
 		// TODO this needs to timeout
-		host := "db" // "127.0.0.1"
-		pool, err = sql.Open("mysql", fmt.Sprintf("niole:pw@tcp(%v:3306)/default", host))
+		pool, err = sql.Open("mysql", fmt.Sprintf("niole:pw@tcp(%v:3306)/default", dbHost))
 		if err != nil {
 			panic(err)
 		}

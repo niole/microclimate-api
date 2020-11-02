@@ -102,10 +102,40 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	log.Print(err)
 }
 
+func testPeripheral(conn grpc.ClientConnInterface) {
+	client := api.NewPeripheralManagementServiceClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	log.Print("starting peripheral test")
+
+	p, err := client.CreatePeripheral(ctx, &api.NewPeripheral{
+		OwnerUserId:  newUuidString(),
+		DeploymentId: newUuidString(),
+		HardwareId:   newUuidString(),
+		Type:         api.NewPeripheral_PARTICLE,
+	})
+
+	log.Print(p)
+	log.Print(err)
+
+	peripheralId := p.Id
+
+	p, err = client.GetPeripheral(ctx, &api.GetPeripheralRequest{
+		PeripheralId: peripheralId,
+	})
+
+	log.Print(p)
+	log.Print(err)
+
+	_, err = client.RemovePeripheral(ctx, p)
+
+	log.Print(err)
+}
+
 func main() {
 	log.Println(quote.Go())
 	opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
-	serverAddr := fmt.Sprintf("localhost:%d", 6002)
+	serverAddr := fmt.Sprintf("localhost:%d", 6003)
 	log.Println(serverAddr)
 	conn, err := grpc.Dial(serverAddr, opts...)
 	if err != nil {
@@ -113,7 +143,8 @@ func main() {
 	}
 	defer conn.Close()
 
-	testEvent(conn)
+	//testEvent(conn)
+	testPeripheral(conn)
 
 	//deploymentId := "c1e2052c-06f3-4a2b-a8a5-73ac7651c022"
 	//peripheralId := "51e6f06e-1a68-11eb-888c-0242ac110002"
