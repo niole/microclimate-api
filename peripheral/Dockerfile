@@ -4,7 +4,7 @@ RUN mkdir -p /go/src
 
 ADD go.mod /go/src/
 
-ADD ./deployment /go/src/deployment
+ADD ./peripheral /go/src/peripheral
 
 ADD ./database /go/src/database
 
@@ -18,6 +18,6 @@ ENV DB_HOST=db
 
 RUN go install all
 
-ENTRYPOINT go run ./deployment/main/server.go
+ENTRYPOINT go run ./peripheral/main/server.go
 
 EXPOSE 8080

@@ -135,7 +135,7 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 func main() {
 	log.Println(quote.Go())
 	opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
-	serverAddr := fmt.Sprintf("localhost:%d", 6003)
+	serverAddr := fmt.Sprintf("localhost:%d", 8080)
 	log.Println(serverAddr)
 	conn, err := grpc.Dial(serverAddr, opts...)
 	if err != nil {
