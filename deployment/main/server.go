@@ -14,6 +14,7 @@ var port int
 
 func init() {
 	flag.IntVar(&port, "serverPort", 6001, "Port for deploymentservice server")
+	flag.Parse()
 }
 
 func main() {

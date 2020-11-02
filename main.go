@@ -3,6 +3,7 @@ package main
 import (
 	api "api/protobuf"
 	"context"
+	"flag"
 	"fmt"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
@@ -12,6 +13,13 @@ import (
 	"rsc.io/quote"
 	"time"
 )
+
+var port int
+
+func init() {
+	flag.IntVar(&port, "serverPort", 8080, "Port client")
+	flag.Parse()
+}
 
 func newUuidString() string {
 	return uuid.New().String()
@@ -102,6 +110,29 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	log.Print(err)
 }
 
+func testUser(conn grpc.ClientConnInterface) {
+	client := api.NewUserServiceClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	log.Print("starting user test")
+
+	u, err := client.CreateUser(ctx, &api.NewUser{Email: "oldemail"})
+	log.Print(u)
+	log.Print(err)
+
+	u, err = client.GetUserByEmail(ctx, &api.GetUserByEmailRequest{Email: u.Email})
+	log.Print(u)
+	log.Print(err)
+
+	u, err = client.UpdateUserEmail(ctx, &api.UpdateUserEmailRequest{UserId: u.Id, Email: "newemail"})
+	log.Print(u)
+	log.Print(err)
+
+	_, err = client.RemoveUser(ctx, &api.RemoveUserRequest{UserId: u.Id})
+	log.Print(err)
+
+}
+
 func testPeripheral(conn grpc.ClientConnInterface) {
 	client := api.NewPeripheralManagementServiceClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -135,7 +166,7 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 func main() {
 	log.Println(quote.Go())
 	opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
-	serverAddr := fmt.Sprintf("localhost:%d", 8080)
+	serverAddr := fmt.Sprintf("localhost:%d", port)
 	log.Println(serverAddr)
 	conn, err := grpc.Dial(serverAddr, opts...)
 	if err != nil {
@@ -144,15 +175,6 @@ func main() {
 	defer conn.Close()
 
 	//testEvent(conn)
-	testPeripheral(conn)
-
-	//deploymentId := "c1e2052c-06f3-4a2b-a8a5-73ac7651c022"
-	//peripheralId := "51e6f06e-1a68-11eb-888c-0242ac110002"
-
-	//found, err := client.GetPeripheral(ctx, &api.GetPeripheralRequest{
-	//	PeripheralId: peripheralId,
-	//})
-
-	//log.Print(found)
-	//log.Print(err)
+	//testPeripheral(conn)
+	testUser(conn)
 }
