@@ -1,4 +1,4 @@
-package event
+package service
 
 import (
 	"api/event/persister"

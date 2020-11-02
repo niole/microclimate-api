@@ -1,7 +1,7 @@
 package main
 
 import (
-	"api/event"
+	"api/event/service"
 	api "api/protobuf"
 	"flag"
 	"fmt"
@@ -25,7 +25,7 @@ func main() {
 	grpcServer := grpc.NewServer(opts...)
 	api.RegisterPeripheralMeasurementEventServiceServer(
 		grpcServer,
-		new(event.PeripheralEventService),
+		new(service.PeripheralEventService),
 	)
 	grpcServer.Serve(lis)
 }
