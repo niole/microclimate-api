@@ -174,7 +174,7 @@ func main() {
 	}
 	defer conn.Close()
 
-	//testEvent(conn)
+	testEvent(conn)
 	//testPeripheral(conn)
-	testUser(conn)
+	//testUser(conn)
 }
