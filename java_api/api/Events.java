@@ -8,15 +8,9 @@ public final class Events {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
-
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
-  }
   public interface MeasurementEventOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.MeasurementEvent)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string id = 1;</code>
@@ -70,145 +64,29 @@ public final class Events {
      * @return The timeStamp.
      */
     com.google.protobuf.Timestamp getTimeStamp();
-    /**
-     * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getTimeStampOrBuilder();
   }
   /**
    * Protobuf type {@code api.MeasurementEvent}
    */
-  public static final class MeasurementEvent extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class MeasurementEvent extends
+      com.google.protobuf.GeneratedMessageLite<
+          MeasurementEvent, MeasurementEvent.Builder> implements
       // @@protoc_insertion_point(message_implements:api.MeasurementEvent)
       MeasurementEventOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use MeasurementEvent.newBuilder() to construct.
-    private MeasurementEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private MeasurementEvent() {
       id_ = "";
       peripheralId_ = "";
       deploymentId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new MeasurementEvent();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private MeasurementEvent(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              id_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              peripheralId_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            case 32: {
-
-              value_ = input.readInt32();
-              break;
-            }
-            case 42: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (timeStamp_ != null) {
-                subBuilder = timeStamp_.toBuilder();
-              }
-              timeStamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(timeStamp_);
-                timeStamp_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.Events.internal_static_api_MeasurementEvent_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.Events.internal_static_api_MeasurementEvent_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.Events.MeasurementEvent.class, api.Events.MeasurementEvent.Builder.class);
-    }
-
     public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    private java.lang.String id_;
     /**
      * <code>string id = 1;</code>
      * @return The id.
      */
     @java.lang.Override
     public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+      return id_;
     }
     /**
      * <code>string id = 1;</code>
@@ -217,36 +95,45 @@ public final class Events {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(id_);
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The id to set.
+     */
+    private void setId(
+        java.lang.String value) {
+      value.getClass();
+  
+      id_ = value;
+    }
+    /**
+     * <code>string id = 1;</code>
+     */
+    private void clearId() {
+      
+      id_ = getDefaultInstance().getId();
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The bytes for id to set.
+     */
+    private void setIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      id_ = value.toStringUtf8();
+      
     }
 
     public static final int PERIPHERALID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object peripheralId_;
+    private java.lang.String peripheralId_;
     /**
      * <code>string peripheralId = 2;</code>
      * @return The peripheralId.
      */
     @java.lang.Override
     public java.lang.String getPeripheralId() {
-      java.lang.Object ref = peripheralId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        peripheralId_ = s;
-        return s;
-      }
+      return peripheralId_;
     }
     /**
      * <code>string peripheralId = 2;</code>
@@ -255,36 +142,45 @@ public final class Events {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getPeripheralIdBytes() {
-      java.lang.Object ref = peripheralId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        peripheralId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(peripheralId_);
+    }
+    /**
+     * <code>string peripheralId = 2;</code>
+     * @param value The peripheralId to set.
+     */
+    private void setPeripheralId(
+        java.lang.String value) {
+      value.getClass();
+  
+      peripheralId_ = value;
+    }
+    /**
+     * <code>string peripheralId = 2;</code>
+     */
+    private void clearPeripheralId() {
+      
+      peripheralId_ = getDefaultInstance().getPeripheralId();
+    }
+    /**
+     * <code>string peripheralId = 2;</code>
+     * @param value The bytes for peripheralId to set.
+     */
+    private void setPeripheralIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      peripheralId_ = value.toStringUtf8();
+      
     }
 
     public static final int DEPLOYMENTID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 3;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 3;</code>
@@ -293,16 +189,34 @@ public final class Events {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
+    }
+    /**
+     * <code>string deploymentId = 3;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
+    }
+    /**
+     * <code>string deploymentId = 3;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+    }
+    /**
+     * <code>string deploymentId = 3;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static final int VALUE_FIELD_NUMBER = 4;
@@ -315,12 +229,26 @@ public final class Events {
     public int getValue() {
       return value_;
     }
+    /**
+     * <code>int32 value = 4;</code>
+     * @param value The value to set.
+     */
+    private void setValue(int value) {
+      
+      value_ = value;
+    }
+    /**
+     * <code>int32 value = 4;</code>
+     */
+    private void clearValue() {
+      
+      value_ = 0;
+    }
 
     public static final int TIME_STAMP_FIELD_NUMBER = 5;
     private com.google.protobuf.Timestamp timeStamp_;
     /**
      * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-     * @return Whether the timeStamp field is set.
      */
     @java.lang.Override
     public boolean hasTimeStamp() {
@@ -328,7 +256,6 @@ public final class Events {
     }
     /**
      * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-     * @return The timeStamp.
      */
     @java.lang.Override
     public com.google.protobuf.Timestamp getTimeStamp() {
@@ -337,427 +264,144 @@ public final class Events {
     /**
      * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
      */
-    @java.lang.Override
-    public com.google.protobuf.TimestampOrBuilder getTimeStampOrBuilder() {
-      return getTimeStamp();
+    private void setTimeStamp(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  timeStamp_ = value;
+      
+      }
+    /**
+     * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeTimeStamp(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  if (timeStamp_ != null &&
+          timeStamp_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+        timeStamp_ =
+          com.google.protobuf.Timestamp.newBuilder(timeStamp_).mergeFrom(value).buildPartial();
+      } else {
+        timeStamp_ = value;
+      }
+      
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
-      }
-      if (!getPeripheralIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, peripheralId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, deploymentId_);
-      }
-      if (value_ != 0) {
-        output.writeInt32(4, value_);
-      }
-      if (timeStamp_ != null) {
-        output.writeMessage(5, getTimeStamp());
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
-      }
-      if (!getPeripheralIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, peripheralId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, deploymentId_);
-      }
-      if (value_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, value_);
-      }
-      if (timeStamp_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getTimeStamp());
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.Events.MeasurementEvent)) {
-        return super.equals(obj);
-      }
-      api.Events.MeasurementEvent other = (api.Events.MeasurementEvent) obj;
-
-      if (!getId()
-          .equals(other.getId())) return false;
-      if (!getPeripheralId()
-          .equals(other.getPeripheralId())) return false;
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (getValue()
-          != other.getValue()) return false;
-      if (hasTimeStamp() != other.hasTimeStamp()) return false;
-      if (hasTimeStamp()) {
-        if (!getTimeStamp()
-            .equals(other.getTimeStamp())) return false;
-      }
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
-      hash = (37 * hash) + PERIPHERALID_FIELD_NUMBER;
-      hash = (53 * hash) + getPeripheralId().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (37 * hash) + VALUE_FIELD_NUMBER;
-      hash = (53 * hash) + getValue();
-      if (hasTimeStamp()) {
-        hash = (37 * hash) + TIME_STAMP_FIELD_NUMBER;
-        hash = (53 * hash) + getTimeStamp().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
+     */
+    private void clearTimeStamp() {  timeStamp_ = null;
+      
     }
 
     public static api.Events.MeasurementEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.MeasurementEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.MeasurementEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.MeasurementEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.MeasurementEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.MeasurementEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.MeasurementEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.Events.MeasurementEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.Events.MeasurementEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.Events.MeasurementEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.Events.MeasurementEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.Events.MeasurementEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.Events.MeasurementEvent prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.MeasurementEvent}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.Events.MeasurementEvent, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.MeasurementEvent)
         api.Events.MeasurementEventOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.Events.internal_static_api_MeasurementEvent_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.Events.internal_static_api_MeasurementEvent_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.Events.MeasurementEvent.class, api.Events.MeasurementEvent.Builder.class);
-      }
-
       // Construct using api.Events.MeasurementEvent.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        id_ = "";
 
-        peripheralId_ = "";
-
-        deploymentId_ = "";
-
-        value_ = 0;
-
-        if (timeStampBuilder_ == null) {
-          timeStamp_ = null;
-        } else {
-          timeStamp_ = null;
-          timeStampBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.Events.internal_static_api_MeasurementEvent_descriptor;
-      }
-
-      @java.lang.Override
-      public api.Events.MeasurementEvent getDefaultInstanceForType() {
-        return api.Events.MeasurementEvent.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.Events.MeasurementEvent build() {
-        api.Events.MeasurementEvent result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.Events.MeasurementEvent buildPartial() {
-        api.Events.MeasurementEvent result = new api.Events.MeasurementEvent(this);
-        result.id_ = id_;
-        result.peripheralId_ = peripheralId_;
-        result.deploymentId_ = deploymentId_;
-        result.value_ = value_;
-        if (timeStampBuilder_ == null) {
-          result.timeStamp_ = timeStamp_;
-        } else {
-          result.timeStamp_ = timeStampBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.Events.MeasurementEvent) {
-          return mergeFrom((api.Events.MeasurementEvent)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.Events.MeasurementEvent other) {
-        if (other == api.Events.MeasurementEvent.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
-        }
-        if (!other.getPeripheralId().isEmpty()) {
-          peripheralId_ = other.peripheralId_;
-          onChanged();
-        }
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        if (other.getValue() != 0) {
-          setValue(other.getValue());
-        }
-        if (other.hasTimeStamp()) {
-          mergeTimeStamp(other.getTimeStamp());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.Events.MeasurementEvent parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.Events.MeasurementEvent) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object id_ = "";
       /**
        * <code>string id = 1;</code>
        * @return The id.
        */
+      @java.lang.Override
       public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getId();
       }
       /**
        * <code>string id = 1;</code>
        * @return The bytes for id.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getIdBytes();
       }
       /**
        * <code>string id = 1;</code>
@@ -766,12 +410,8 @@ public final class Events {
        */
       public Builder setId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setId(value);
         return this;
       }
       /**
@@ -779,9 +419,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
+        copyOnWrite();
+        instance.clearId();
         return this;
       }
       /**
@@ -791,49 +430,27 @@ public final class Events {
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setIdBytes(value);
         return this;
       }
 
-      private java.lang.Object peripheralId_ = "";
       /**
        * <code>string peripheralId = 2;</code>
        * @return The peripheralId.
        */
+      @java.lang.Override
       public java.lang.String getPeripheralId() {
-        java.lang.Object ref = peripheralId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          peripheralId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getPeripheralId();
       }
       /**
        * <code>string peripheralId = 2;</code>
        * @return The bytes for peripheralId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getPeripheralIdBytes() {
-        java.lang.Object ref = peripheralId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          peripheralId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getPeripheralIdBytes();
       }
       /**
        * <code>string peripheralId = 2;</code>
@@ -842,12 +459,8 @@ public final class Events {
        */
       public Builder setPeripheralId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        peripheralId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralId(value);
         return this;
       }
       /**
@@ -855,9 +468,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearPeripheralId() {
-        
-        peripheralId_ = getDefaultInstance().getPeripheralId();
-        onChanged();
+        copyOnWrite();
+        instance.clearPeripheralId();
         return this;
       }
       /**
@@ -867,49 +479,27 @@ public final class Events {
        */
       public Builder setPeripheralIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        peripheralId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralIdBytes(value);
         return this;
       }
 
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 3;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 3;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 3;</code>
@@ -918,12 +508,8 @@ public final class Events {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -931,9 +517,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -943,24 +528,18 @@ public final class Events {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
 
-      private int value_ ;
       /**
        * <code>int32 value = 4;</code>
        * @return The value.
        */
       @java.lang.Override
       public int getValue() {
-        return value_;
+        return instance.getValue();
       }
       /**
        * <code>int32 value = 4;</code>
@@ -968,9 +547,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder setValue(int value) {
-        
-        value_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setValue(value);
         return this;
       }
       /**
@@ -978,186 +556,140 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearValue() {
-        
-        value_ = 0;
-        onChanged();
+        copyOnWrite();
+        instance.clearValue();
         return this;
       }
 
-      private com.google.protobuf.Timestamp timeStamp_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeStampBuilder_;
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-       * @return Whether the timeStamp field is set.
        */
+      @java.lang.Override
       public boolean hasTimeStamp() {
-        return timeStampBuilder_ != null || timeStamp_ != null;
+        return instance.hasTimeStamp();
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-       * @return The timeStamp.
        */
+      @java.lang.Override
       public com.google.protobuf.Timestamp getTimeStamp() {
-        if (timeStampBuilder_ == null) {
-          return timeStamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeStamp_;
-        } else {
-          return timeStampBuilder_.getMessage();
-        }
+        return instance.getTimeStamp();
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
        */
       public Builder setTimeStamp(com.google.protobuf.Timestamp value) {
-        if (timeStampBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          timeStamp_ = value;
-          onChanged();
-        } else {
-          timeStampBuilder_.setMessage(value);
-        }
-
+        copyOnWrite();
+        instance.setTimeStamp(value);
         return this;
-      }
+        }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
        */
       public Builder setTimeStamp(
           com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (timeStampBuilder_ == null) {
-          timeStamp_ = builderForValue.build();
-          onChanged();
-        } else {
-          timeStampBuilder_.setMessage(builderForValue.build());
-        }
-
+        copyOnWrite();
+        instance.setTimeStamp(builderForValue.build());
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
        */
       public Builder mergeTimeStamp(com.google.protobuf.Timestamp value) {
-        if (timeStampBuilder_ == null) {
-          if (timeStamp_ != null) {
-            timeStamp_ =
-              com.google.protobuf.Timestamp.newBuilder(timeStamp_).mergeFrom(value).buildPartial();
-          } else {
-            timeStamp_ = value;
-          }
-          onChanged();
-        } else {
-          timeStampBuilder_.mergeFrom(value);
-        }
-
+        copyOnWrite();
+        instance.mergeTimeStamp(value);
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
        */
-      public Builder clearTimeStamp() {
-        if (timeStampBuilder_ == null) {
-          timeStamp_ = null;
-          onChanged();
-        } else {
-          timeStamp_ = null;
-          timeStampBuilder_ = null;
-        }
-
+      public Builder clearTimeStamp() {  copyOnWrite();
+        instance.clearTimeStamp();
         return this;
       }
-      /**
-       * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-       */
-      public com.google.protobuf.Timestamp.Builder getTimeStampBuilder() {
-        
-        onChanged();
-        return getTimeStampFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-       */
-      public com.google.protobuf.TimestampOrBuilder getTimeStampOrBuilder() {
-        if (timeStampBuilder_ != null) {
-          return timeStampBuilder_.getMessageOrBuilder();
-        } else {
-          return timeStamp_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : timeStamp_;
-        }
-      }
-      /**
-       * <code>.google.protobuf.Timestamp time_stamp = 5;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getTimeStampFieldBuilder() {
-        if (timeStampBuilder_ == null) {
-          timeStampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getTimeStamp(),
-                  getParentForChildren(),
-                  isClean());
-          timeStamp_ = null;
-        }
-        return timeStampBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.MeasurementEvent)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.Events.MeasurementEvent();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "id_",
+              "peripheralId_",
+              "deploymentId_",
+              "value_",
+              "timeStamp_",
+            };
+            java.lang.String info =
+                "\u0000\u0005\u0000\u0000\u0001\u0005\u0005\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0208\u0004\u0004\u0005\t";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.Events.MeasurementEvent> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.Events.MeasurementEvent.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.Events.MeasurementEvent>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.MeasurementEvent)
     private static final api.Events.MeasurementEvent DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.Events.MeasurementEvent();
+      MeasurementEvent defaultInstance = new MeasurementEvent();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        MeasurementEvent.class, defaultInstance);
     }
 
     public static api.Events.MeasurementEvent getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<MeasurementEvent>
-        PARSER = new com.google.protobuf.AbstractParser<MeasurementEvent>() {
-      @java.lang.Override
-      public MeasurementEvent parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MeasurementEvent(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<MeasurementEvent> PARSER;
 
     public static com.google.protobuf.Parser<MeasurementEvent> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MeasurementEvent> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.Events.MeasurementEvent getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface NewMeasurementEventOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.NewMeasurementEvent)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string peripheralId = 1;</code>
@@ -1199,138 +731,28 @@ public final class Events {
      * @return The timeStamp.
      */
     com.google.protobuf.Timestamp getTimeStamp();
-    /**
-     * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getTimeStampOrBuilder();
   }
   /**
    * Protobuf type {@code api.NewMeasurementEvent}
    */
-  public static final class NewMeasurementEvent extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class NewMeasurementEvent extends
+      com.google.protobuf.GeneratedMessageLite<
+          NewMeasurementEvent, NewMeasurementEvent.Builder> implements
       // @@protoc_insertion_point(message_implements:api.NewMeasurementEvent)
       NewMeasurementEventOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use NewMeasurementEvent.newBuilder() to construct.
-    private NewMeasurementEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private NewMeasurementEvent() {
       peripheralId_ = "";
       deploymentId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new NewMeasurementEvent();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private NewMeasurementEvent(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              peripheralId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            case 24: {
-
-              value_ = input.readInt32();
-              break;
-            }
-            case 34: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (timeStamp_ != null) {
-                subBuilder = timeStamp_.toBuilder();
-              }
-              timeStamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(timeStamp_);
-                timeStamp_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.Events.internal_static_api_NewMeasurementEvent_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.Events.internal_static_api_NewMeasurementEvent_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.Events.NewMeasurementEvent.class, api.Events.NewMeasurementEvent.Builder.class);
-    }
-
     public static final int PERIPHERALID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object peripheralId_;
+    private java.lang.String peripheralId_;
     /**
      * <code>string peripheralId = 1;</code>
      * @return The peripheralId.
      */
     @java.lang.Override
     public java.lang.String getPeripheralId() {
-      java.lang.Object ref = peripheralId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        peripheralId_ = s;
-        return s;
-      }
+      return peripheralId_;
     }
     /**
      * <code>string peripheralId = 1;</code>
@@ -1339,36 +761,45 @@ public final class Events {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getPeripheralIdBytes() {
-      java.lang.Object ref = peripheralId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        peripheralId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(peripheralId_);
+    }
+    /**
+     * <code>string peripheralId = 1;</code>
+     * @param value The peripheralId to set.
+     */
+    private void setPeripheralId(
+        java.lang.String value) {
+      value.getClass();
+  
+      peripheralId_ = value;
+    }
+    /**
+     * <code>string peripheralId = 1;</code>
+     */
+    private void clearPeripheralId() {
+      
+      peripheralId_ = getDefaultInstance().getPeripheralId();
+    }
+    /**
+     * <code>string peripheralId = 1;</code>
+     * @param value The bytes for peripheralId to set.
+     */
+    private void setPeripheralIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      peripheralId_ = value.toStringUtf8();
+      
     }
 
     public static final int DEPLOYMENTID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 2;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 2;</code>
@@ -1377,16 +808,34 @@ public final class Events {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static final int VALUE_FIELD_NUMBER = 3;
@@ -1399,12 +848,26 @@ public final class Events {
     public int getValue() {
       return value_;
     }
+    /**
+     * <code>int32 value = 3;</code>
+     * @param value The value to set.
+     */
+    private void setValue(int value) {
+      
+      value_ = value;
+    }
+    /**
+     * <code>int32 value = 3;</code>
+     */
+    private void clearValue() {
+      
+      value_ = 0;
+    }
 
     public static final int TIME_STAMP_FIELD_NUMBER = 4;
     private com.google.protobuf.Timestamp timeStamp_;
     /**
      * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-     * @return Whether the timeStamp field is set.
      */
     @java.lang.Override
     public boolean hasTimeStamp() {
@@ -1412,7 +875,6 @@ public final class Events {
     }
     /**
      * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-     * @return The timeStamp.
      */
     @java.lang.Override
     public com.google.protobuf.Timestamp getTimeStamp() {
@@ -1421,410 +883,144 @@ public final class Events {
     /**
      * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
      */
-    @java.lang.Override
-    public com.google.protobuf.TimestampOrBuilder getTimeStampOrBuilder() {
-      return getTimeStamp();
+    private void setTimeStamp(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  timeStamp_ = value;
+      
+      }
+    /**
+     * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeTimeStamp(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  if (timeStamp_ != null &&
+          timeStamp_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+        timeStamp_ =
+          com.google.protobuf.Timestamp.newBuilder(timeStamp_).mergeFrom(value).buildPartial();
+      } else {
+        timeStamp_ = value;
+      }
+      
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getPeripheralIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, peripheralId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deploymentId_);
-      }
-      if (value_ != 0) {
-        output.writeInt32(3, value_);
-      }
-      if (timeStamp_ != null) {
-        output.writeMessage(4, getTimeStamp());
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getPeripheralIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, peripheralId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deploymentId_);
-      }
-      if (value_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, value_);
-      }
-      if (timeStamp_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getTimeStamp());
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.Events.NewMeasurementEvent)) {
-        return super.equals(obj);
-      }
-      api.Events.NewMeasurementEvent other = (api.Events.NewMeasurementEvent) obj;
-
-      if (!getPeripheralId()
-          .equals(other.getPeripheralId())) return false;
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (getValue()
-          != other.getValue()) return false;
-      if (hasTimeStamp() != other.hasTimeStamp()) return false;
-      if (hasTimeStamp()) {
-        if (!getTimeStamp()
-            .equals(other.getTimeStamp())) return false;
-      }
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PERIPHERALID_FIELD_NUMBER;
-      hash = (53 * hash) + getPeripheralId().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (37 * hash) + VALUE_FIELD_NUMBER;
-      hash = (53 * hash) + getValue();
-      if (hasTimeStamp()) {
-        hash = (37 * hash) + TIME_STAMP_FIELD_NUMBER;
-        hash = (53 * hash) + getTimeStamp().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
+     */
+    private void clearTimeStamp() {  timeStamp_ = null;
+      
     }
 
     public static api.Events.NewMeasurementEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.NewMeasurementEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.NewMeasurementEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.Events.NewMeasurementEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.Events.NewMeasurementEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.Events.NewMeasurementEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.Events.NewMeasurementEvent prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.NewMeasurementEvent}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.Events.NewMeasurementEvent, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.NewMeasurementEvent)
         api.Events.NewMeasurementEventOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.Events.internal_static_api_NewMeasurementEvent_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.Events.internal_static_api_NewMeasurementEvent_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.Events.NewMeasurementEvent.class, api.Events.NewMeasurementEvent.Builder.class);
-      }
-
       // Construct using api.Events.NewMeasurementEvent.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        peripheralId_ = "";
 
-        deploymentId_ = "";
-
-        value_ = 0;
-
-        if (timeStampBuilder_ == null) {
-          timeStamp_ = null;
-        } else {
-          timeStamp_ = null;
-          timeStampBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.Events.internal_static_api_NewMeasurementEvent_descriptor;
-      }
-
-      @java.lang.Override
-      public api.Events.NewMeasurementEvent getDefaultInstanceForType() {
-        return api.Events.NewMeasurementEvent.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.Events.NewMeasurementEvent build() {
-        api.Events.NewMeasurementEvent result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.Events.NewMeasurementEvent buildPartial() {
-        api.Events.NewMeasurementEvent result = new api.Events.NewMeasurementEvent(this);
-        result.peripheralId_ = peripheralId_;
-        result.deploymentId_ = deploymentId_;
-        result.value_ = value_;
-        if (timeStampBuilder_ == null) {
-          result.timeStamp_ = timeStamp_;
-        } else {
-          result.timeStamp_ = timeStampBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.Events.NewMeasurementEvent) {
-          return mergeFrom((api.Events.NewMeasurementEvent)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.Events.NewMeasurementEvent other) {
-        if (other == api.Events.NewMeasurementEvent.getDefaultInstance()) return this;
-        if (!other.getPeripheralId().isEmpty()) {
-          peripheralId_ = other.peripheralId_;
-          onChanged();
-        }
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        if (other.getValue() != 0) {
-          setValue(other.getValue());
-        }
-        if (other.hasTimeStamp()) {
-          mergeTimeStamp(other.getTimeStamp());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.Events.NewMeasurementEvent parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.Events.NewMeasurementEvent) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object peripheralId_ = "";
       /**
        * <code>string peripheralId = 1;</code>
        * @return The peripheralId.
        */
+      @java.lang.Override
       public java.lang.String getPeripheralId() {
-        java.lang.Object ref = peripheralId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          peripheralId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getPeripheralId();
       }
       /**
        * <code>string peripheralId = 1;</code>
        * @return The bytes for peripheralId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getPeripheralIdBytes() {
-        java.lang.Object ref = peripheralId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          peripheralId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getPeripheralIdBytes();
       }
       /**
        * <code>string peripheralId = 1;</code>
@@ -1833,12 +1029,8 @@ public final class Events {
        */
       public Builder setPeripheralId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        peripheralId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralId(value);
         return this;
       }
       /**
@@ -1846,9 +1038,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearPeripheralId() {
-        
-        peripheralId_ = getDefaultInstance().getPeripheralId();
-        onChanged();
+        copyOnWrite();
+        instance.clearPeripheralId();
         return this;
       }
       /**
@@ -1858,49 +1049,27 @@ public final class Events {
        */
       public Builder setPeripheralIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        peripheralId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralIdBytes(value);
         return this;
       }
 
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 2;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 2;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 2;</code>
@@ -1909,12 +1078,8 @@ public final class Events {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -1922,9 +1087,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -1934,24 +1098,18 @@ public final class Events {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
 
-      private int value_ ;
       /**
        * <code>int32 value = 3;</code>
        * @return The value.
        */
       @java.lang.Override
       public int getValue() {
-        return value_;
+        return instance.getValue();
       }
       /**
        * <code>int32 value = 3;</code>
@@ -1959,9 +1117,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder setValue(int value) {
-        
-        value_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setValue(value);
         return this;
       }
       /**
@@ -1969,186 +1126,139 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearValue() {
-        
-        value_ = 0;
-        onChanged();
+        copyOnWrite();
+        instance.clearValue();
         return this;
       }
 
-      private com.google.protobuf.Timestamp timeStamp_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timeStampBuilder_;
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-       * @return Whether the timeStamp field is set.
        */
+      @java.lang.Override
       public boolean hasTimeStamp() {
-        return timeStampBuilder_ != null || timeStamp_ != null;
+        return instance.hasTimeStamp();
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-       * @return The timeStamp.
        */
+      @java.lang.Override
       public com.google.protobuf.Timestamp getTimeStamp() {
-        if (timeStampBuilder_ == null) {
-          return timeStamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timeStamp_;
-        } else {
-          return timeStampBuilder_.getMessage();
-        }
+        return instance.getTimeStamp();
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
        */
       public Builder setTimeStamp(com.google.protobuf.Timestamp value) {
-        if (timeStampBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          timeStamp_ = value;
-          onChanged();
-        } else {
-          timeStampBuilder_.setMessage(value);
-        }
-
+        copyOnWrite();
+        instance.setTimeStamp(value);
         return this;
-      }
+        }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
        */
       public Builder setTimeStamp(
           com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (timeStampBuilder_ == null) {
-          timeStamp_ = builderForValue.build();
-          onChanged();
-        } else {
-          timeStampBuilder_.setMessage(builderForValue.build());
-        }
-
+        copyOnWrite();
+        instance.setTimeStamp(builderForValue.build());
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
        */
       public Builder mergeTimeStamp(com.google.protobuf.Timestamp value) {
-        if (timeStampBuilder_ == null) {
-          if (timeStamp_ != null) {
-            timeStamp_ =
-              com.google.protobuf.Timestamp.newBuilder(timeStamp_).mergeFrom(value).buildPartial();
-          } else {
-            timeStamp_ = value;
-          }
-          onChanged();
-        } else {
-          timeStampBuilder_.mergeFrom(value);
-        }
-
+        copyOnWrite();
+        instance.mergeTimeStamp(value);
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
        */
-      public Builder clearTimeStamp() {
-        if (timeStampBuilder_ == null) {
-          timeStamp_ = null;
-          onChanged();
-        } else {
-          timeStamp_ = null;
-          timeStampBuilder_ = null;
-        }
-
+      public Builder clearTimeStamp() {  copyOnWrite();
+        instance.clearTimeStamp();
         return this;
       }
-      /**
-       * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-       */
-      public com.google.protobuf.Timestamp.Builder getTimeStampBuilder() {
-        
-        onChanged();
-        return getTimeStampFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-       */
-      public com.google.protobuf.TimestampOrBuilder getTimeStampOrBuilder() {
-        if (timeStampBuilder_ != null) {
-          return timeStampBuilder_.getMessageOrBuilder();
-        } else {
-          return timeStamp_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : timeStamp_;
-        }
-      }
-      /**
-       * <code>.google.protobuf.Timestamp time_stamp = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getTimeStampFieldBuilder() {
-        if (timeStampBuilder_ == null) {
-          timeStampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getTimeStamp(),
-                  getParentForChildren(),
-                  isClean());
-          timeStamp_ = null;
-        }
-        return timeStampBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.NewMeasurementEvent)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.Events.NewMeasurementEvent();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "peripheralId_",
+              "deploymentId_",
+              "value_",
+              "timeStamp_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0000\u0001\u0004\u0004\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0004\u0004\t";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.Events.NewMeasurementEvent> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.Events.NewMeasurementEvent.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.Events.NewMeasurementEvent>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.NewMeasurementEvent)
     private static final api.Events.NewMeasurementEvent DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.Events.NewMeasurementEvent();
+      NewMeasurementEvent defaultInstance = new NewMeasurementEvent();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        NewMeasurementEvent.class, defaultInstance);
     }
 
     public static api.Events.NewMeasurementEvent getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<NewMeasurementEvent>
-        PARSER = new com.google.protobuf.AbstractParser<NewMeasurementEvent>() {
-      @java.lang.Override
-      public NewMeasurementEvent parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new NewMeasurementEvent(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<NewMeasurementEvent> PARSER;
 
     public static com.google.protobuf.Parser<NewMeasurementEvent> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<NewMeasurementEvent> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.Events.NewMeasurementEvent getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface MeasurementEventFilterRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.MeasurementEventFilterRequest)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>repeated string peripheralIds = 1;</code>
@@ -2169,8 +1279,8 @@ public final class Events {
     java.lang.String getPeripheralIds(int index);
     /**
      * <code>repeated string peripheralIds = 1;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the peripheralIds at the given index.
+     * @param index The index of the element to return.
+     * @return The peripheralIds at the given index.
      */
     com.google.protobuf.ByteString
         getPeripheralIdsBytes(int index);
@@ -2197,10 +1307,6 @@ public final class Events {
      * @return The startTime.
      */
     com.google.protobuf.Timestamp getStartTime();
-    /**
-     * <code>.google.protobuf.Timestamp start_time = 3;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getStartTimeOrBuilder();
 
     /**
      * <code>.google.protobuf.Timestamp end_time = 4;</code>
@@ -2212,149 +1318,34 @@ public final class Events {
      * @return The endTime.
      */
     com.google.protobuf.Timestamp getEndTime();
-    /**
-     * <code>.google.protobuf.Timestamp end_time = 4;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getEndTimeOrBuilder();
   }
   /**
    * Protobuf type {@code api.MeasurementEventFilterRequest}
    */
-  public static final class MeasurementEventFilterRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class MeasurementEventFilterRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          MeasurementEventFilterRequest, MeasurementEventFilterRequest.Builder> implements
       // @@protoc_insertion_point(message_implements:api.MeasurementEventFilterRequest)
       MeasurementEventFilterRequestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use MeasurementEventFilterRequest.newBuilder() to construct.
-    private MeasurementEventFilterRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private MeasurementEventFilterRequest() {
-      peripheralIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      peripheralIds_ = com.google.protobuf.GeneratedMessageLite.emptyProtobufList();
       deploymentId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new MeasurementEventFilterRequest();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private MeasurementEventFilterRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                peripheralIds_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              peripheralIds_.add(s);
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            case 26: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (startTime_ != null) {
-                subBuilder = startTime_.toBuilder();
-              }
-              startTime_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(startTime_);
-                startTime_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 34: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (endTime_ != null) {
-                subBuilder = endTime_.toBuilder();
-              }
-              endTime_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(endTime_);
-                endTime_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          peripheralIds_ = peripheralIds_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.Events.internal_static_api_MeasurementEventFilterRequest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.Events.internal_static_api_MeasurementEventFilterRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.Events.MeasurementEventFilterRequest.class, api.Events.MeasurementEventFilterRequest.Builder.class);
-    }
-
     public static final int PERIPHERALIDS_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList peripheralIds_;
+    private com.google.protobuf.Internal.ProtobufList<java.lang.String> peripheralIds_;
     /**
      * <code>repeated string peripheralIds = 1;</code>
      * @return A list containing the peripheralIds.
      */
-    public com.google.protobuf.ProtocolStringList
-        getPeripheralIdsList() {
+    @java.lang.Override
+    public java.util.List<java.lang.String> getPeripheralIdsList() {
       return peripheralIds_;
     }
     /**
      * <code>repeated string peripheralIds = 1;</code>
      * @return The count of peripheralIds.
      */
+    @java.lang.Override
     public int getPeripheralIdsCount() {
       return peripheralIds_.size();
     }
@@ -2363,6 +1354,7 @@ public final class Events {
      * @param index The index of the element to return.
      * @return The peripheralIds at the given index.
      */
+    @java.lang.Override
     public java.lang.String getPeripheralIds(int index) {
       return peripheralIds_.get(index);
     }
@@ -2371,29 +1363,76 @@ public final class Events {
      * @param index The index of the value to return.
      * @return The bytes of the peripheralIds at the given index.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getPeripheralIdsBytes(int index) {
-      return peripheralIds_.getByteString(index);
+      return com.google.protobuf.ByteString.copyFromUtf8(
+          peripheralIds_.get(index));
+    }
+    private void ensurePeripheralIdsIsMutable() {
+      com.google.protobuf.Internal.ProtobufList<java.lang.String> tmp =
+          peripheralIds_;  if (!tmp.isModifiable()) {
+        peripheralIds_ =
+            com.google.protobuf.GeneratedMessageLite.mutableCopy(tmp);
+       }
+    }
+    /**
+     * <code>repeated string peripheralIds = 1;</code>
+     * @param index The index to set the value at.
+     * @param value The peripheralIds to set.
+     */
+    private void setPeripheralIds(
+        int index, java.lang.String value) {
+      value.getClass();
+  ensurePeripheralIdsIsMutable();
+      peripheralIds_.set(index, value);
+    }
+    /**
+     * <code>repeated string peripheralIds = 1;</code>
+     * @param value The peripheralIds to add.
+     */
+    private void addPeripheralIds(
+        java.lang.String value) {
+      value.getClass();
+  ensurePeripheralIdsIsMutable();
+      peripheralIds_.add(value);
+    }
+    /**
+     * <code>repeated string peripheralIds = 1;</code>
+     * @param values The peripheralIds to add.
+     */
+    private void addAllPeripheralIds(
+        java.lang.Iterable<java.lang.String> values) {
+      ensurePeripheralIdsIsMutable();
+      com.google.protobuf.AbstractMessageLite.addAll(
+          values, peripheralIds_);
+    }
+    /**
+     * <code>repeated string peripheralIds = 1;</code>
+     */
+    private void clearPeripheralIds() {
+      peripheralIds_ = com.google.protobuf.GeneratedMessageLite.emptyProtobufList();
+    }
+    /**
+     * <code>repeated string peripheralIds = 1;</code>
+     * @param value The bytes of the peripheralIds to add.
+     */
+    private void addPeripheralIdsBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      ensurePeripheralIdsIsMutable();
+      peripheralIds_.add(value.toStringUtf8());
     }
 
     public static final int DEPLOYMENTID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 2;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 2;</code>
@@ -2402,23 +1441,40 @@ public final class Events {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static final int START_TIME_FIELD_NUMBER = 3;
     private com.google.protobuf.Timestamp startTime_;
     /**
      * <code>.google.protobuf.Timestamp start_time = 3;</code>
-     * @return Whether the startTime field is set.
      */
     @java.lang.Override
     public boolean hasStartTime() {
@@ -2426,7 +1482,6 @@ public final class Events {
     }
     /**
      * <code>.google.protobuf.Timestamp start_time = 3;</code>
-     * @return The startTime.
      */
     @java.lang.Override
     public com.google.protobuf.Timestamp getStartTime() {
@@ -2435,16 +1490,37 @@ public final class Events {
     /**
      * <code>.google.protobuf.Timestamp start_time = 3;</code>
      */
-    @java.lang.Override
-    public com.google.protobuf.TimestampOrBuilder getStartTimeOrBuilder() {
-      return getStartTime();
+    private void setStartTime(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  startTime_ = value;
+      
+      }
+    /**
+     * <code>.google.protobuf.Timestamp start_time = 3;</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeStartTime(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  if (startTime_ != null &&
+          startTime_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+        startTime_ =
+          com.google.protobuf.Timestamp.newBuilder(startTime_).mergeFrom(value).buildPartial();
+      } else {
+        startTime_ = value;
+      }
+      
+    }
+    /**
+     * <code>.google.protobuf.Timestamp start_time = 3;</code>
+     */
+    private void clearStartTime() {  startTime_ = null;
+      
     }
 
     public static final int END_TIME_FIELD_NUMBER = 4;
     private com.google.protobuf.Timestamp endTime_;
     /**
      * <code>.google.protobuf.Timestamp end_time = 4;</code>
-     * @return Whether the endTime field is set.
      */
     @java.lang.Override
     public boolean hasEndTime() {
@@ -2452,7 +1528,6 @@ public final class Events {
     }
     /**
      * <code>.google.protobuf.Timestamp end_time = 4;</code>
-     * @return The endTime.
      */
     @java.lang.Override
     public com.google.protobuf.Timestamp getEndTime() {
@@ -2461,447 +1536,164 @@ public final class Events {
     /**
      * <code>.google.protobuf.Timestamp end_time = 4;</code>
      */
-    @java.lang.Override
-    public com.google.protobuf.TimestampOrBuilder getEndTimeOrBuilder() {
-      return getEndTime();
+    private void setEndTime(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  endTime_ = value;
+      
+      }
+    /**
+     * <code>.google.protobuf.Timestamp end_time = 4;</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeEndTime(com.google.protobuf.Timestamp value) {
+      value.getClass();
+  if (endTime_ != null &&
+          endTime_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+        endTime_ =
+          com.google.protobuf.Timestamp.newBuilder(endTime_).mergeFrom(value).buildPartial();
+      } else {
+        endTime_ = value;
+      }
+      
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < peripheralIds_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, peripheralIds_.getRaw(i));
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deploymentId_);
-      }
-      if (startTime_ != null) {
-        output.writeMessage(3, getStartTime());
-      }
-      if (endTime_ != null) {
-        output.writeMessage(4, getEndTime());
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < peripheralIds_.size(); i++) {
-          dataSize += computeStringSizeNoTag(peripheralIds_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getPeripheralIdsList().size();
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deploymentId_);
-      }
-      if (startTime_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getStartTime());
-      }
-      if (endTime_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getEndTime());
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.Events.MeasurementEventFilterRequest)) {
-        return super.equals(obj);
-      }
-      api.Events.MeasurementEventFilterRequest other = (api.Events.MeasurementEventFilterRequest) obj;
-
-      if (!getPeripheralIdsList()
-          .equals(other.getPeripheralIdsList())) return false;
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (hasStartTime() != other.hasStartTime()) return false;
-      if (hasStartTime()) {
-        if (!getStartTime()
-            .equals(other.getStartTime())) return false;
-      }
-      if (hasEndTime() != other.hasEndTime()) return false;
-      if (hasEndTime()) {
-        if (!getEndTime()
-            .equals(other.getEndTime())) return false;
-      }
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getPeripheralIdsCount() > 0) {
-        hash = (37 * hash) + PERIPHERALIDS_FIELD_NUMBER;
-        hash = (53 * hash) + getPeripheralIdsList().hashCode();
-      }
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      if (hasStartTime()) {
-        hash = (37 * hash) + START_TIME_FIELD_NUMBER;
-        hash = (53 * hash) + getStartTime().hashCode();
-      }
-      if (hasEndTime()) {
-        hash = (37 * hash) + END_TIME_FIELD_NUMBER;
-        hash = (53 * hash) + getEndTime().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>.google.protobuf.Timestamp end_time = 4;</code>
+     */
+    private void clearEndTime() {  endTime_ = null;
+      
     }
 
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.Events.MeasurementEventFilterRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.Events.MeasurementEventFilterRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.Events.MeasurementEventFilterRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.Events.MeasurementEventFilterRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.MeasurementEventFilterRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.Events.MeasurementEventFilterRequest, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.MeasurementEventFilterRequest)
         api.Events.MeasurementEventFilterRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.Events.internal_static_api_MeasurementEventFilterRequest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.Events.internal_static_api_MeasurementEventFilterRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.Events.MeasurementEventFilterRequest.class, api.Events.MeasurementEventFilterRequest.Builder.class);
-      }
-
       // Construct using api.Events.MeasurementEventFilterRequest.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        peripheralIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        deploymentId_ = "";
 
-        if (startTimeBuilder_ == null) {
-          startTime_ = null;
-        } else {
-          startTime_ = null;
-          startTimeBuilder_ = null;
-        }
-        if (endTimeBuilder_ == null) {
-          endTime_ = null;
-        } else {
-          endTime_ = null;
-          endTimeBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.Events.internal_static_api_MeasurementEventFilterRequest_descriptor;
-      }
-
-      @java.lang.Override
-      public api.Events.MeasurementEventFilterRequest getDefaultInstanceForType() {
-        return api.Events.MeasurementEventFilterRequest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.Events.MeasurementEventFilterRequest build() {
-        api.Events.MeasurementEventFilterRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.Events.MeasurementEventFilterRequest buildPartial() {
-        api.Events.MeasurementEventFilterRequest result = new api.Events.MeasurementEventFilterRequest(this);
-        int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          peripheralIds_ = peripheralIds_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.peripheralIds_ = peripheralIds_;
-        result.deploymentId_ = deploymentId_;
-        if (startTimeBuilder_ == null) {
-          result.startTime_ = startTime_;
-        } else {
-          result.startTime_ = startTimeBuilder_.build();
-        }
-        if (endTimeBuilder_ == null) {
-          result.endTime_ = endTime_;
-        } else {
-          result.endTime_ = endTimeBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.Events.MeasurementEventFilterRequest) {
-          return mergeFrom((api.Events.MeasurementEventFilterRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.Events.MeasurementEventFilterRequest other) {
-        if (other == api.Events.MeasurementEventFilterRequest.getDefaultInstance()) return this;
-        if (!other.peripheralIds_.isEmpty()) {
-          if (peripheralIds_.isEmpty()) {
-            peripheralIds_ = other.peripheralIds_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensurePeripheralIdsIsMutable();
-            peripheralIds_.addAll(other.peripheralIds_);
-          }
-          onChanged();
-        }
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        if (other.hasStartTime()) {
-          mergeStartTime(other.getStartTime());
-        }
-        if (other.hasEndTime()) {
-          mergeEndTime(other.getEndTime());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.Events.MeasurementEventFilterRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.Events.MeasurementEventFilterRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.google.protobuf.LazyStringList peripheralIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensurePeripheralIdsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          peripheralIds_ = new com.google.protobuf.LazyStringArrayList(peripheralIds_);
-          bitField0_ |= 0x00000001;
-         }
-      }
       /**
        * <code>repeated string peripheralIds = 1;</code>
        * @return A list containing the peripheralIds.
        */
-      public com.google.protobuf.ProtocolStringList
+      @java.lang.Override
+      public java.util.List<java.lang.String>
           getPeripheralIdsList() {
-        return peripheralIds_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(
+            instance.getPeripheralIdsList());
       }
       /**
        * <code>repeated string peripheralIds = 1;</code>
        * @return The count of peripheralIds.
        */
+      @java.lang.Override
       public int getPeripheralIdsCount() {
-        return peripheralIds_.size();
+        return instance.getPeripheralIdsCount();
       }
       /**
        * <code>repeated string peripheralIds = 1;</code>
        * @param index The index of the element to return.
        * @return The peripheralIds at the given index.
        */
+      @java.lang.Override
       public java.lang.String getPeripheralIds(int index) {
-        return peripheralIds_.get(index);
+        return instance.getPeripheralIds(index);
       }
       /**
        * <code>repeated string peripheralIds = 1;</code>
        * @param index The index of the value to return.
        * @return The bytes of the peripheralIds at the given index.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getPeripheralIdsBytes(int index) {
-        return peripheralIds_.getByteString(index);
+        return instance.getPeripheralIdsBytes(index);
       }
       /**
        * <code>repeated string peripheralIds = 1;</code>
@@ -2911,12 +1703,8 @@ public final class Events {
        */
       public Builder setPeripheralIds(
           int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensurePeripheralIdsIsMutable();
-        peripheralIds_.set(index, value);
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralIds(index, value);
         return this;
       }
       /**
@@ -2926,12 +1714,8 @@ public final class Events {
        */
       public Builder addPeripheralIds(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensurePeripheralIdsIsMutable();
-        peripheralIds_.add(value);
-        onChanged();
+        copyOnWrite();
+        instance.addPeripheralIds(value);
         return this;
       }
       /**
@@ -2941,10 +1725,8 @@ public final class Events {
        */
       public Builder addAllPeripheralIds(
           java.lang.Iterable<java.lang.String> values) {
-        ensurePeripheralIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, peripheralIds_);
-        onChanged();
+        copyOnWrite();
+        instance.addAllPeripheralIds(values);
         return this;
       }
       /**
@@ -2952,9 +1734,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearPeripheralIds() {
-        peripheralIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
+        copyOnWrite();
+        instance.clearPeripheralIds();
         return this;
       }
       /**
@@ -2964,49 +1745,27 @@ public final class Events {
        */
       public Builder addPeripheralIdsBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensurePeripheralIdsIsMutable();
-        peripheralIds_.add(value);
-        onChanged();
+        copyOnWrite();
+        instance.addPeripheralIdsBytes(value);
         return this;
       }
 
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 2;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 2;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 2;</code>
@@ -3015,12 +1774,8 @@ public final class Events {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -3028,9 +1783,8 @@ public final class Events {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -3040,375 +1794,185 @@ public final class Events {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
 
-      private com.google.protobuf.Timestamp startTime_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> startTimeBuilder_;
       /**
        * <code>.google.protobuf.Timestamp start_time = 3;</code>
-       * @return Whether the startTime field is set.
        */
+      @java.lang.Override
       public boolean hasStartTime() {
-        return startTimeBuilder_ != null || startTime_ != null;
+        return instance.hasStartTime();
       }
       /**
        * <code>.google.protobuf.Timestamp start_time = 3;</code>
-       * @return The startTime.
        */
+      @java.lang.Override
       public com.google.protobuf.Timestamp getStartTime() {
-        if (startTimeBuilder_ == null) {
-          return startTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : startTime_;
-        } else {
-          return startTimeBuilder_.getMessage();
-        }
+        return instance.getStartTime();
       }
       /**
        * <code>.google.protobuf.Timestamp start_time = 3;</code>
        */
       public Builder setStartTime(com.google.protobuf.Timestamp value) {
-        if (startTimeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          startTime_ = value;
-          onChanged();
-        } else {
-          startTimeBuilder_.setMessage(value);
-        }
-
+        copyOnWrite();
+        instance.setStartTime(value);
         return this;
-      }
+        }
       /**
        * <code>.google.protobuf.Timestamp start_time = 3;</code>
        */
       public Builder setStartTime(
           com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (startTimeBuilder_ == null) {
-          startTime_ = builderForValue.build();
-          onChanged();
-        } else {
-          startTimeBuilder_.setMessage(builderForValue.build());
-        }
-
+        copyOnWrite();
+        instance.setStartTime(builderForValue.build());
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp start_time = 3;</code>
        */
       public Builder mergeStartTime(com.google.protobuf.Timestamp value) {
-        if (startTimeBuilder_ == null) {
-          if (startTime_ != null) {
-            startTime_ =
-              com.google.protobuf.Timestamp.newBuilder(startTime_).mergeFrom(value).buildPartial();
-          } else {
-            startTime_ = value;
-          }
-          onChanged();
-        } else {
-          startTimeBuilder_.mergeFrom(value);
-        }
-
+        copyOnWrite();
+        instance.mergeStartTime(value);
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp start_time = 3;</code>
        */
-      public Builder clearStartTime() {
-        if (startTimeBuilder_ == null) {
-          startTime_ = null;
-          onChanged();
-        } else {
-          startTime_ = null;
-          startTimeBuilder_ = null;
-        }
-
+      public Builder clearStartTime() {  copyOnWrite();
+        instance.clearStartTime();
         return this;
       }
-      /**
-       * <code>.google.protobuf.Timestamp start_time = 3;</code>
-       */
-      public com.google.protobuf.Timestamp.Builder getStartTimeBuilder() {
-        
-        onChanged();
-        return getStartTimeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.google.protobuf.Timestamp start_time = 3;</code>
-       */
-      public com.google.protobuf.TimestampOrBuilder getStartTimeOrBuilder() {
-        if (startTimeBuilder_ != null) {
-          return startTimeBuilder_.getMessageOrBuilder();
-        } else {
-          return startTime_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : startTime_;
-        }
-      }
-      /**
-       * <code>.google.protobuf.Timestamp start_time = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getStartTimeFieldBuilder() {
-        if (startTimeBuilder_ == null) {
-          startTimeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getStartTime(),
-                  getParentForChildren(),
-                  isClean());
-          startTime_ = null;
-        }
-        return startTimeBuilder_;
-      }
 
-      private com.google.protobuf.Timestamp endTime_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> endTimeBuilder_;
       /**
        * <code>.google.protobuf.Timestamp end_time = 4;</code>
-       * @return Whether the endTime field is set.
        */
+      @java.lang.Override
       public boolean hasEndTime() {
-        return endTimeBuilder_ != null || endTime_ != null;
+        return instance.hasEndTime();
       }
       /**
        * <code>.google.protobuf.Timestamp end_time = 4;</code>
-       * @return The endTime.
        */
+      @java.lang.Override
       public com.google.protobuf.Timestamp getEndTime() {
-        if (endTimeBuilder_ == null) {
-          return endTime_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : endTime_;
-        } else {
-          return endTimeBuilder_.getMessage();
-        }
+        return instance.getEndTime();
       }
       /**
        * <code>.google.protobuf.Timestamp end_time = 4;</code>
        */
       public Builder setEndTime(com.google.protobuf.Timestamp value) {
-        if (endTimeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          endTime_ = value;
-          onChanged();
-        } else {
-          endTimeBuilder_.setMessage(value);
-        }
-
+        copyOnWrite();
+        instance.setEndTime(value);
         return this;
-      }
+        }
       /**
        * <code>.google.protobuf.Timestamp end_time = 4;</code>
        */
       public Builder setEndTime(
           com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (endTimeBuilder_ == null) {
-          endTime_ = builderForValue.build();
-          onChanged();
-        } else {
-          endTimeBuilder_.setMessage(builderForValue.build());
-        }
-
+        copyOnWrite();
+        instance.setEndTime(builderForValue.build());
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp end_time = 4;</code>
        */
       public Builder mergeEndTime(com.google.protobuf.Timestamp value) {
-        if (endTimeBuilder_ == null) {
-          if (endTime_ != null) {
-            endTime_ =
-              com.google.protobuf.Timestamp.newBuilder(endTime_).mergeFrom(value).buildPartial();
-          } else {
-            endTime_ = value;
-          }
-          onChanged();
-        } else {
-          endTimeBuilder_.mergeFrom(value);
-        }
-
+        copyOnWrite();
+        instance.mergeEndTime(value);
         return this;
       }
       /**
        * <code>.google.protobuf.Timestamp end_time = 4;</code>
        */
-      public Builder clearEndTime() {
-        if (endTimeBuilder_ == null) {
-          endTime_ = null;
-          onChanged();
-        } else {
-          endTime_ = null;
-          endTimeBuilder_ = null;
-        }
-
+      public Builder clearEndTime() {  copyOnWrite();
+        instance.clearEndTime();
         return this;
       }
-      /**
-       * <code>.google.protobuf.Timestamp end_time = 4;</code>
-       */
-      public com.google.protobuf.Timestamp.Builder getEndTimeBuilder() {
-        
-        onChanged();
-        return getEndTimeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.google.protobuf.Timestamp end_time = 4;</code>
-       */
-      public com.google.protobuf.TimestampOrBuilder getEndTimeOrBuilder() {
-        if (endTimeBuilder_ != null) {
-          return endTimeBuilder_.getMessageOrBuilder();
-        } else {
-          return endTime_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : endTime_;
-        }
-      }
-      /**
-       * <code>.google.protobuf.Timestamp end_time = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getEndTimeFieldBuilder() {
-        if (endTimeBuilder_ == null) {
-          endTimeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getEndTime(),
-                  getParentForChildren(),
-                  isClean());
-          endTime_ = null;
-        }
-        return endTimeBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.MeasurementEventFilterRequest)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.Events.MeasurementEventFilterRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "peripheralIds_",
+              "deploymentId_",
+              "startTime_",
+              "endTime_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0000\u0001\u0004\u0004\u0000\u0001\u0000\u0001\u021a\u0002\u0208" +
+                "\u0003\t\u0004\t";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.Events.MeasurementEventFilterRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.Events.MeasurementEventFilterRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.Events.MeasurementEventFilterRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.MeasurementEventFilterRequest)
     private static final api.Events.MeasurementEventFilterRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.Events.MeasurementEventFilterRequest();
+      MeasurementEventFilterRequest defaultInstance = new MeasurementEventFilterRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        MeasurementEventFilterRequest.class, defaultInstance);
     }
 
     public static api.Events.MeasurementEventFilterRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<MeasurementEventFilterRequest>
-        PARSER = new com.google.protobuf.AbstractParser<MeasurementEventFilterRequest>() {
-      @java.lang.Override
-      public MeasurementEventFilterRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MeasurementEventFilterRequest(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<MeasurementEventFilterRequest> PARSER;
 
     public static com.google.protobuf.Parser<MeasurementEventFilterRequest> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MeasurementEventFilterRequest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.Events.MeasurementEventFilterRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_MeasurementEvent_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_MeasurementEvent_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_NewMeasurementEvent_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_NewMeasurementEvent_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_MeasurementEventFilterRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_MeasurementEventFilterRequest_fieldAccessorTable;
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
   static {
-    java.lang.String[] descriptorData = {
-      "\n\014events.proto\022\003api\032\013empty.proto\032\037google" +
-      "/protobuf/timestamp.proto\"\211\001\n\020Measuremen" +
-      "tEvent\022\n\n\002id\030\001 \001(\t\022\024\n\014peripheralId\030\002 \001(\t" +
-      "\022\024\n\014deploymentId\030\003 \001(\t\022\r\n\005value\030\004 \001(\005\022.\n" +
-      "\ntime_stamp\030\005 \001(\0132\032.google.protobuf.Time" +
-      "stamp\"\200\001\n\023NewMeasurementEvent\022\024\n\014periphe" +
-      "ralId\030\001 \001(\t\022\024\n\014deploymentId\030\002 \001(\t\022\r\n\005val" +
-      "ue\030\003 \001(\005\022.\n\ntime_stamp\030\004 \001(\0132\032.google.pr" +
-      "otobuf.Timestamp\"\252\001\n\035MeasurementEventFil" +
-      "terRequest\022\025\n\rperipheralIds\030\001 \003(\t\022\024\n\014dep" +
-      "loymentId\030\002 \001(\t\022.\n\nstart_time\030\003 \001(\0132\032.go" +
-      "ogle.protobuf.Timestamp\022,\n\010end_time\030\004 \001(" +
-      "\0132\032.google.protobuf.Timestamp2\243\001\n!Periph" +
-      "eralMeasurementEventService\0221\n\tSendEvent" +
-      "\022\030.api.NewMeasurementEvent\032\n.api.Empty\022K" +
-      "\n\014FilterEvents\022\".api.MeasurementEventFil" +
-      "terRequest\032\025.api.MeasurementEvent0\001B\016Z\014a" +
-      "pi/protobufb\006proto3"
-    };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          api.EmptyOuterClass.getDescriptor(),
-          com.google.protobuf.TimestampProto.getDescriptor(),
-        });
-    internal_static_api_MeasurementEvent_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_api_MeasurementEvent_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_MeasurementEvent_descriptor,
-        new java.lang.String[] { "Id", "PeripheralId", "DeploymentId", "Value", "TimeStamp", });
-    internal_static_api_NewMeasurementEvent_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_api_NewMeasurementEvent_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_NewMeasurementEvent_descriptor,
-        new java.lang.String[] { "PeripheralId", "DeploymentId", "Value", "TimeStamp", });
-    internal_static_api_MeasurementEventFilterRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_api_MeasurementEventFilterRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_MeasurementEventFilterRequest_descriptor,
-        new java.lang.String[] { "PeripheralIds", "DeploymentId", "StartTime", "EndTime", });
-    api.EmptyOuterClass.getDescriptor();
-    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

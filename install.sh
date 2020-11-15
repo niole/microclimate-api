@@ -14,11 +14,7 @@ then
     exit 1
 fi
 
-echo "Cancel if tests do not succeed"
-
-cd grpc-java/compiler
-../gradlew java_pluginExecutable -PskipAndroid=true
-../gradlew test -PskipAndroid=true
+./install_grpc_java.sh
 
 echo "Install go stuff"
 

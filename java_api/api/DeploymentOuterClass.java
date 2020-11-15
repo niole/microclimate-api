@@ -8,15 +8,9 @@ public final class DeploymentOuterClass {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
-
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
-  }
   public interface DeploymentOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.Deployment)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string id = 1;</code>
@@ -68,113 +62,21 @@ public final class DeploymentOuterClass {
   /**
    * Protobuf type {@code api.Deployment}
    */
-  public static final class Deployment extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class Deployment extends
+      com.google.protobuf.GeneratedMessageLite<
+          Deployment, Deployment.Builder> implements
       // @@protoc_insertion_point(message_implements:api.Deployment)
       DeploymentOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use Deployment.newBuilder() to construct.
-    private Deployment(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private Deployment() {
       id_ = "";
       ownerUserId_ = "";
       domain_ = "";
-      status_ = 0;
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Deployment();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Deployment(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              id_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ownerUserId_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              domain_ = s;
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-
-              status_ = rawValue;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.DeploymentOuterClass.internal_static_api_Deployment_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.DeploymentOuterClass.internal_static_api_Deployment_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.DeploymentOuterClass.Deployment.class, api.DeploymentOuterClass.Deployment.Builder.class);
-    }
-
     /**
      * Protobuf enum {@code api.Deployment.Status}
      */
     public enum Status
-        implements com.google.protobuf.ProtocolMessageEnum {
+        implements com.google.protobuf.Internal.EnumLite {
       /**
        * <code>STARTING_UP = 0;</code>
        */
@@ -220,6 +122,7 @@ public final class DeploymentOuterClass {
       public static final int UNREACHABLE_VALUE = 4;
 
 
+      @java.lang.Override
       public final int getNumber() {
         if (this == UNRECOGNIZED) {
           throw new java.lang.IllegalArgumentException(
@@ -229,8 +132,8 @@ public final class DeploymentOuterClass {
       }
 
       /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -238,10 +141,6 @@ public final class DeploymentOuterClass {
         return forNumber(value);
       }
 
-      /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
-       */
       public static Status forNumber(int value) {
         switch (value) {
           case 0: return STARTING_UP;
@@ -260,41 +159,25 @@ public final class DeploymentOuterClass {
       private static final com.google.protobuf.Internal.EnumLiteMap<
           Status> internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Status>() {
+              @java.lang.Override
               public Status findValueByNumber(int number) {
                 return Status.forNumber(number);
               }
             };
 
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalStateException(
-              "Can't get the descriptor of an unrecognized enum value.");
-        }
-        return getDescriptor().getValues().get(ordinal());
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return api.DeploymentOuterClass.Deployment.getDescriptor().getEnumTypes().get(0);
+      public static com.google.protobuf.Internal.EnumVerifier 
+          internalGetVerifier() {
+        return StatusVerifier.INSTANCE;
       }
 
-      private static final Status[] VALUES = values();
-
-      public static Status valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        if (desc.getIndex() == -1) {
-          return UNRECOGNIZED;
-        }
-        return VALUES[desc.getIndex()];
-      }
+      private static final class StatusVerifier implements 
+           com.google.protobuf.Internal.EnumVerifier { 
+              static final com.google.protobuf.Internal.EnumVerifier           INSTANCE = new StatusVerifier();
+              @java.lang.Override
+              public boolean isInRange(int number) {
+                return Status.forNumber(number) != null;
+              }
+            };
 
       private final int value;
 
@@ -306,23 +189,14 @@ public final class DeploymentOuterClass {
     }
 
     public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    private java.lang.String id_;
     /**
      * <code>string id = 1;</code>
      * @return The id.
      */
     @java.lang.Override
     public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+      return id_;
     }
     /**
      * <code>string id = 1;</code>
@@ -331,36 +205,45 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(id_);
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The id to set.
+     */
+    private void setId(
+        java.lang.String value) {
+      value.getClass();
+  
+      id_ = value;
+    }
+    /**
+     * <code>string id = 1;</code>
+     */
+    private void clearId() {
+      
+      id_ = getDefaultInstance().getId();
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The bytes for id to set.
+     */
+    private void setIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      id_ = value.toStringUtf8();
+      
     }
 
     public static final int OWNERUSERID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object ownerUserId_;
+    private java.lang.String ownerUserId_;
     /**
      * <code>string ownerUserId = 2;</code>
      * @return The ownerUserId.
      */
     @java.lang.Override
     public java.lang.String getOwnerUserId() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ownerUserId_ = s;
-        return s;
-      }
+      return ownerUserId_;
     }
     /**
      * <code>string ownerUserId = 2;</code>
@@ -369,36 +252,45 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getOwnerUserIdBytes() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ownerUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(ownerUserId_);
+    }
+    /**
+     * <code>string ownerUserId = 2;</code>
+     * @param value The ownerUserId to set.
+     */
+    private void setOwnerUserId(
+        java.lang.String value) {
+      value.getClass();
+  
+      ownerUserId_ = value;
+    }
+    /**
+     * <code>string ownerUserId = 2;</code>
+     */
+    private void clearOwnerUserId() {
+      
+      ownerUserId_ = getDefaultInstance().getOwnerUserId();
+    }
+    /**
+     * <code>string ownerUserId = 2;</code>
+     * @param value The bytes for ownerUserId to set.
+     */
+    private void setOwnerUserIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      ownerUserId_ = value.toStringUtf8();
+      
     }
 
     public static final int DOMAIN_FIELD_NUMBER = 3;
-    private volatile java.lang.Object domain_;
+    private java.lang.String domain_;
     /**
      * <code>string domain = 3;</code>
      * @return The domain.
      */
     @java.lang.Override
     public java.lang.String getDomain() {
-      java.lang.Object ref = domain_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        domain_ = s;
-        return s;
-      }
+      return domain_;
     }
     /**
      * <code>string domain = 3;</code>
@@ -407,16 +299,34 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDomainBytes() {
-      java.lang.Object ref = domain_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        domain_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(domain_);
+    }
+    /**
+     * <code>string domain = 3;</code>
+     * @param value The domain to set.
+     */
+    private void setDomain(
+        java.lang.String value) {
+      value.getClass();
+  
+      domain_ = value;
+    }
+    /**
+     * <code>string domain = 3;</code>
+     */
+    private void clearDomain() {
+      
+      domain_ = getDefaultInstance().getDomain();
+    }
+    /**
+     * <code>string domain = 3;</code>
+     * @param value The bytes for domain to set.
+     */
+    private void setDomainBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      domain_ = value.toStringUtf8();
+      
     }
 
     public static final int STATUS_FIELD_NUMBER = 4;
@@ -425,404 +335,153 @@ public final class DeploymentOuterClass {
      * <code>.api.Deployment.Status status = 4;</code>
      * @return The enum numeric value on the wire for status.
      */
-    @java.lang.Override public int getStatusValue() {
+    @java.lang.Override
+    public int getStatusValue() {
       return status_;
     }
     /**
      * <code>.api.Deployment.Status status = 4;</code>
      * @return The status.
      */
-    @java.lang.Override public api.DeploymentOuterClass.Deployment.Status getStatus() {
-      @SuppressWarnings("deprecation")
-      api.DeploymentOuterClass.Deployment.Status result = api.DeploymentOuterClass.Deployment.Status.valueOf(status_);
+    @java.lang.Override
+    public api.DeploymentOuterClass.Deployment.Status getStatus() {
+      api.DeploymentOuterClass.Deployment.Status result = api.DeploymentOuterClass.Deployment.Status.forNumber(status_);
       return result == null ? api.DeploymentOuterClass.Deployment.Status.UNRECOGNIZED : result;
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>.api.Deployment.Status status = 4;</code>
+     * @param value The enum numeric value on the wire for status to set.
+     */
+    private void setStatusValue(int value) {
+        status_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
-      }
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ownerUserId_);
-      }
-      if (!getDomainBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, domain_);
-      }
-      if (status_ != api.DeploymentOuterClass.Deployment.Status.STARTING_UP.getNumber()) {
-        output.writeEnum(4, status_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>.api.Deployment.Status status = 4;</code>
+     * @param value The status to set.
+     */
+    private void setStatus(api.DeploymentOuterClass.Deployment.Status value) {
+      status_ = value.getNumber();
+      
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
-      }
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ownerUserId_);
-      }
-      if (!getDomainBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, domain_);
-      }
-      if (status_ != api.DeploymentOuterClass.Deployment.Status.STARTING_UP.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, status_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.DeploymentOuterClass.Deployment)) {
-        return super.equals(obj);
-      }
-      api.DeploymentOuterClass.Deployment other = (api.DeploymentOuterClass.Deployment) obj;
-
-      if (!getId()
-          .equals(other.getId())) return false;
-      if (!getOwnerUserId()
-          .equals(other.getOwnerUserId())) return false;
-      if (!getDomain()
-          .equals(other.getDomain())) return false;
-      if (status_ != other.status_) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
-      hash = (37 * hash) + OWNERUSERID_FIELD_NUMBER;
-      hash = (53 * hash) + getOwnerUserId().hashCode();
-      hash = (37 * hash) + DOMAIN_FIELD_NUMBER;
-      hash = (53 * hash) + getDomain().hashCode();
-      hash = (37 * hash) + STATUS_FIELD_NUMBER;
-      hash = (53 * hash) + status_;
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>.api.Deployment.Status status = 4;</code>
+     */
+    private void clearStatus() {
+      
+      status_ = 0;
     }
 
     public static api.DeploymentOuterClass.Deployment parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.Deployment parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.Deployment parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.Deployment parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.DeploymentOuterClass.Deployment prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.Deployment}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.DeploymentOuterClass.Deployment, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.Deployment)
         api.DeploymentOuterClass.DeploymentOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.DeploymentOuterClass.internal_static_api_Deployment_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.DeploymentOuterClass.internal_static_api_Deployment_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.DeploymentOuterClass.Deployment.class, api.DeploymentOuterClass.Deployment.Builder.class);
-      }
-
       // Construct using api.DeploymentOuterClass.Deployment.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        id_ = "";
 
-        ownerUserId_ = "";
-
-        domain_ = "";
-
-        status_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.DeploymentOuterClass.internal_static_api_Deployment_descriptor;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.Deployment getDefaultInstanceForType() {
-        return api.DeploymentOuterClass.Deployment.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.Deployment build() {
-        api.DeploymentOuterClass.Deployment result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.Deployment buildPartial() {
-        api.DeploymentOuterClass.Deployment result = new api.DeploymentOuterClass.Deployment(this);
-        result.id_ = id_;
-        result.ownerUserId_ = ownerUserId_;
-        result.domain_ = domain_;
-        result.status_ = status_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.DeploymentOuterClass.Deployment) {
-          return mergeFrom((api.DeploymentOuterClass.Deployment)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.DeploymentOuterClass.Deployment other) {
-        if (other == api.DeploymentOuterClass.Deployment.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
-        }
-        if (!other.getOwnerUserId().isEmpty()) {
-          ownerUserId_ = other.ownerUserId_;
-          onChanged();
-        }
-        if (!other.getDomain().isEmpty()) {
-          domain_ = other.domain_;
-          onChanged();
-        }
-        if (other.status_ != 0) {
-          setStatusValue(other.getStatusValue());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.DeploymentOuterClass.Deployment parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.DeploymentOuterClass.Deployment) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object id_ = "";
       /**
        * <code>string id = 1;</code>
        * @return The id.
        */
+      @java.lang.Override
       public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getId();
       }
       /**
        * <code>string id = 1;</code>
        * @return The bytes for id.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getIdBytes();
       }
       /**
        * <code>string id = 1;</code>
@@ -831,12 +490,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setId(value);
         return this;
       }
       /**
@@ -844,9 +499,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
+        copyOnWrite();
+        instance.clearId();
         return this;
       }
       /**
@@ -856,49 +510,27 @@ public final class DeploymentOuterClass {
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setIdBytes(value);
         return this;
       }
 
-      private java.lang.Object ownerUserId_ = "";
       /**
        * <code>string ownerUserId = 2;</code>
        * @return The ownerUserId.
        */
+      @java.lang.Override
       public java.lang.String getOwnerUserId() {
-        java.lang.Object ref = ownerUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ownerUserId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getOwnerUserId();
       }
       /**
        * <code>string ownerUserId = 2;</code>
        * @return The bytes for ownerUserId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getOwnerUserIdBytes() {
-        java.lang.Object ref = ownerUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ownerUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getOwnerUserIdBytes();
       }
       /**
        * <code>string ownerUserId = 2;</code>
@@ -907,12 +539,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setOwnerUserId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserId(value);
         return this;
       }
       /**
@@ -920,9 +548,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearOwnerUserId() {
-        
-        ownerUserId_ = getDefaultInstance().getOwnerUserId();
-        onChanged();
+        copyOnWrite();
+        instance.clearOwnerUserId();
         return this;
       }
       /**
@@ -932,49 +559,27 @@ public final class DeploymentOuterClass {
        */
       public Builder setOwnerUserIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserIdBytes(value);
         return this;
       }
 
-      private java.lang.Object domain_ = "";
       /**
        * <code>string domain = 3;</code>
        * @return The domain.
        */
+      @java.lang.Override
       public java.lang.String getDomain() {
-        java.lang.Object ref = domain_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          domain_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDomain();
       }
       /**
        * <code>string domain = 3;</code>
        * @return The bytes for domain.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDomainBytes() {
-        java.lang.Object ref = domain_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          domain_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDomainBytes();
       }
       /**
        * <code>string domain = 3;</code>
@@ -983,12 +588,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setDomain(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        domain_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDomain(value);
         return this;
       }
       /**
@@ -996,9 +597,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearDomain() {
-        
-        domain_ = getDefaultInstance().getDomain();
-        onChanged();
+        copyOnWrite();
+        instance.clearDomain();
         return this;
       }
       /**
@@ -1008,33 +608,27 @@ public final class DeploymentOuterClass {
        */
       public Builder setDomainBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        domain_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDomainBytes(value);
         return this;
       }
 
-      private int status_ = 0;
       /**
        * <code>.api.Deployment.Status status = 4;</code>
        * @return The enum numeric value on the wire for status.
        */
-      @java.lang.Override public int getStatusValue() {
-        return status_;
+      @java.lang.Override
+      public int getStatusValue() {
+        return instance.getStatusValue();
       }
       /**
        * <code>.api.Deployment.Status status = 4;</code>
-       * @param value The enum numeric value on the wire for status to set.
+       * @param value The status to set.
        * @return This builder for chaining.
        */
       public Builder setStatusValue(int value) {
-        
-        status_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setStatusValue(value);
         return this;
       }
       /**
@@ -1043,22 +637,16 @@ public final class DeploymentOuterClass {
        */
       @java.lang.Override
       public api.DeploymentOuterClass.Deployment.Status getStatus() {
-        @SuppressWarnings("deprecation")
-        api.DeploymentOuterClass.Deployment.Status result = api.DeploymentOuterClass.Deployment.Status.valueOf(status_);
-        return result == null ? api.DeploymentOuterClass.Deployment.Status.UNRECOGNIZED : result;
+        return instance.getStatus();
       }
       /**
        * <code>.api.Deployment.Status status = 4;</code>
-       * @param value The status to set.
+       * @param value The enum numeric value on the wire for status to set.
        * @return This builder for chaining.
        */
       public Builder setStatus(api.DeploymentOuterClass.Deployment.Status value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        status_ = value.getNumber();
-        onChanged();
+        copyOnWrite();
+        instance.setStatus(value);
         return this;
       }
       /**
@@ -1066,67 +654,92 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearStatus() {
-        
-        status_ = 0;
-        onChanged();
+        copyOnWrite();
+        instance.clearStatus();
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.Deployment)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.DeploymentOuterClass.Deployment();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "id_",
+              "ownerUserId_",
+              "domain_",
+              "status_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0000\u0001\u0004\u0004\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0208\u0004\f";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.DeploymentOuterClass.Deployment> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.DeploymentOuterClass.Deployment.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.DeploymentOuterClass.Deployment>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.Deployment)
     private static final api.DeploymentOuterClass.Deployment DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.DeploymentOuterClass.Deployment();
+      Deployment defaultInstance = new Deployment();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        Deployment.class, defaultInstance);
     }
 
     public static api.DeploymentOuterClass.Deployment getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<Deployment>
-        PARSER = new com.google.protobuf.AbstractParser<Deployment>() {
-      @java.lang.Override
-      public Deployment parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Deployment(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<Deployment> PARSER;
 
     public static com.google.protobuf.Parser<Deployment> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Deployment> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.DeploymentOuterClass.Deployment getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface NewDeploymentOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.NewDeployment)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string ownerUserId = 1;</code>
@@ -1143,105 +756,23 @@ public final class DeploymentOuterClass {
   /**
    * Protobuf type {@code api.NewDeployment}
    */
-  public static final class NewDeployment extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class NewDeployment extends
+      com.google.protobuf.GeneratedMessageLite<
+          NewDeployment, NewDeployment.Builder> implements
       // @@protoc_insertion_point(message_implements:api.NewDeployment)
       NewDeploymentOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use NewDeployment.newBuilder() to construct.
-    private NewDeployment(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private NewDeployment() {
       ownerUserId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new NewDeployment();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private NewDeployment(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ownerUserId_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.DeploymentOuterClass.internal_static_api_NewDeployment_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.DeploymentOuterClass.internal_static_api_NewDeployment_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.DeploymentOuterClass.NewDeployment.class, api.DeploymentOuterClass.NewDeployment.Builder.class);
-    }
-
     public static final int OWNERUSERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ownerUserId_;
+    private java.lang.String ownerUserId_;
     /**
      * <code>string ownerUserId = 1;</code>
      * @return The ownerUserId.
      */
     @java.lang.Override
     public java.lang.String getOwnerUserId() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ownerUserId_ = s;
-        return s;
-      }
+      return ownerUserId_;
     }
     /**
      * <code>string ownerUserId = 1;</code>
@@ -1250,353 +781,147 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getOwnerUserIdBytes() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ownerUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(ownerUserId_);
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The ownerUserId to set.
+     */
+    private void setOwnerUserId(
+        java.lang.String value) {
+      value.getClass();
+  
+      ownerUserId_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ownerUserId_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>string ownerUserId = 1;</code>
+     */
+    private void clearOwnerUserId() {
+      
+      ownerUserId_ = getDefaultInstance().getOwnerUserId();
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ownerUserId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.DeploymentOuterClass.NewDeployment)) {
-        return super.equals(obj);
-      }
-      api.DeploymentOuterClass.NewDeployment other = (api.DeploymentOuterClass.NewDeployment) obj;
-
-      if (!getOwnerUserId()
-          .equals(other.getOwnerUserId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + OWNERUSERID_FIELD_NUMBER;
-      hash = (53 * hash) + getOwnerUserId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The bytes for ownerUserId to set.
+     */
+    private void setOwnerUserIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      ownerUserId_ = value.toStringUtf8();
+      
     }
 
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.NewDeployment parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.NewDeployment parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.NewDeployment parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.DeploymentOuterClass.NewDeployment prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.NewDeployment}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.DeploymentOuterClass.NewDeployment, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.NewDeployment)
         api.DeploymentOuterClass.NewDeploymentOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.DeploymentOuterClass.internal_static_api_NewDeployment_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.DeploymentOuterClass.internal_static_api_NewDeployment_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.DeploymentOuterClass.NewDeployment.class, api.DeploymentOuterClass.NewDeployment.Builder.class);
-      }
-
       // Construct using api.DeploymentOuterClass.NewDeployment.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        ownerUserId_ = "";
 
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.DeploymentOuterClass.internal_static_api_NewDeployment_descriptor;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.NewDeployment getDefaultInstanceForType() {
-        return api.DeploymentOuterClass.NewDeployment.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.NewDeployment build() {
-        api.DeploymentOuterClass.NewDeployment result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.NewDeployment buildPartial() {
-        api.DeploymentOuterClass.NewDeployment result = new api.DeploymentOuterClass.NewDeployment(this);
-        result.ownerUserId_ = ownerUserId_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.DeploymentOuterClass.NewDeployment) {
-          return mergeFrom((api.DeploymentOuterClass.NewDeployment)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.DeploymentOuterClass.NewDeployment other) {
-        if (other == api.DeploymentOuterClass.NewDeployment.getDefaultInstance()) return this;
-        if (!other.getOwnerUserId().isEmpty()) {
-          ownerUserId_ = other.ownerUserId_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.DeploymentOuterClass.NewDeployment parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.DeploymentOuterClass.NewDeployment) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object ownerUserId_ = "";
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The ownerUserId.
        */
+      @java.lang.Override
       public java.lang.String getOwnerUserId() {
-        java.lang.Object ref = ownerUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ownerUserId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getOwnerUserId();
       }
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The bytes for ownerUserId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getOwnerUserIdBytes() {
-        java.lang.Object ref = ownerUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ownerUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getOwnerUserIdBytes();
       }
       /**
        * <code>string ownerUserId = 1;</code>
@@ -1605,12 +930,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setOwnerUserId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserId(value);
         return this;
       }
       /**
@@ -1618,9 +939,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearOwnerUserId() {
-        
-        ownerUserId_ = getDefaultInstance().getOwnerUserId();
-        onChanged();
+        copyOnWrite();
+        instance.clearOwnerUserId();
         return this;
       }
       /**
@@ -1630,71 +950,88 @@ public final class DeploymentOuterClass {
        */
       public Builder setOwnerUserIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserIdBytes(value);
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.NewDeployment)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.DeploymentOuterClass.NewDeployment();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "ownerUserId_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.DeploymentOuterClass.NewDeployment> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.DeploymentOuterClass.NewDeployment.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.DeploymentOuterClass.NewDeployment>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.NewDeployment)
     private static final api.DeploymentOuterClass.NewDeployment DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.DeploymentOuterClass.NewDeployment();
+      NewDeployment defaultInstance = new NewDeployment();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        NewDeployment.class, defaultInstance);
     }
 
     public static api.DeploymentOuterClass.NewDeployment getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<NewDeployment>
-        PARSER = new com.google.protobuf.AbstractParser<NewDeployment>() {
-      @java.lang.Override
-      public NewDeployment parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new NewDeployment(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<NewDeployment> PARSER;
 
     public static com.google.protobuf.Parser<NewDeployment> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<NewDeployment> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.DeploymentOuterClass.NewDeployment getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface GetDeploymentRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.GetDeploymentRequest)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string ownerUserId = 1;</code>
@@ -1723,112 +1060,24 @@ public final class DeploymentOuterClass {
   /**
    * Protobuf type {@code api.GetDeploymentRequest}
    */
-  public static final class GetDeploymentRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class GetDeploymentRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          GetDeploymentRequest, GetDeploymentRequest.Builder> implements
       // @@protoc_insertion_point(message_implements:api.GetDeploymentRequest)
       GetDeploymentRequestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use GetDeploymentRequest.newBuilder() to construct.
-    private GetDeploymentRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private GetDeploymentRequest() {
       ownerUserId_ = "";
       deploymentId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new GetDeploymentRequest();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private GetDeploymentRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ownerUserId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.DeploymentOuterClass.internal_static_api_GetDeploymentRequest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.DeploymentOuterClass.internal_static_api_GetDeploymentRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.DeploymentOuterClass.GetDeploymentRequest.class, api.DeploymentOuterClass.GetDeploymentRequest.Builder.class);
-    }
-
     public static final int OWNERUSERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ownerUserId_;
+    private java.lang.String ownerUserId_;
     /**
      * <code>string ownerUserId = 1;</code>
      * @return The ownerUserId.
      */
     @java.lang.Override
     public java.lang.String getOwnerUserId() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ownerUserId_ = s;
-        return s;
-      }
+      return ownerUserId_;
     }
     /**
      * <code>string ownerUserId = 1;</code>
@@ -1837,36 +1086,45 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getOwnerUserIdBytes() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ownerUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(ownerUserId_);
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The ownerUserId to set.
+     */
+    private void setOwnerUserId(
+        java.lang.String value) {
+      value.getClass();
+  
+      ownerUserId_ = value;
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     */
+    private void clearOwnerUserId() {
+      
+      ownerUserId_ = getDefaultInstance().getOwnerUserId();
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The bytes for ownerUserId to set.
+     */
+    private void setOwnerUserIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      ownerUserId_ = value.toStringUtf8();
+      
     }
 
     public static final int DEPLOYMENTID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 2;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 2;</code>
@@ -1875,370 +1133,147 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ownerUserId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deploymentId_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>string deploymentId = 2;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ownerUserId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deploymentId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.DeploymentOuterClass.GetDeploymentRequest)) {
-        return super.equals(obj);
-      }
-      api.DeploymentOuterClass.GetDeploymentRequest other = (api.DeploymentOuterClass.GetDeploymentRequest) obj;
-
-      if (!getOwnerUserId()
-          .equals(other.getOwnerUserId())) return false;
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + OWNERUSERID_FIELD_NUMBER;
-      hash = (53 * hash) + getOwnerUserId().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.GetDeploymentRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.DeploymentOuterClass.GetDeploymentRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.GetDeploymentRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.DeploymentOuterClass.GetDeploymentRequest, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.GetDeploymentRequest)
         api.DeploymentOuterClass.GetDeploymentRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.DeploymentOuterClass.internal_static_api_GetDeploymentRequest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.DeploymentOuterClass.internal_static_api_GetDeploymentRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.DeploymentOuterClass.GetDeploymentRequest.class, api.DeploymentOuterClass.GetDeploymentRequest.Builder.class);
-      }
-
       // Construct using api.DeploymentOuterClass.GetDeploymentRequest.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        ownerUserId_ = "";
 
-        deploymentId_ = "";
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.DeploymentOuterClass.internal_static_api_GetDeploymentRequest_descriptor;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.GetDeploymentRequest getDefaultInstanceForType() {
-        return api.DeploymentOuterClass.GetDeploymentRequest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.GetDeploymentRequest build() {
-        api.DeploymentOuterClass.GetDeploymentRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.GetDeploymentRequest buildPartial() {
-        api.DeploymentOuterClass.GetDeploymentRequest result = new api.DeploymentOuterClass.GetDeploymentRequest(this);
-        result.ownerUserId_ = ownerUserId_;
-        result.deploymentId_ = deploymentId_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.DeploymentOuterClass.GetDeploymentRequest) {
-          return mergeFrom((api.DeploymentOuterClass.GetDeploymentRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.DeploymentOuterClass.GetDeploymentRequest other) {
-        if (other == api.DeploymentOuterClass.GetDeploymentRequest.getDefaultInstance()) return this;
-        if (!other.getOwnerUserId().isEmpty()) {
-          ownerUserId_ = other.ownerUserId_;
-          onChanged();
-        }
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.DeploymentOuterClass.GetDeploymentRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.DeploymentOuterClass.GetDeploymentRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object ownerUserId_ = "";
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The ownerUserId.
        */
+      @java.lang.Override
       public java.lang.String getOwnerUserId() {
-        java.lang.Object ref = ownerUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ownerUserId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getOwnerUserId();
       }
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The bytes for ownerUserId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getOwnerUserIdBytes() {
-        java.lang.Object ref = ownerUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ownerUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getOwnerUserIdBytes();
       }
       /**
        * <code>string ownerUserId = 1;</code>
@@ -2247,12 +1282,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setOwnerUserId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserId(value);
         return this;
       }
       /**
@@ -2260,9 +1291,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearOwnerUserId() {
-        
-        ownerUserId_ = getDefaultInstance().getOwnerUserId();
-        onChanged();
+        copyOnWrite();
+        instance.clearOwnerUserId();
         return this;
       }
       /**
@@ -2272,49 +1302,27 @@ public final class DeploymentOuterClass {
        */
       public Builder setOwnerUserIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserIdBytes(value);
         return this;
       }
 
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 2;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 2;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 2;</code>
@@ -2323,12 +1331,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -2336,9 +1340,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -2348,71 +1351,90 @@ public final class DeploymentOuterClass {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.GetDeploymentRequest)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.DeploymentOuterClass.GetDeploymentRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "ownerUserId_",
+              "deploymentId_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.DeploymentOuterClass.GetDeploymentRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.DeploymentOuterClass.GetDeploymentRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.DeploymentOuterClass.GetDeploymentRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.GetDeploymentRequest)
     private static final api.DeploymentOuterClass.GetDeploymentRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.DeploymentOuterClass.GetDeploymentRequest();
+      GetDeploymentRequest defaultInstance = new GetDeploymentRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GetDeploymentRequest.class, defaultInstance);
     }
 
     public static api.DeploymentOuterClass.GetDeploymentRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<GetDeploymentRequest>
-        PARSER = new com.google.protobuf.AbstractParser<GetDeploymentRequest>() {
-      @java.lang.Override
-      public GetDeploymentRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetDeploymentRequest(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<GetDeploymentRequest> PARSER;
 
     public static com.google.protobuf.Parser<GetDeploymentRequest> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GetDeploymentRequest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.DeploymentOuterClass.GetDeploymentRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface RemoveDeploymentRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.RemoveDeploymentRequest)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string deploymentId = 1;</code>
@@ -2429,105 +1451,23 @@ public final class DeploymentOuterClass {
   /**
    * Protobuf type {@code api.RemoveDeploymentRequest}
    */
-  public static final class RemoveDeploymentRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class RemoveDeploymentRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          RemoveDeploymentRequest, RemoveDeploymentRequest.Builder> implements
       // @@protoc_insertion_point(message_implements:api.RemoveDeploymentRequest)
       RemoveDeploymentRequestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use RemoveDeploymentRequest.newBuilder() to construct.
-    private RemoveDeploymentRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private RemoveDeploymentRequest() {
       deploymentId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new RemoveDeploymentRequest();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private RemoveDeploymentRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.DeploymentOuterClass.internal_static_api_RemoveDeploymentRequest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.DeploymentOuterClass.internal_static_api_RemoveDeploymentRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.DeploymentOuterClass.RemoveDeploymentRequest.class, api.DeploymentOuterClass.RemoveDeploymentRequest.Builder.class);
-    }
-
     public static final int DEPLOYMENTID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 1;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 1;</code>
@@ -2536,353 +1476,147 @@ public final class DeploymentOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>string deploymentId = 1;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, deploymentId_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>string deploymentId = 1;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, deploymentId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.DeploymentOuterClass.RemoveDeploymentRequest)) {
-        return super.equals(obj);
-      }
-      api.DeploymentOuterClass.RemoveDeploymentRequest other = (api.DeploymentOuterClass.RemoveDeploymentRequest) obj;
-
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>string deploymentId = 1;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.DeploymentOuterClass.RemoveDeploymentRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.DeploymentOuterClass.RemoveDeploymentRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.RemoveDeploymentRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.DeploymentOuterClass.RemoveDeploymentRequest, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.RemoveDeploymentRequest)
         api.DeploymentOuterClass.RemoveDeploymentRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.DeploymentOuterClass.internal_static_api_RemoveDeploymentRequest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.DeploymentOuterClass.internal_static_api_RemoveDeploymentRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.DeploymentOuterClass.RemoveDeploymentRequest.class, api.DeploymentOuterClass.RemoveDeploymentRequest.Builder.class);
-      }
-
       // Construct using api.DeploymentOuterClass.RemoveDeploymentRequest.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        deploymentId_ = "";
 
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.DeploymentOuterClass.internal_static_api_RemoveDeploymentRequest_descriptor;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.RemoveDeploymentRequest getDefaultInstanceForType() {
-        return api.DeploymentOuterClass.RemoveDeploymentRequest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.RemoveDeploymentRequest build() {
-        api.DeploymentOuterClass.RemoveDeploymentRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.DeploymentOuterClass.RemoveDeploymentRequest buildPartial() {
-        api.DeploymentOuterClass.RemoveDeploymentRequest result = new api.DeploymentOuterClass.RemoveDeploymentRequest(this);
-        result.deploymentId_ = deploymentId_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.DeploymentOuterClass.RemoveDeploymentRequest) {
-          return mergeFrom((api.DeploymentOuterClass.RemoveDeploymentRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.DeploymentOuterClass.RemoveDeploymentRequest other) {
-        if (other == api.DeploymentOuterClass.RemoveDeploymentRequest.getDefaultInstance()) return this;
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.DeploymentOuterClass.RemoveDeploymentRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.DeploymentOuterClass.RemoveDeploymentRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 1;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 1;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 1;</code>
@@ -2891,12 +1625,8 @@ public final class DeploymentOuterClass {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -2904,9 +1634,8 @@ public final class DeploymentOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -2916,144 +1645,87 @@ public final class DeploymentOuterClass {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.RemoveDeploymentRequest)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.DeploymentOuterClass.RemoveDeploymentRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "deploymentId_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.DeploymentOuterClass.RemoveDeploymentRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.DeploymentOuterClass.RemoveDeploymentRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.DeploymentOuterClass.RemoveDeploymentRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.RemoveDeploymentRequest)
     private static final api.DeploymentOuterClass.RemoveDeploymentRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.DeploymentOuterClass.RemoveDeploymentRequest();
+      RemoveDeploymentRequest defaultInstance = new RemoveDeploymentRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        RemoveDeploymentRequest.class, defaultInstance);
     }
 
     public static api.DeploymentOuterClass.RemoveDeploymentRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<RemoveDeploymentRequest>
-        PARSER = new com.google.protobuf.AbstractParser<RemoveDeploymentRequest>() {
-      @java.lang.Override
-      public RemoveDeploymentRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RemoveDeploymentRequest(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<RemoveDeploymentRequest> PARSER;
 
     public static com.google.protobuf.Parser<RemoveDeploymentRequest> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RemoveDeploymentRequest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.DeploymentOuterClass.RemoveDeploymentRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_Deployment_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_Deployment_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_NewDeployment_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_NewDeployment_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_GetDeploymentRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_GetDeploymentRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_RemoveDeploymentRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_RemoveDeploymentRequest_fieldAccessorTable;
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
   static {
-    java.lang.String[] descriptorData = {
-      "\n\020deployment.proto\022\003api\032\013empty.proto\"\275\001\n" +
-      "\nDeployment\022\n\n\002id\030\001 \001(\t\022\023\n\013ownerUserId\030\002" +
-      " \001(\t\022\016\n\006domain\030\003 \001(\t\022&\n\006status\030\004 \001(\0162\026.a" +
-      "pi.Deployment.Status\"V\n\006Status\022\017\n\013STARTI" +
-      "NG_UP\020\000\022\n\n\006FAILED\020\001\022\013\n\007RUNNING\020\002\022\021\n\rSHUT" +
-      "TING_DOWN\020\003\022\017\n\013UNREACHABLE\020\004\"$\n\rNewDeplo" +
-      "yment\022\023\n\013ownerUserId\030\001 \001(\t\"A\n\024GetDeploym" +
-      "entRequest\022\023\n\013ownerUserId\030\001 \001(\t\022\024\n\014deplo" +
-      "ymentId\030\002 \001(\t\"/\n\027RemoveDeploymentRequest" +
-      "\022\024\n\014deploymentId\030\001 \001(\t2\321\001\n\033DeploymentMan" +
-      "agementService\0227\n\020CreateDeployment\022\022.api" +
-      ".NewDeployment\032\017.api.Deployment\022;\n\rGetDe" +
-      "ployment\022\031.api.GetDeploymentRequest\032\017.ap" +
-      "i.Deployment\022<\n\020RemoveDeployment\022\034.api.R" +
-      "emoveDeploymentRequest\032\n.api.EmptyB\016Z\014ap" +
-      "i/protobufb\006proto3"
-    };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          api.EmptyOuterClass.getDescriptor(),
-        });
-    internal_static_api_Deployment_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_api_Deployment_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_Deployment_descriptor,
-        new java.lang.String[] { "Id", "OwnerUserId", "Domain", "Status", });
-    internal_static_api_NewDeployment_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_api_NewDeployment_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_NewDeployment_descriptor,
-        new java.lang.String[] { "OwnerUserId", });
-    internal_static_api_GetDeploymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_api_GetDeploymentRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_GetDeploymentRequest_descriptor,
-        new java.lang.String[] { "OwnerUserId", "DeploymentId", });
-    internal_static_api_RemoveDeploymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_api_RemoveDeploymentRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_RemoveDeploymentRequest_descriptor,
-        new java.lang.String[] { "DeploymentId", });
-    api.EmptyOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -46,11 +46,10 @@ public final class PeripheralManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPeripheral"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.GetPeripheralRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.Peripheral.getDefaultInstance()))
-              .setSchemaDescriptor(new PeripheralManagementServiceMethodDescriptorSupplier("GetPeripheral"))
               .build();
         }
       }
@@ -77,11 +76,10 @@ public final class PeripheralManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreatePeripheral"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.NewPeripheral.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.Peripheral.getDefaultInstance()))
-              .setSchemaDescriptor(new PeripheralManagementServiceMethodDescriptorSupplier("CreatePeripheral"))
               .build();
         }
       }
@@ -108,11 +106,10 @@ public final class PeripheralManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RemovePeripheral"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.Peripheral.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.EmptyOuterClass.Empty.getDefaultInstance()))
-              .setSchemaDescriptor(new PeripheralManagementServiceMethodDescriptorSupplier("RemovePeripheral"))
               .build();
         }
       }
@@ -139,11 +136,10 @@ public final class PeripheralManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetDeploymentPeripherals"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.PeripheralOuterClass.Peripheral.getDefaultInstance()))
-              .setSchemaDescriptor(new PeripheralManagementServiceMethodDescriptorSupplier("GetDeploymentPeripherals"))
               .build();
         }
       }
@@ -445,41 +441,6 @@ public final class PeripheralManagementServiceGrpc {
     }
   }
 
-  private static abstract class PeripheralManagementServiceBaseDescriptorSupplier
-      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    PeripheralManagementServiceBaseDescriptorSupplier() {}
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return api.PeripheralOuterClass.getDescriptor();
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("PeripheralManagementService");
-    }
-  }
-
-  private static final class PeripheralManagementServiceFileDescriptorSupplier
-      extends PeripheralManagementServiceBaseDescriptorSupplier {
-    PeripheralManagementServiceFileDescriptorSupplier() {}
-  }
-
-  private static final class PeripheralManagementServiceMethodDescriptorSupplier
-      extends PeripheralManagementServiceBaseDescriptorSupplier
-      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
-
-    PeripheralManagementServiceMethodDescriptorSupplier(String methodName) {
-      this.methodName = methodName;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
-      return getServiceDescriptor().findMethodByName(methodName);
-    }
-  }
-
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
 
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
@@ -489,7 +450,6 @@ public final class PeripheralManagementServiceGrpc {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new PeripheralManagementServiceFileDescriptorSupplier())
               .addMethod(getGetPeripheralMethod())
               .addMethod(getCreatePeripheralMethod())
               .addMethod(getRemovePeripheralMethod())

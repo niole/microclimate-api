@@ -8,15 +8,9 @@ public final class PeripheralOuterClass {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
-
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
-  }
   public interface NewPeripheralOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.NewPeripheral)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string ownerUserId = 1;</code>
@@ -68,113 +62,21 @@ public final class PeripheralOuterClass {
   /**
    * Protobuf type {@code api.NewPeripheral}
    */
-  public static final class NewPeripheral extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class NewPeripheral extends
+      com.google.protobuf.GeneratedMessageLite<
+          NewPeripheral, NewPeripheral.Builder> implements
       // @@protoc_insertion_point(message_implements:api.NewPeripheral)
       NewPeripheralOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use NewPeripheral.newBuilder() to construct.
-    private NewPeripheral(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private NewPeripheral() {
       ownerUserId_ = "";
       deploymentId_ = "";
       hardwareId_ = "";
-      type_ = 0;
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new NewPeripheral();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private NewPeripheral(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ownerUserId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              hardwareId_ = s;
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.PeripheralOuterClass.internal_static_api_NewPeripheral_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.PeripheralOuterClass.internal_static_api_NewPeripheral_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.PeripheralOuterClass.NewPeripheral.class, api.PeripheralOuterClass.NewPeripheral.Builder.class);
-    }
-
     /**
      * Protobuf enum {@code api.NewPeripheral.PeripheralType}
      */
     public enum PeripheralType
-        implements com.google.protobuf.ProtocolMessageEnum {
+        implements com.google.protobuf.Internal.EnumLite {
       /**
        * <code>THERMAL = 0;</code>
        */
@@ -196,6 +98,7 @@ public final class PeripheralOuterClass {
       public static final int PARTICLE_VALUE = 1;
 
 
+      @java.lang.Override
       public final int getNumber() {
         if (this == UNRECOGNIZED) {
           throw new java.lang.IllegalArgumentException(
@@ -205,8 +108,8 @@ public final class PeripheralOuterClass {
       }
 
       /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -214,10 +117,6 @@ public final class PeripheralOuterClass {
         return forNumber(value);
       }
 
-      /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
-       */
       public static PeripheralType forNumber(int value) {
         switch (value) {
           case 0: return THERMAL;
@@ -233,41 +132,25 @@ public final class PeripheralOuterClass {
       private static final com.google.protobuf.Internal.EnumLiteMap<
           PeripheralType> internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<PeripheralType>() {
+              @java.lang.Override
               public PeripheralType findValueByNumber(int number) {
                 return PeripheralType.forNumber(number);
               }
             };
 
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalStateException(
-              "Can't get the descriptor of an unrecognized enum value.");
-        }
-        return getDescriptor().getValues().get(ordinal());
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return api.PeripheralOuterClass.NewPeripheral.getDescriptor().getEnumTypes().get(0);
+      public static com.google.protobuf.Internal.EnumVerifier 
+          internalGetVerifier() {
+        return PeripheralTypeVerifier.INSTANCE;
       }
 
-      private static final PeripheralType[] VALUES = values();
-
-      public static PeripheralType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        if (desc.getIndex() == -1) {
-          return UNRECOGNIZED;
-        }
-        return VALUES[desc.getIndex()];
-      }
+      private static final class PeripheralTypeVerifier implements 
+           com.google.protobuf.Internal.EnumVerifier { 
+              static final com.google.protobuf.Internal.EnumVerifier           INSTANCE = new PeripheralTypeVerifier();
+              @java.lang.Override
+              public boolean isInRange(int number) {
+                return PeripheralType.forNumber(number) != null;
+              }
+            };
 
       private final int value;
 
@@ -279,23 +162,14 @@ public final class PeripheralOuterClass {
     }
 
     public static final int OWNERUSERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ownerUserId_;
+    private java.lang.String ownerUserId_;
     /**
      * <code>string ownerUserId = 1;</code>
      * @return The ownerUserId.
      */
     @java.lang.Override
     public java.lang.String getOwnerUserId() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ownerUserId_ = s;
-        return s;
-      }
+      return ownerUserId_;
     }
     /**
      * <code>string ownerUserId = 1;</code>
@@ -304,36 +178,45 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getOwnerUserIdBytes() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ownerUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(ownerUserId_);
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The ownerUserId to set.
+     */
+    private void setOwnerUserId(
+        java.lang.String value) {
+      value.getClass();
+  
+      ownerUserId_ = value;
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     */
+    private void clearOwnerUserId() {
+      
+      ownerUserId_ = getDefaultInstance().getOwnerUserId();
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The bytes for ownerUserId to set.
+     */
+    private void setOwnerUserIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      ownerUserId_ = value.toStringUtf8();
+      
     }
 
     public static final int DEPLOYMENTID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 2;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 2;</code>
@@ -342,36 +225,45 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static final int HARDWAREID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object hardwareId_;
+    private java.lang.String hardwareId_;
     /**
      * <code>string hardwareId = 3;</code>
      * @return The hardwareId.
      */
     @java.lang.Override
     public java.lang.String getHardwareId() {
-      java.lang.Object ref = hardwareId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        hardwareId_ = s;
-        return s;
-      }
+      return hardwareId_;
     }
     /**
      * <code>string hardwareId = 3;</code>
@@ -380,16 +272,34 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getHardwareIdBytes() {
-      java.lang.Object ref = hardwareId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        hardwareId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(hardwareId_);
+    }
+    /**
+     * <code>string hardwareId = 3;</code>
+     * @param value The hardwareId to set.
+     */
+    private void setHardwareId(
+        java.lang.String value) {
+      value.getClass();
+  
+      hardwareId_ = value;
+    }
+    /**
+     * <code>string hardwareId = 3;</code>
+     */
+    private void clearHardwareId() {
+      
+      hardwareId_ = getDefaultInstance().getHardwareId();
+    }
+    /**
+     * <code>string hardwareId = 3;</code>
+     * @param value The bytes for hardwareId to set.
+     */
+    private void setHardwareIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      hardwareId_ = value.toStringUtf8();
+      
     }
 
     public static final int TYPE_FIELD_NUMBER = 4;
@@ -398,404 +308,153 @@ public final class PeripheralOuterClass {
      * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
      * @return The enum numeric value on the wire for type.
      */
-    @java.lang.Override public int getTypeValue() {
+    @java.lang.Override
+    public int getTypeValue() {
       return type_;
     }
     /**
      * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
      * @return The type.
      */
-    @java.lang.Override public api.PeripheralOuterClass.NewPeripheral.PeripheralType getType() {
-      @SuppressWarnings("deprecation")
-      api.PeripheralOuterClass.NewPeripheral.PeripheralType result = api.PeripheralOuterClass.NewPeripheral.PeripheralType.valueOf(type_);
+    @java.lang.Override
+    public api.PeripheralOuterClass.NewPeripheral.PeripheralType getType() {
+      api.PeripheralOuterClass.NewPeripheral.PeripheralType result = api.PeripheralOuterClass.NewPeripheral.PeripheralType.forNumber(type_);
       return result == null ? api.PeripheralOuterClass.NewPeripheral.PeripheralType.UNRECOGNIZED : result;
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
+     * @param value The enum numeric value on the wire for type to set.
+     */
+    private void setTypeValue(int value) {
+        type_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ownerUserId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deploymentId_);
-      }
-      if (!getHardwareIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, hardwareId_);
-      }
-      if (type_ != api.PeripheralOuterClass.NewPeripheral.PeripheralType.THERMAL.getNumber()) {
-        output.writeEnum(4, type_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
+     * @param value The type to set.
+     */
+    private void setType(api.PeripheralOuterClass.NewPeripheral.PeripheralType value) {
+      type_ = value.getNumber();
+      
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ownerUserId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deploymentId_);
-      }
-      if (!getHardwareIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, hardwareId_);
-      }
-      if (type_ != api.PeripheralOuterClass.NewPeripheral.PeripheralType.THERMAL.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, type_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.PeripheralOuterClass.NewPeripheral)) {
-        return super.equals(obj);
-      }
-      api.PeripheralOuterClass.NewPeripheral other = (api.PeripheralOuterClass.NewPeripheral) obj;
-
-      if (!getOwnerUserId()
-          .equals(other.getOwnerUserId())) return false;
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (!getHardwareId()
-          .equals(other.getHardwareId())) return false;
-      if (type_ != other.type_) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + OWNERUSERID_FIELD_NUMBER;
-      hash = (53 * hash) + getOwnerUserId().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (37 * hash) + HARDWAREID_FIELD_NUMBER;
-      hash = (53 * hash) + getHardwareId().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + type_;
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
+     */
+    private void clearType() {
+      
+      type_ = 0;
     }
 
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.NewPeripheral parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.PeripheralOuterClass.NewPeripheral prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.NewPeripheral}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.PeripheralOuterClass.NewPeripheral, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.NewPeripheral)
         api.PeripheralOuterClass.NewPeripheralOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.PeripheralOuterClass.internal_static_api_NewPeripheral_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.PeripheralOuterClass.internal_static_api_NewPeripheral_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.PeripheralOuterClass.NewPeripheral.class, api.PeripheralOuterClass.NewPeripheral.Builder.class);
-      }
-
       // Construct using api.PeripheralOuterClass.NewPeripheral.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        ownerUserId_ = "";
 
-        deploymentId_ = "";
-
-        hardwareId_ = "";
-
-        type_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.PeripheralOuterClass.internal_static_api_NewPeripheral_descriptor;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.NewPeripheral getDefaultInstanceForType() {
-        return api.PeripheralOuterClass.NewPeripheral.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.NewPeripheral build() {
-        api.PeripheralOuterClass.NewPeripheral result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.NewPeripheral buildPartial() {
-        api.PeripheralOuterClass.NewPeripheral result = new api.PeripheralOuterClass.NewPeripheral(this);
-        result.ownerUserId_ = ownerUserId_;
-        result.deploymentId_ = deploymentId_;
-        result.hardwareId_ = hardwareId_;
-        result.type_ = type_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.PeripheralOuterClass.NewPeripheral) {
-          return mergeFrom((api.PeripheralOuterClass.NewPeripheral)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.PeripheralOuterClass.NewPeripheral other) {
-        if (other == api.PeripheralOuterClass.NewPeripheral.getDefaultInstance()) return this;
-        if (!other.getOwnerUserId().isEmpty()) {
-          ownerUserId_ = other.ownerUserId_;
-          onChanged();
-        }
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        if (!other.getHardwareId().isEmpty()) {
-          hardwareId_ = other.hardwareId_;
-          onChanged();
-        }
-        if (other.type_ != 0) {
-          setTypeValue(other.getTypeValue());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.PeripheralOuterClass.NewPeripheral parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.PeripheralOuterClass.NewPeripheral) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object ownerUserId_ = "";
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The ownerUserId.
        */
+      @java.lang.Override
       public java.lang.String getOwnerUserId() {
-        java.lang.Object ref = ownerUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ownerUserId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getOwnerUserId();
       }
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The bytes for ownerUserId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getOwnerUserIdBytes() {
-        java.lang.Object ref = ownerUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ownerUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getOwnerUserIdBytes();
       }
       /**
        * <code>string ownerUserId = 1;</code>
@@ -804,12 +463,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setOwnerUserId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserId(value);
         return this;
       }
       /**
@@ -817,9 +472,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearOwnerUserId() {
-        
-        ownerUserId_ = getDefaultInstance().getOwnerUserId();
-        onChanged();
+        copyOnWrite();
+        instance.clearOwnerUserId();
         return this;
       }
       /**
@@ -829,49 +483,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setOwnerUserIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserIdBytes(value);
         return this;
       }
 
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 2;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 2;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 2;</code>
@@ -880,12 +512,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -893,9 +521,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -905,49 +532,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
 
-      private java.lang.Object hardwareId_ = "";
       /**
        * <code>string hardwareId = 3;</code>
        * @return The hardwareId.
        */
+      @java.lang.Override
       public java.lang.String getHardwareId() {
-        java.lang.Object ref = hardwareId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          hardwareId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getHardwareId();
       }
       /**
        * <code>string hardwareId = 3;</code>
        * @return The bytes for hardwareId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getHardwareIdBytes() {
-        java.lang.Object ref = hardwareId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          hardwareId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getHardwareIdBytes();
       }
       /**
        * <code>string hardwareId = 3;</code>
@@ -956,12 +561,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setHardwareId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        hardwareId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setHardwareId(value);
         return this;
       }
       /**
@@ -969,9 +570,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearHardwareId() {
-        
-        hardwareId_ = getDefaultInstance().getHardwareId();
-        onChanged();
+        copyOnWrite();
+        instance.clearHardwareId();
         return this;
       }
       /**
@@ -981,33 +581,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setHardwareIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        hardwareId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setHardwareIdBytes(value);
         return this;
       }
 
-      private int type_ = 0;
       /**
        * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
        * @return The enum numeric value on the wire for type.
        */
-      @java.lang.Override public int getTypeValue() {
-        return type_;
+      @java.lang.Override
+      public int getTypeValue() {
+        return instance.getTypeValue();
       }
       /**
        * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
-       * @param value The enum numeric value on the wire for type to set.
+       * @param value The type to set.
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-        
-        type_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setTypeValue(value);
         return this;
       }
       /**
@@ -1016,22 +610,16 @@ public final class PeripheralOuterClass {
        */
       @java.lang.Override
       public api.PeripheralOuterClass.NewPeripheral.PeripheralType getType() {
-        @SuppressWarnings("deprecation")
-        api.PeripheralOuterClass.NewPeripheral.PeripheralType result = api.PeripheralOuterClass.NewPeripheral.PeripheralType.valueOf(type_);
-        return result == null ? api.PeripheralOuterClass.NewPeripheral.PeripheralType.UNRECOGNIZED : result;
+        return instance.getType();
       }
       /**
        * <code>.api.NewPeripheral.PeripheralType type = 4;</code>
-       * @param value The type to set.
+       * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
       public Builder setType(api.PeripheralOuterClass.NewPeripheral.PeripheralType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        type_ = value.getNumber();
-        onChanged();
+        copyOnWrite();
+        instance.setType(value);
         return this;
       }
       /**
@@ -1039,67 +627,92 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-        
-        type_ = 0;
-        onChanged();
+        copyOnWrite();
+        instance.clearType();
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.NewPeripheral)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.PeripheralOuterClass.NewPeripheral();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "ownerUserId_",
+              "deploymentId_",
+              "hardwareId_",
+              "type_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0000\u0001\u0004\u0004\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0208\u0004\f";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.PeripheralOuterClass.NewPeripheral> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.PeripheralOuterClass.NewPeripheral.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.PeripheralOuterClass.NewPeripheral>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.NewPeripheral)
     private static final api.PeripheralOuterClass.NewPeripheral DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.PeripheralOuterClass.NewPeripheral();
+      NewPeripheral defaultInstance = new NewPeripheral();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        NewPeripheral.class, defaultInstance);
     }
 
     public static api.PeripheralOuterClass.NewPeripheral getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<NewPeripheral>
-        PARSER = new com.google.protobuf.AbstractParser<NewPeripheral>() {
-      @java.lang.Override
-      public NewPeripheral parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new NewPeripheral(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<NewPeripheral> PARSER;
 
     public static com.google.protobuf.Parser<NewPeripheral> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<NewPeripheral> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.PeripheralOuterClass.NewPeripheral getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface PeripheralOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.Peripheral)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string ownerUserId = 1;</code>
@@ -1163,120 +776,22 @@ public final class PeripheralOuterClass {
   /**
    * Protobuf type {@code api.Peripheral}
    */
-  public static final class Peripheral extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class Peripheral extends
+      com.google.protobuf.GeneratedMessageLite<
+          Peripheral, Peripheral.Builder> implements
       // @@protoc_insertion_point(message_implements:api.Peripheral)
       PeripheralOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use Peripheral.newBuilder() to construct.
-    private Peripheral(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private Peripheral() {
       ownerUserId_ = "";
       deploymentId_ = "";
       id_ = "";
       hardwareId_ = "";
-      type_ = 0;
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Peripheral();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Peripheral(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ownerUserId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              id_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              hardwareId_ = s;
-              break;
-            }
-            case 40: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.PeripheralOuterClass.internal_static_api_Peripheral_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.PeripheralOuterClass.internal_static_api_Peripheral_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.PeripheralOuterClass.Peripheral.class, api.PeripheralOuterClass.Peripheral.Builder.class);
-    }
-
     /**
      * Protobuf enum {@code api.Peripheral.PeripheralType}
      */
     public enum PeripheralType
-        implements com.google.protobuf.ProtocolMessageEnum {
+        implements com.google.protobuf.Internal.EnumLite {
       /**
        * <code>THERMAL = 0;</code>
        */
@@ -1298,6 +813,7 @@ public final class PeripheralOuterClass {
       public static final int PARTICLE_VALUE = 1;
 
 
+      @java.lang.Override
       public final int getNumber() {
         if (this == UNRECOGNIZED) {
           throw new java.lang.IllegalArgumentException(
@@ -1307,8 +823,8 @@ public final class PeripheralOuterClass {
       }
 
       /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -1316,10 +832,6 @@ public final class PeripheralOuterClass {
         return forNumber(value);
       }
 
-      /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
-       */
       public static PeripheralType forNumber(int value) {
         switch (value) {
           case 0: return THERMAL;
@@ -1335,41 +847,25 @@ public final class PeripheralOuterClass {
       private static final com.google.protobuf.Internal.EnumLiteMap<
           PeripheralType> internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<PeripheralType>() {
+              @java.lang.Override
               public PeripheralType findValueByNumber(int number) {
                 return PeripheralType.forNumber(number);
               }
             };
 
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        if (this == UNRECOGNIZED) {
-          throw new java.lang.IllegalStateException(
-              "Can't get the descriptor of an unrecognized enum value.");
-        }
-        return getDescriptor().getValues().get(ordinal());
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return api.PeripheralOuterClass.Peripheral.getDescriptor().getEnumTypes().get(0);
+      public static com.google.protobuf.Internal.EnumVerifier 
+          internalGetVerifier() {
+        return PeripheralTypeVerifier.INSTANCE;
       }
 
-      private static final PeripheralType[] VALUES = values();
-
-      public static PeripheralType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        if (desc.getIndex() == -1) {
-          return UNRECOGNIZED;
-        }
-        return VALUES[desc.getIndex()];
-      }
+      private static final class PeripheralTypeVerifier implements 
+           com.google.protobuf.Internal.EnumVerifier { 
+              static final com.google.protobuf.Internal.EnumVerifier           INSTANCE = new PeripheralTypeVerifier();
+              @java.lang.Override
+              public boolean isInRange(int number) {
+                return PeripheralType.forNumber(number) != null;
+              }
+            };
 
       private final int value;
 
@@ -1381,23 +877,14 @@ public final class PeripheralOuterClass {
     }
 
     public static final int OWNERUSERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ownerUserId_;
+    private java.lang.String ownerUserId_;
     /**
      * <code>string ownerUserId = 1;</code>
      * @return The ownerUserId.
      */
     @java.lang.Override
     public java.lang.String getOwnerUserId() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ownerUserId_ = s;
-        return s;
-      }
+      return ownerUserId_;
     }
     /**
      * <code>string ownerUserId = 1;</code>
@@ -1406,36 +893,45 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getOwnerUserIdBytes() {
-      java.lang.Object ref = ownerUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ownerUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(ownerUserId_);
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The ownerUserId to set.
+     */
+    private void setOwnerUserId(
+        java.lang.String value) {
+      value.getClass();
+  
+      ownerUserId_ = value;
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     */
+    private void clearOwnerUserId() {
+      
+      ownerUserId_ = getDefaultInstance().getOwnerUserId();
+    }
+    /**
+     * <code>string ownerUserId = 1;</code>
+     * @param value The bytes for ownerUserId to set.
+     */
+    private void setOwnerUserIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      ownerUserId_ = value.toStringUtf8();
+      
     }
 
     public static final int DEPLOYMENTID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 2;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 2;</code>
@@ -1444,36 +940,45 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
+    }
+    /**
+     * <code>string deploymentId = 2;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static final int ID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object id_;
+    private java.lang.String id_;
     /**
      * <code>string id = 3;</code>
      * @return The id.
      */
     @java.lang.Override
     public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+      return id_;
     }
     /**
      * <code>string id = 3;</code>
@@ -1482,36 +987,45 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(id_);
+    }
+    /**
+     * <code>string id = 3;</code>
+     * @param value The id to set.
+     */
+    private void setId(
+        java.lang.String value) {
+      value.getClass();
+  
+      id_ = value;
+    }
+    /**
+     * <code>string id = 3;</code>
+     */
+    private void clearId() {
+      
+      id_ = getDefaultInstance().getId();
+    }
+    /**
+     * <code>string id = 3;</code>
+     * @param value The bytes for id to set.
+     */
+    private void setIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      id_ = value.toStringUtf8();
+      
     }
 
     public static final int HARDWAREID_FIELD_NUMBER = 4;
-    private volatile java.lang.Object hardwareId_;
+    private java.lang.String hardwareId_;
     /**
      * <code>string hardwareId = 4;</code>
      * @return The hardwareId.
      */
     @java.lang.Override
     public java.lang.String getHardwareId() {
-      java.lang.Object ref = hardwareId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        hardwareId_ = s;
-        return s;
-      }
+      return hardwareId_;
     }
     /**
      * <code>string hardwareId = 4;</code>
@@ -1520,16 +1034,34 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getHardwareIdBytes() {
-      java.lang.Object ref = hardwareId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        hardwareId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(hardwareId_);
+    }
+    /**
+     * <code>string hardwareId = 4;</code>
+     * @param value The hardwareId to set.
+     */
+    private void setHardwareId(
+        java.lang.String value) {
+      value.getClass();
+  
+      hardwareId_ = value;
+    }
+    /**
+     * <code>string hardwareId = 4;</code>
+     */
+    private void clearHardwareId() {
+      
+      hardwareId_ = getDefaultInstance().getHardwareId();
+    }
+    /**
+     * <code>string hardwareId = 4;</code>
+     * @param value The bytes for hardwareId to set.
+     */
+    private void setHardwareIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      hardwareId_ = value.toStringUtf8();
+      
     }
 
     public static final int TYPE_FIELD_NUMBER = 5;
@@ -1538,421 +1070,153 @@ public final class PeripheralOuterClass {
      * <code>.api.Peripheral.PeripheralType type = 5;</code>
      * @return The enum numeric value on the wire for type.
      */
-    @java.lang.Override public int getTypeValue() {
+    @java.lang.Override
+    public int getTypeValue() {
       return type_;
     }
     /**
      * <code>.api.Peripheral.PeripheralType type = 5;</code>
      * @return The type.
      */
-    @java.lang.Override public api.PeripheralOuterClass.Peripheral.PeripheralType getType() {
-      @SuppressWarnings("deprecation")
-      api.PeripheralOuterClass.Peripheral.PeripheralType result = api.PeripheralOuterClass.Peripheral.PeripheralType.valueOf(type_);
+    @java.lang.Override
+    public api.PeripheralOuterClass.Peripheral.PeripheralType getType() {
+      api.PeripheralOuterClass.Peripheral.PeripheralType result = api.PeripheralOuterClass.Peripheral.PeripheralType.forNumber(type_);
       return result == null ? api.PeripheralOuterClass.Peripheral.PeripheralType.UNRECOGNIZED : result;
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>.api.Peripheral.PeripheralType type = 5;</code>
+     * @param value The enum numeric value on the wire for type to set.
+     */
+    private void setTypeValue(int value) {
+        type_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ownerUserId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deploymentId_);
-      }
-      if (!getIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, id_);
-      }
-      if (!getHardwareIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, hardwareId_);
-      }
-      if (type_ != api.PeripheralOuterClass.Peripheral.PeripheralType.THERMAL.getNumber()) {
-        output.writeEnum(5, type_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>.api.Peripheral.PeripheralType type = 5;</code>
+     * @param value The type to set.
+     */
+    private void setType(api.PeripheralOuterClass.Peripheral.PeripheralType value) {
+      type_ = value.getNumber();
+      
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getOwnerUserIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ownerUserId_);
-      }
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deploymentId_);
-      }
-      if (!getIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, id_);
-      }
-      if (!getHardwareIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, hardwareId_);
-      }
-      if (type_ != api.PeripheralOuterClass.Peripheral.PeripheralType.THERMAL.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, type_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.PeripheralOuterClass.Peripheral)) {
-        return super.equals(obj);
-      }
-      api.PeripheralOuterClass.Peripheral other = (api.PeripheralOuterClass.Peripheral) obj;
-
-      if (!getOwnerUserId()
-          .equals(other.getOwnerUserId())) return false;
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (!getId()
-          .equals(other.getId())) return false;
-      if (!getHardwareId()
-          .equals(other.getHardwareId())) return false;
-      if (type_ != other.type_) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + OWNERUSERID_FIELD_NUMBER;
-      hash = (53 * hash) + getOwnerUserId().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
-      hash = (37 * hash) + HARDWAREID_FIELD_NUMBER;
-      hash = (53 * hash) + getHardwareId().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + type_;
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>.api.Peripheral.PeripheralType type = 5;</code>
+     */
+    private void clearType() {
+      
+      type_ = 0;
     }
 
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.Peripheral parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.Peripheral parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.Peripheral parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.PeripheralOuterClass.Peripheral prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.Peripheral}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.PeripheralOuterClass.Peripheral, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.Peripheral)
         api.PeripheralOuterClass.PeripheralOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.PeripheralOuterClass.internal_static_api_Peripheral_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.PeripheralOuterClass.internal_static_api_Peripheral_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.PeripheralOuterClass.Peripheral.class, api.PeripheralOuterClass.Peripheral.Builder.class);
-      }
-
       // Construct using api.PeripheralOuterClass.Peripheral.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        ownerUserId_ = "";
 
-        deploymentId_ = "";
-
-        id_ = "";
-
-        hardwareId_ = "";
-
-        type_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.PeripheralOuterClass.internal_static_api_Peripheral_descriptor;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.Peripheral getDefaultInstanceForType() {
-        return api.PeripheralOuterClass.Peripheral.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.Peripheral build() {
-        api.PeripheralOuterClass.Peripheral result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.Peripheral buildPartial() {
-        api.PeripheralOuterClass.Peripheral result = new api.PeripheralOuterClass.Peripheral(this);
-        result.ownerUserId_ = ownerUserId_;
-        result.deploymentId_ = deploymentId_;
-        result.id_ = id_;
-        result.hardwareId_ = hardwareId_;
-        result.type_ = type_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.PeripheralOuterClass.Peripheral) {
-          return mergeFrom((api.PeripheralOuterClass.Peripheral)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.PeripheralOuterClass.Peripheral other) {
-        if (other == api.PeripheralOuterClass.Peripheral.getDefaultInstance()) return this;
-        if (!other.getOwnerUserId().isEmpty()) {
-          ownerUserId_ = other.ownerUserId_;
-          onChanged();
-        }
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
-        }
-        if (!other.getHardwareId().isEmpty()) {
-          hardwareId_ = other.hardwareId_;
-          onChanged();
-        }
-        if (other.type_ != 0) {
-          setTypeValue(other.getTypeValue());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.PeripheralOuterClass.Peripheral parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.PeripheralOuterClass.Peripheral) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object ownerUserId_ = "";
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The ownerUserId.
        */
+      @java.lang.Override
       public java.lang.String getOwnerUserId() {
-        java.lang.Object ref = ownerUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ownerUserId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getOwnerUserId();
       }
       /**
        * <code>string ownerUserId = 1;</code>
        * @return The bytes for ownerUserId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getOwnerUserIdBytes() {
-        java.lang.Object ref = ownerUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ownerUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getOwnerUserIdBytes();
       }
       /**
        * <code>string ownerUserId = 1;</code>
@@ -1961,12 +1225,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setOwnerUserId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserId(value);
         return this;
       }
       /**
@@ -1974,9 +1234,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearOwnerUserId() {
-        
-        ownerUserId_ = getDefaultInstance().getOwnerUserId();
-        onChanged();
+        copyOnWrite();
+        instance.clearOwnerUserId();
         return this;
       }
       /**
@@ -1986,49 +1245,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setOwnerUserIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ownerUserId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setOwnerUserIdBytes(value);
         return this;
       }
 
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 2;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 2;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 2;</code>
@@ -2037,12 +1274,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -2050,9 +1283,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -2062,49 +1294,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
 
-      private java.lang.Object id_ = "";
       /**
        * <code>string id = 3;</code>
        * @return The id.
        */
+      @java.lang.Override
       public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getId();
       }
       /**
        * <code>string id = 3;</code>
        * @return The bytes for id.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getIdBytes();
       }
       /**
        * <code>string id = 3;</code>
@@ -2113,12 +1323,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setId(value);
         return this;
       }
       /**
@@ -2126,9 +1332,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
+        copyOnWrite();
+        instance.clearId();
         return this;
       }
       /**
@@ -2138,49 +1343,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setIdBytes(value);
         return this;
       }
 
-      private java.lang.Object hardwareId_ = "";
       /**
        * <code>string hardwareId = 4;</code>
        * @return The hardwareId.
        */
+      @java.lang.Override
       public java.lang.String getHardwareId() {
-        java.lang.Object ref = hardwareId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          hardwareId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getHardwareId();
       }
       /**
        * <code>string hardwareId = 4;</code>
        * @return The bytes for hardwareId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getHardwareIdBytes() {
-        java.lang.Object ref = hardwareId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          hardwareId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getHardwareIdBytes();
       }
       /**
        * <code>string hardwareId = 4;</code>
@@ -2189,12 +1372,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setHardwareId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        hardwareId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setHardwareId(value);
         return this;
       }
       /**
@@ -2202,9 +1381,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearHardwareId() {
-        
-        hardwareId_ = getDefaultInstance().getHardwareId();
-        onChanged();
+        copyOnWrite();
+        instance.clearHardwareId();
         return this;
       }
       /**
@@ -2214,33 +1392,27 @@ public final class PeripheralOuterClass {
        */
       public Builder setHardwareIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        hardwareId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setHardwareIdBytes(value);
         return this;
       }
 
-      private int type_ = 0;
       /**
        * <code>.api.Peripheral.PeripheralType type = 5;</code>
        * @return The enum numeric value on the wire for type.
        */
-      @java.lang.Override public int getTypeValue() {
-        return type_;
+      @java.lang.Override
+      public int getTypeValue() {
+        return instance.getTypeValue();
       }
       /**
        * <code>.api.Peripheral.PeripheralType type = 5;</code>
-       * @param value The enum numeric value on the wire for type to set.
+       * @param value The type to set.
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-        
-        type_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setTypeValue(value);
         return this;
       }
       /**
@@ -2249,22 +1421,16 @@ public final class PeripheralOuterClass {
        */
       @java.lang.Override
       public api.PeripheralOuterClass.Peripheral.PeripheralType getType() {
-        @SuppressWarnings("deprecation")
-        api.PeripheralOuterClass.Peripheral.PeripheralType result = api.PeripheralOuterClass.Peripheral.PeripheralType.valueOf(type_);
-        return result == null ? api.PeripheralOuterClass.Peripheral.PeripheralType.UNRECOGNIZED : result;
+        return instance.getType();
       }
       /**
        * <code>.api.Peripheral.PeripheralType type = 5;</code>
-       * @param value The type to set.
+       * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
       public Builder setType(api.PeripheralOuterClass.Peripheral.PeripheralType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        type_ = value.getNumber();
-        onChanged();
+        copyOnWrite();
+        instance.setType(value);
         return this;
       }
       /**
@@ -2272,67 +1438,93 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-        
-        type_ = 0;
-        onChanged();
+        copyOnWrite();
+        instance.clearType();
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.Peripheral)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.PeripheralOuterClass.Peripheral();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "ownerUserId_",
+              "deploymentId_",
+              "id_",
+              "hardwareId_",
+              "type_",
+            };
+            java.lang.String info =
+                "\u0000\u0005\u0000\u0000\u0001\u0005\u0005\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\u0208\u0004\u0208\u0005\f";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.PeripheralOuterClass.Peripheral> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.PeripheralOuterClass.Peripheral.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.PeripheralOuterClass.Peripheral>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.Peripheral)
     private static final api.PeripheralOuterClass.Peripheral DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.PeripheralOuterClass.Peripheral();
+      Peripheral defaultInstance = new Peripheral();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        Peripheral.class, defaultInstance);
     }
 
     public static api.PeripheralOuterClass.Peripheral getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<Peripheral>
-        PARSER = new com.google.protobuf.AbstractParser<Peripheral>() {
-      @java.lang.Override
-      public Peripheral parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Peripheral(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<Peripheral> PARSER;
 
     public static com.google.protobuf.Parser<Peripheral> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Peripheral> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.PeripheralOuterClass.Peripheral getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface GetDeploymentPeripheralsRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.GetDeploymentPeripheralsRequest)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string deploymentId = 1;</code>
@@ -2349,105 +1541,23 @@ public final class PeripheralOuterClass {
   /**
    * Protobuf type {@code api.GetDeploymentPeripheralsRequest}
    */
-  public static final class GetDeploymentPeripheralsRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class GetDeploymentPeripheralsRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          GetDeploymentPeripheralsRequest, GetDeploymentPeripheralsRequest.Builder> implements
       // @@protoc_insertion_point(message_implements:api.GetDeploymentPeripheralsRequest)
       GetDeploymentPeripheralsRequestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use GetDeploymentPeripheralsRequest.newBuilder() to construct.
-    private GetDeploymentPeripheralsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private GetDeploymentPeripheralsRequest() {
       deploymentId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new GetDeploymentPeripheralsRequest();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private GetDeploymentPeripheralsRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              deploymentId_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.PeripheralOuterClass.internal_static_api_GetDeploymentPeripheralsRequest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.PeripheralOuterClass.internal_static_api_GetDeploymentPeripheralsRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.class, api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.Builder.class);
-    }
-
     public static final int DEPLOYMENTID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object deploymentId_;
+    private java.lang.String deploymentId_;
     /**
      * <code>string deploymentId = 1;</code>
      * @return The deploymentId.
      */
     @java.lang.Override
     public java.lang.String getDeploymentId() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        deploymentId_ = s;
-        return s;
-      }
+      return deploymentId_;
     }
     /**
      * <code>string deploymentId = 1;</code>
@@ -2456,353 +1566,147 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getDeploymentIdBytes() {
-      java.lang.Object ref = deploymentId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deploymentId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deploymentId_);
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>string deploymentId = 1;</code>
+     * @param value The deploymentId to set.
+     */
+    private void setDeploymentId(
+        java.lang.String value) {
+      value.getClass();
+  
+      deploymentId_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getDeploymentIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, deploymentId_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>string deploymentId = 1;</code>
+     */
+    private void clearDeploymentId() {
+      
+      deploymentId_ = getDefaultInstance().getDeploymentId();
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getDeploymentIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, deploymentId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.PeripheralOuterClass.GetDeploymentPeripheralsRequest)) {
-        return super.equals(obj);
-      }
-      api.PeripheralOuterClass.GetDeploymentPeripheralsRequest other = (api.PeripheralOuterClass.GetDeploymentPeripheralsRequest) obj;
-
-      if (!getDeploymentId()
-          .equals(other.getDeploymentId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + DEPLOYMENTID_FIELD_NUMBER;
-      hash = (53 * hash) + getDeploymentId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>string deploymentId = 1;</code>
+     * @param value The bytes for deploymentId to set.
+     */
+    private void setDeploymentIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deploymentId_ = value.toStringUtf8();
+      
     }
 
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.PeripheralOuterClass.GetDeploymentPeripheralsRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.GetDeploymentPeripheralsRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.PeripheralOuterClass.GetDeploymentPeripheralsRequest, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.GetDeploymentPeripheralsRequest)
         api.PeripheralOuterClass.GetDeploymentPeripheralsRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.PeripheralOuterClass.internal_static_api_GetDeploymentPeripheralsRequest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.PeripheralOuterClass.internal_static_api_GetDeploymentPeripheralsRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.class, api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.Builder.class);
-      }
-
       // Construct using api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        deploymentId_ = "";
 
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.PeripheralOuterClass.internal_static_api_GetDeploymentPeripheralsRequest_descriptor;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.GetDeploymentPeripheralsRequest getDefaultInstanceForType() {
-        return api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.GetDeploymentPeripheralsRequest build() {
-        api.PeripheralOuterClass.GetDeploymentPeripheralsRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.GetDeploymentPeripheralsRequest buildPartial() {
-        api.PeripheralOuterClass.GetDeploymentPeripheralsRequest result = new api.PeripheralOuterClass.GetDeploymentPeripheralsRequest(this);
-        result.deploymentId_ = deploymentId_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.PeripheralOuterClass.GetDeploymentPeripheralsRequest) {
-          return mergeFrom((api.PeripheralOuterClass.GetDeploymentPeripheralsRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.PeripheralOuterClass.GetDeploymentPeripheralsRequest other) {
-        if (other == api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.getDefaultInstance()) return this;
-        if (!other.getDeploymentId().isEmpty()) {
-          deploymentId_ = other.deploymentId_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.PeripheralOuterClass.GetDeploymentPeripheralsRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.PeripheralOuterClass.GetDeploymentPeripheralsRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object deploymentId_ = "";
       /**
        * <code>string deploymentId = 1;</code>
        * @return The deploymentId.
        */
+      @java.lang.Override
       public java.lang.String getDeploymentId() {
-        java.lang.Object ref = deploymentId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          deploymentId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeploymentId();
       }
       /**
        * <code>string deploymentId = 1;</code>
        * @return The bytes for deploymentId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeploymentIdBytes() {
-        java.lang.Object ref = deploymentId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deploymentId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeploymentIdBytes();
       }
       /**
        * <code>string deploymentId = 1;</code>
@@ -2811,12 +1715,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setDeploymentId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentId(value);
         return this;
       }
       /**
@@ -2824,9 +1724,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearDeploymentId() {
-        
-        deploymentId_ = getDefaultInstance().getDeploymentId();
-        onChanged();
+        copyOnWrite();
+        instance.clearDeploymentId();
         return this;
       }
       /**
@@ -2836,71 +1735,88 @@ public final class PeripheralOuterClass {
        */
       public Builder setDeploymentIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        deploymentId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setDeploymentIdBytes(value);
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.GetDeploymentPeripheralsRequest)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.PeripheralOuterClass.GetDeploymentPeripheralsRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "deploymentId_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.PeripheralOuterClass.GetDeploymentPeripheralsRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.PeripheralOuterClass.GetDeploymentPeripheralsRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.PeripheralOuterClass.GetDeploymentPeripheralsRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.GetDeploymentPeripheralsRequest)
     private static final api.PeripheralOuterClass.GetDeploymentPeripheralsRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.PeripheralOuterClass.GetDeploymentPeripheralsRequest();
+      GetDeploymentPeripheralsRequest defaultInstance = new GetDeploymentPeripheralsRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GetDeploymentPeripheralsRequest.class, defaultInstance);
     }
 
     public static api.PeripheralOuterClass.GetDeploymentPeripheralsRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<GetDeploymentPeripheralsRequest>
-        PARSER = new com.google.protobuf.AbstractParser<GetDeploymentPeripheralsRequest>() {
-      @java.lang.Override
-      public GetDeploymentPeripheralsRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetDeploymentPeripheralsRequest(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<GetDeploymentPeripheralsRequest> PARSER;
 
     public static com.google.protobuf.Parser<GetDeploymentPeripheralsRequest> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GetDeploymentPeripheralsRequest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.PeripheralOuterClass.GetDeploymentPeripheralsRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface GetPeripheralRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:api.GetPeripheralRequest)
-      com.google.protobuf.MessageOrBuilder {
+      com.google.protobuf.MessageLiteOrBuilder {
 
     /**
      * <code>string peripheralId = 1;</code>
@@ -2917,105 +1833,23 @@ public final class PeripheralOuterClass {
   /**
    * Protobuf type {@code api.GetPeripheralRequest}
    */
-  public static final class GetPeripheralRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public  static final class GetPeripheralRequest extends
+      com.google.protobuf.GeneratedMessageLite<
+          GetPeripheralRequest, GetPeripheralRequest.Builder> implements
       // @@protoc_insertion_point(message_implements:api.GetPeripheralRequest)
       GetPeripheralRequestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use GetPeripheralRequest.newBuilder() to construct.
-    private GetPeripheralRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
     private GetPeripheralRequest() {
       peripheralId_ = "";
     }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new GetPeripheralRequest();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private GetPeripheralRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              peripheralId_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return api.PeripheralOuterClass.internal_static_api_GetPeripheralRequest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return api.PeripheralOuterClass.internal_static_api_GetPeripheralRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              api.PeripheralOuterClass.GetPeripheralRequest.class, api.PeripheralOuterClass.GetPeripheralRequest.Builder.class);
-    }
-
     public static final int PERIPHERALID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object peripheralId_;
+    private java.lang.String peripheralId_;
     /**
      * <code>string peripheralId = 1;</code>
      * @return The peripheralId.
      */
     @java.lang.Override
     public java.lang.String getPeripheralId() {
-      java.lang.Object ref = peripheralId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        peripheralId_ = s;
-        return s;
-      }
+      return peripheralId_;
     }
     /**
      * <code>string peripheralId = 1;</code>
@@ -3024,353 +1858,147 @@ public final class PeripheralOuterClass {
     @java.lang.Override
     public com.google.protobuf.ByteString
         getPeripheralIdBytes() {
-      java.lang.Object ref = peripheralId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        peripheralId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(peripheralId_);
     }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>string peripheralId = 1;</code>
+     * @param value The peripheralId to set.
+     */
+    private void setPeripheralId(
+        java.lang.String value) {
+      value.getClass();
+  
+      peripheralId_ = value;
     }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getPeripheralIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, peripheralId_);
-      }
-      unknownFields.writeTo(output);
+    /**
+     * <code>string peripheralId = 1;</code>
+     */
+    private void clearPeripheralId() {
+      
+      peripheralId_ = getDefaultInstance().getPeripheralId();
     }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getPeripheralIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, peripheralId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof api.PeripheralOuterClass.GetPeripheralRequest)) {
-        return super.equals(obj);
-      }
-      api.PeripheralOuterClass.GetPeripheralRequest other = (api.PeripheralOuterClass.GetPeripheralRequest) obj;
-
-      if (!getPeripheralId()
-          .equals(other.getPeripheralId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PERIPHERALID_FIELD_NUMBER;
-      hash = (53 * hash) + getPeripheralId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
+    /**
+     * <code>string peripheralId = 1;</code>
+     * @param value The bytes for peripheralId to set.
+     */
+    private void setPeripheralIdBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      peripheralId_ = value.toStringUtf8();
+      
     }
 
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static api.PeripheralOuterClass.GetPeripheralRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(api.PeripheralOuterClass.GetPeripheralRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code api.GetPeripheralRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          api.PeripheralOuterClass.GetPeripheralRequest, Builder> implements
         // @@protoc_insertion_point(builder_implements:api.GetPeripheralRequest)
         api.PeripheralOuterClass.GetPeripheralRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return api.PeripheralOuterClass.internal_static_api_GetPeripheralRequest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return api.PeripheralOuterClass.internal_static_api_GetPeripheralRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                api.PeripheralOuterClass.GetPeripheralRequest.class, api.PeripheralOuterClass.GetPeripheralRequest.Builder.class);
-      }
-
       // Construct using api.PeripheralOuterClass.GetPeripheralRequest.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        peripheralId_ = "";
 
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return api.PeripheralOuterClass.internal_static_api_GetPeripheralRequest_descriptor;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.GetPeripheralRequest getDefaultInstanceForType() {
-        return api.PeripheralOuterClass.GetPeripheralRequest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.GetPeripheralRequest build() {
-        api.PeripheralOuterClass.GetPeripheralRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public api.PeripheralOuterClass.GetPeripheralRequest buildPartial() {
-        api.PeripheralOuterClass.GetPeripheralRequest result = new api.PeripheralOuterClass.GetPeripheralRequest(this);
-        result.peripheralId_ = peripheralId_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof api.PeripheralOuterClass.GetPeripheralRequest) {
-          return mergeFrom((api.PeripheralOuterClass.GetPeripheralRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(api.PeripheralOuterClass.GetPeripheralRequest other) {
-        if (other == api.PeripheralOuterClass.GetPeripheralRequest.getDefaultInstance()) return this;
-        if (!other.getPeripheralId().isEmpty()) {
-          peripheralId_ = other.peripheralId_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        api.PeripheralOuterClass.GetPeripheralRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (api.PeripheralOuterClass.GetPeripheralRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object peripheralId_ = "";
       /**
        * <code>string peripheralId = 1;</code>
        * @return The peripheralId.
        */
+      @java.lang.Override
       public java.lang.String getPeripheralId() {
-        java.lang.Object ref = peripheralId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          peripheralId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getPeripheralId();
       }
       /**
        * <code>string peripheralId = 1;</code>
        * @return The bytes for peripheralId.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getPeripheralIdBytes() {
-        java.lang.Object ref = peripheralId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          peripheralId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getPeripheralIdBytes();
       }
       /**
        * <code>string peripheralId = 1;</code>
@@ -3379,12 +2007,8 @@ public final class PeripheralOuterClass {
        */
       public Builder setPeripheralId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        peripheralId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralId(value);
         return this;
       }
       /**
@@ -3392,9 +2016,8 @@ public final class PeripheralOuterClass {
        * @return This builder for chaining.
        */
       public Builder clearPeripheralId() {
-        
-        peripheralId_ = getDefaultInstance().getPeripheralId();
-        onChanged();
+        copyOnWrite();
+        instance.clearPeripheralId();
         return this;
       }
       /**
@@ -3404,149 +2027,87 @@ public final class PeripheralOuterClass {
        */
       public Builder setPeripheralIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        peripheralId_ = value;
-        onChanged();
+        copyOnWrite();
+        instance.setPeripheralIdBytes(value);
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:api.GetPeripheralRequest)
     }
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new api.PeripheralOuterClass.GetPeripheralRequest();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "peripheralId_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u0208";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<api.PeripheralOuterClass.GetPeripheralRequest> parser = PARSER;
+          if (parser == null) {
+            synchronized (api.PeripheralOuterClass.GetPeripheralRequest.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<api.PeripheralOuterClass.GetPeripheralRequest>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
+    }
+
 
     // @@protoc_insertion_point(class_scope:api.GetPeripheralRequest)
     private static final api.PeripheralOuterClass.GetPeripheralRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new api.PeripheralOuterClass.GetPeripheralRequest();
+      GetPeripheralRequest defaultInstance = new GetPeripheralRequest();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        GetPeripheralRequest.class, defaultInstance);
     }
 
     public static api.PeripheralOuterClass.GetPeripheralRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<GetPeripheralRequest>
-        PARSER = new com.google.protobuf.AbstractParser<GetPeripheralRequest>() {
-      @java.lang.Override
-      public GetPeripheralRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GetPeripheralRequest(input, extensionRegistry);
-      }
-    };
+    private static volatile com.google.protobuf.Parser<GetPeripheralRequest> PARSER;
 
     public static com.google.protobuf.Parser<GetPeripheralRequest> parser() {
-      return PARSER;
+      return DEFAULT_INSTANCE.getParserForType();
     }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GetPeripheralRequest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public api.PeripheralOuterClass.GetPeripheralRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_NewPeripheral_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_NewPeripheral_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_Peripheral_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_Peripheral_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_GetDeploymentPeripheralsRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_GetDeploymentPeripheralsRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_GetPeripheralRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_GetPeripheralRequest_fieldAccessorTable;
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
   static {
-    java.lang.String[] descriptorData = {
-      "\n\020peripheral.proto\022\003api\032\013empty.proto\"\254\001\n" +
-      "\rNewPeripheral\022\023\n\013ownerUserId\030\001 \001(\t\022\024\n\014d" +
-      "eploymentId\030\002 \001(\t\022\022\n\nhardwareId\030\003 \001(\t\022/\n" +
-      "\004type\030\004 \001(\0162!.api.NewPeripheral.Peripher" +
-      "alType\"+\n\016PeripheralType\022\013\n\007THERMAL\020\000\022\014\n" +
-      "\010PARTICLE\020\001\"\262\001\n\nPeripheral\022\023\n\013ownerUserI" +
-      "d\030\001 \001(\t\022\024\n\014deploymentId\030\002 \001(\t\022\n\n\002id\030\003 \001(" +
-      "\t\022\022\n\nhardwareId\030\004 \001(\t\022,\n\004type\030\005 \001(\0162\036.ap" +
-      "i.Peripheral.PeripheralType\"+\n\016Periphera" +
-      "lType\022\013\n\007THERMAL\020\000\022\014\n\010PARTICLE\020\001\"7\n\037GetD" +
-      "eploymentPeripheralsRequest\022\024\n\014deploymen" +
-      "tId\030\001 \001(\t\",\n\024GetPeripheralRequest\022\024\n\014per" +
-      "ipheralId\030\001 \001(\t2\233\002\n\033PeripheralManagement" +
-      "Service\022;\n\rGetPeripheral\022\031.api.GetPeriph" +
-      "eralRequest\032\017.api.Peripheral\0227\n\020CreatePe" +
-      "ripheral\022\022.api.NewPeripheral\032\017.api.Perip" +
-      "heral\022/\n\020RemovePeripheral\022\017.api.Peripher" +
-      "al\032\n.api.Empty\022U\n\030GetDeploymentPeriphera" +
-      "ls\022$.api.GetDeploymentPeripheralsRequest" +
-      "\032\017.api.Peripheral\"\0000\001B\016Z\014api/protobufb\006p" +
-      "roto3"
-    };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          api.EmptyOuterClass.getDescriptor(),
-        });
-    internal_static_api_NewPeripheral_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_api_NewPeripheral_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_NewPeripheral_descriptor,
-        new java.lang.String[] { "OwnerUserId", "DeploymentId", "HardwareId", "Type", });
-    internal_static_api_Peripheral_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_api_Peripheral_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_Peripheral_descriptor,
-        new java.lang.String[] { "OwnerUserId", "DeploymentId", "Id", "HardwareId", "Type", });
-    internal_static_api_GetDeploymentPeripheralsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_api_GetDeploymentPeripheralsRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_GetDeploymentPeripheralsRequest_descriptor,
-        new java.lang.String[] { "DeploymentId", });
-    internal_static_api_GetPeripheralRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_api_GetPeripheralRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_GetPeripheralRequest_descriptor,
-        new java.lang.String[] { "PeripheralId", });
-    api.EmptyOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

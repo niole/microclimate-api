@@ -46,11 +46,10 @@ public final class DeploymentManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateDeployment"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.DeploymentOuterClass.NewDeployment.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.DeploymentOuterClass.Deployment.getDefaultInstance()))
-              .setSchemaDescriptor(new DeploymentManagementServiceMethodDescriptorSupplier("CreateDeployment"))
               .build();
         }
       }
@@ -77,11 +76,10 @@ public final class DeploymentManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetDeployment"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.DeploymentOuterClass.GetDeploymentRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.DeploymentOuterClass.Deployment.getDefaultInstance()))
-              .setSchemaDescriptor(new DeploymentManagementServiceMethodDescriptorSupplier("GetDeployment"))
               .build();
         }
       }
@@ -108,11 +106,10 @@ public final class DeploymentManagementServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RemoveDeployment"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.DeploymentOuterClass.RemoveDeploymentRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.EmptyOuterClass.Empty.getDefaultInstance()))
-              .setSchemaDescriptor(new DeploymentManagementServiceMethodDescriptorSupplier("RemoveDeployment"))
               .build();
         }
       }
@@ -379,41 +376,6 @@ public final class DeploymentManagementServiceGrpc {
     }
   }
 
-  private static abstract class DeploymentManagementServiceBaseDescriptorSupplier
-      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    DeploymentManagementServiceBaseDescriptorSupplier() {}
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return api.DeploymentOuterClass.getDescriptor();
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("DeploymentManagementService");
-    }
-  }
-
-  private static final class DeploymentManagementServiceFileDescriptorSupplier
-      extends DeploymentManagementServiceBaseDescriptorSupplier {
-    DeploymentManagementServiceFileDescriptorSupplier() {}
-  }
-
-  private static final class DeploymentManagementServiceMethodDescriptorSupplier
-      extends DeploymentManagementServiceBaseDescriptorSupplier
-      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
-
-    DeploymentManagementServiceMethodDescriptorSupplier(String methodName) {
-      this.methodName = methodName;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
-      return getServiceDescriptor().findMethodByName(methodName);
-    }
-  }
-
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
 
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
@@ -423,7 +385,6 @@ public final class DeploymentManagementServiceGrpc {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new DeploymentManagementServiceFileDescriptorSupplier())
               .addMethod(getCreateDeploymentMethod())
               .addMethod(getGetDeploymentMethod())
               .addMethod(getRemoveDeploymentMethod())

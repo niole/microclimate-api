@@ -46,11 +46,10 @@ public final class PeripheralMeasurementEventServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SendEvent"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.Events.NewMeasurementEvent.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.EmptyOuterClass.Empty.getDefaultInstance()))
-              .setSchemaDescriptor(new PeripheralMeasurementEventServiceMethodDescriptorSupplier("SendEvent"))
               .build();
         }
       }
@@ -77,11 +76,10 @@ public final class PeripheralMeasurementEventServiceGrpc {
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FilterEvents"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.Events.MeasurementEventFilterRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
                   api.Events.MeasurementEvent.getDefaultInstance()))
-              .setSchemaDescriptor(new PeripheralMeasurementEventServiceMethodDescriptorSupplier("FilterEvents"))
               .build();
         }
       }
@@ -299,41 +297,6 @@ public final class PeripheralMeasurementEventServiceGrpc {
     }
   }
 
-  private static abstract class PeripheralMeasurementEventServiceBaseDescriptorSupplier
-      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    PeripheralMeasurementEventServiceBaseDescriptorSupplier() {}
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return api.Events.getDescriptor();
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("PeripheralMeasurementEventService");
-    }
-  }
-
-  private static final class PeripheralMeasurementEventServiceFileDescriptorSupplier
-      extends PeripheralMeasurementEventServiceBaseDescriptorSupplier {
-    PeripheralMeasurementEventServiceFileDescriptorSupplier() {}
-  }
-
-  private static final class PeripheralMeasurementEventServiceMethodDescriptorSupplier
-      extends PeripheralMeasurementEventServiceBaseDescriptorSupplier
-      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
-
-    PeripheralMeasurementEventServiceMethodDescriptorSupplier(String methodName) {
-      this.methodName = methodName;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
-      return getServiceDescriptor().findMethodByName(methodName);
-    }
-  }
-
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
 
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
@@ -343,7 +306,6 @@ public final class PeripheralMeasurementEventServiceGrpc {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new PeripheralMeasurementEventServiceFileDescriptorSupplier())
               .addMethod(getSendEventMethod())
               .addMethod(getFilterEventsMethod())
               .build();
