@@ -30,8 +30,8 @@ func testEvent(conn grpc.ClientConnInterface) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	peripheralId := newUuidString()
-	deploymentId := newUuidString()
+	peripheralId := "142b9f43-2829-11eb-bccb-0242ac190002"
+	deploymentId := "e1cddf14-2828-11eb-bccb-0242ac190002"
 
 	for i := 0; i < 5; i++ {
 		thetime, err := ptypes.TimestampProto(
@@ -89,57 +89,57 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting deployment test")
 
-	ownerUserId := newUuidString() // TODO make niole user
+	ownerUserId := "cbd94dc1-2828-11eb-bccb-0242ac190002"
 
 	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
 		OwnerUserId: ownerUserId,
 	})
 
-	_, err = client.CreateDeployment(ctx, &api.NewDeployment{
-		OwnerUserId: ownerUserId,
-	})
+	//_, err = client.CreateDeployment(ctx, &api.NewDeployment{
+	//	OwnerUserId: ownerUserId,
+	//})
 
 	log.Print(d)
 	log.Print(err)
 
-	deploymentStreamClient, streamError := client.GetDeploymentsForUser(ctx, &api.GetDeploymentsForUserRequest{
-		UserId: ownerUserId,
-	})
+	//deploymentStreamClient, streamError := client.GetDeploymentsForUser(ctx, &api.GetDeploymentsForUserRequest{
+	//	UserId: ownerUserId,
+	//})
 
-	if streamError != nil {
-		log.Fatalf("Failed to start receiving deployments, error %v", streamError)
-	}
+	//if streamError != nil {
+	//	log.Fatalf("Failed to start receiving deployments, error %v", streamError)
+	//}
 
-	for {
-		newEvent, err := deploymentStreamClient.Recv()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			log.Fatalf("Failed to receive single deployment, error %v", err)
-			break
-		}
-		if newEvent != nil {
-			log.Print(newEvent)
-		} else {
-			log.Print("DONE")
-			break
-		}
-	}
+	//for {
+	//	newEvent, err := deploymentStreamClient.Recv()
+	//	if err == io.EOF {
+	//		break
+	//	}
+	//	if err != nil {
+	//		log.Fatalf("Failed to receive single deployment, error %v", err)
+	//		break
+	//	}
+	//	if newEvent != nil {
+	//		log.Print(newEvent)
+	//	} else {
+	//		log.Print("DONE")
+	//		break
+	//	}
+	//}
 
-	d, err = client.GetDeployment(ctx, &api.GetDeploymentRequest{
-		OwnerUserId:  d.OwnerUserId,
-		DeploymentId: d.Id,
-	})
+	//d, err = client.GetDeployment(ctx, &api.GetDeploymentRequest{
+	//	OwnerUserId:  d.OwnerUserId,
+	//	DeploymentId: d.Id,
+	//})
 
-	log.Print(d)
-	log.Print(err)
+	//log.Print(d)
+	//log.Print(err)
 
-	_, err = client.RemoveDeployment(ctx, &api.RemoveDeploymentRequest{
-		DeploymentId: d.Id,
-	})
+	//_, err = client.RemoveDeployment(ctx, &api.RemoveDeploymentRequest{
+	//	DeploymentId: d.Id,
+	//})
 
-	log.Print(err)
+	//log.Print(err)
 }
 
 func testUser(conn grpc.ClientConnInterface) {
@@ -172,8 +172,8 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 	log.Print("starting peripheral test")
 
 	p, err := client.CreatePeripheral(ctx, &api.NewPeripheral{
-		OwnerUserId:  newUuidString(),
-		DeploymentId: newUuidString(),
+		OwnerUserId:  "cbd94dc1-2828-11eb-bccb-0242ac190002",
+		DeploymentId: "e1cddf14-2828-11eb-bccb-0242ac190002",
 		HardwareId:   newUuidString(),
 		Type:         api.NewPeripheral_PARTICLE,
 	})
@@ -181,18 +181,18 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 	log.Print(p)
 	log.Print(err)
 
-	peripheralId := p.Id
+	//peripheralId := p.Id
 
-	p, err = client.GetPeripheral(ctx, &api.GetPeripheralRequest{
-		PeripheralId: peripheralId,
-	})
+	//p, err = client.GetPeripheral(ctx, &api.GetPeripheralRequest{
+	//	PeripheralId: peripheralId,
+	//})
 
-	log.Print(p)
-	log.Print(err)
+	//log.Print(p)
+	//log.Print(err)
 
-	_, err = client.RemovePeripheral(ctx, p)
+	//_, err = client.RemovePeripheral(ctx, p)
 
-	log.Print(err)
+	//log.Print(err)
 }
 
 func main() {
@@ -208,7 +208,7 @@ func main() {
 
 	//testDeployment(conn)
 
-	//testEvent(conn)
+	testEvent(conn)
 	//testPeripheral(conn)
 	//testUser(conn)
 }

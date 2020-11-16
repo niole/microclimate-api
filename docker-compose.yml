@@ -29,7 +29,7 @@ services:
       context: .
       dockerfile: ./event/Dockerfile
     ports:
-      - "8080:8080"
+      - "6004:8080"
     links:
       - db
   db:

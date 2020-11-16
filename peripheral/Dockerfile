@@ -18,6 +18,6 @@ ENV DB_HOST=db
 
 RUN go install all
 
-ENTRYPOINT go run ./peripheral/main/server.go
+ENTRYPOINT go run ./peripheral/main/server.go -serverPort 8080
 
 EXPOSE 6001

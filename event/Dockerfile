@@ -20,4 +20,4 @@ RUN go install all
 
 ENTRYPOINT go run ./event/main/server.go -serverPort 8080
 
-EXPOSE 8080
+EXPOSE 6004
