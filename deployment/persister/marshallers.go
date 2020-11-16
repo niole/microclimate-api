@@ -3,6 +3,7 @@ package persister
 import (
 	api "api/protobuf"
 	sql "database/sql"
+	"log"
 )
 
 // TODO use generated enum map things
@@ -14,12 +15,12 @@ var statusMap = map[string]api.Deployment_Status{
 	"shutting_down": api.Deployment_SHUTTING_DOWN,
 }
 
-func ScanOneDeployment(result *sql.Row, saveToDeployment *api.Deployment) error {
+func scanOneDeployment(scanner func(dest ...interface{}) error, saveToDeployment *api.Deployment) error {
 	var id string
 	var ownerUserId string
 	var domain string
 	var status string
-	err := result.Scan(&id, &ownerUserId, &domain, &status)
+	err := scanner(&id, &ownerUserId, &domain, &status)
 
 	*saveToDeployment = api.Deployment{
 		Id:          id,
@@ -29,4 +30,27 @@ func ScanOneDeployment(result *sql.Row, saveToDeployment *api.Deployment) error 
 	}
 
 	return err
+}
+
+func ScanOneDeployment(result *sql.Row, saveToDeployment *api.Deployment) error {
+	return scanOneDeployment(result.Scan, saveToDeployment)
+}
+
+func ScanManyDeployments(result *sql.Rows, err error) ([]api.Deployment, error) {
+	defer result.Close()
+
+	deployments := make([]api.Deployment, 0)
+	if err == nil {
+		for result.Next() {
+			var deployment api.Deployment
+			err = scanOneDeployment(result.Scan, &deployment)
+			if err == nil {
+				deployments = append(deployments, deployment)
+			}
+		}
+	} else {
+		log.Printf("Something went wrong while unmarshalling deployments, error: %v", err)
+	}
+
+	return deployments, err
 }

@@ -8,6 +8,18 @@ import (
 	"log"
 )
 
+func GetDeploymentsForUser(ctx context.Context, userId string) ([]api.Deployment, error) {
+	db := database.Get(initTable)
+
+	deployments, err := ScanManyDeployments(db.QueryContext(
+		ctx,
+		"SELECT * FROM Deployments WHERE OwnerUserId = ?;",
+		&userId,
+	))
+
+	return deployments, err
+}
+
 // creates deployment for user
 func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*api.Deployment, error) {
 	db := database.Get(initTable)

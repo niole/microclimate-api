@@ -88,12 +88,44 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	log.Print("starting deployment test")
+
+	ownerUserId := newUuidString() // TODO make niole user
+
 	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
-		OwnerUserId: newUuidString(),
+		OwnerUserId: ownerUserId,
+	})
+
+	_, err = client.CreateDeployment(ctx, &api.NewDeployment{
+		OwnerUserId: ownerUserId,
 	})
 
 	log.Print(d)
 	log.Print(err)
+
+	deploymentStreamClient, streamError := client.GetDeploymentsForUser(ctx, &api.GetDeploymentsForUserRequest{
+		UserId: ownerUserId,
+	})
+
+	if streamError != nil {
+		log.Fatalf("Failed to start receiving deployments, error %v", streamError)
+	}
+
+	for {
+		newEvent, err := deploymentStreamClient.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Failed to receive single deployment, error %v", err)
+			break
+		}
+		if newEvent != nil {
+			log.Print(newEvent)
+		} else {
+			log.Print("DONE")
+			break
+		}
+	}
 
 	d, err = client.GetDeployment(ctx, &api.GetDeploymentRequest{
 		OwnerUserId:  d.OwnerUserId,
@@ -116,20 +148,20 @@ func testUser(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting user test")
 
-	u, err := client.CreateUser(ctx, &api.NewUser{Email: "oldemail"})
+	u, err := client.CreateUser(ctx, &api.NewUser{Email: "niolenelson@gmail.com"})
 	log.Print(u)
 	log.Print(err)
 
-	u, err = client.GetUserByEmail(ctx, &api.GetUserByEmailRequest{Email: u.Email})
-	log.Print(u)
-	log.Print(err)
+	//u, err = client.GetUserByEmail(ctx, &api.GetUserByEmailRequest{Email: u.Email})
+	//log.Print(u)
+	//log.Print(err)
 
-	u, err = client.UpdateUserEmail(ctx, &api.UpdateUserEmailRequest{UserId: u.Id, Email: "newemail"})
-	log.Print(u)
-	log.Print(err)
+	//u, err = client.UpdateUserEmail(ctx, &api.UpdateUserEmailRequest{UserId: u.Id, Email: "newemail"})
+	//log.Print(u)
+	//log.Print(err)
 
-	_, err = client.RemoveUser(ctx, &api.RemoveUserRequest{UserId: u.Id})
-	log.Print(err)
+	//_, err = client.RemoveUser(ctx, &api.RemoveUserRequest{UserId: u.Id})
+	//log.Print(err)
 
 }
 
@@ -174,7 +206,9 @@ func main() {
 	}
 	defer conn.Close()
 
+	//testDeployment(conn)
+
 	//testEvent(conn)
 	//testPeripheral(conn)
-	testUser(conn)
+	//testUser(conn)
 }

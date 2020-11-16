@@ -17,6 +17,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DeploymentManagementServiceClient interface {
+	GetDeploymentsForUser(ctx context.Context, in *GetDeploymentsForUserRequest, opts ...grpc.CallOption) (DeploymentManagementService_GetDeploymentsForUserClient, error)
 	CreateDeployment(ctx context.Context, in *NewDeployment, opts ...grpc.CallOption) (*Deployment, error)
 	GetDeployment(ctx context.Context, in *GetDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error)
 	RemoveDeployment(ctx context.Context, in *RemoveDeploymentRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -28,6 +29,38 @@ type deploymentManagementServiceClient struct {
 
 func NewDeploymentManagementServiceClient(cc grpc.ClientConnInterface) DeploymentManagementServiceClient {
 	return &deploymentManagementServiceClient{cc}
+}
+
+func (c *deploymentManagementServiceClient) GetDeploymentsForUser(ctx context.Context, in *GetDeploymentsForUserRequest, opts ...grpc.CallOption) (DeploymentManagementService_GetDeploymentsForUserClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_DeploymentManagementService_serviceDesc.Streams[0], "/api.DeploymentManagementService/GetDeploymentsForUser", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &deploymentManagementServiceGetDeploymentsForUserClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type DeploymentManagementService_GetDeploymentsForUserClient interface {
+	Recv() (*Deployment, error)
+	grpc.ClientStream
+}
+
+type deploymentManagementServiceGetDeploymentsForUserClient struct {
+	grpc.ClientStream
+}
+
+func (x *deploymentManagementServiceGetDeploymentsForUserClient) Recv() (*Deployment, error) {
+	m := new(Deployment)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *deploymentManagementServiceClient) CreateDeployment(ctx context.Context, in *NewDeployment, opts ...grpc.CallOption) (*Deployment, error) {
@@ -61,6 +94,7 @@ func (c *deploymentManagementServiceClient) RemoveDeployment(ctx context.Context
 // All implementations must embed UnimplementedDeploymentManagementServiceServer
 // for forward compatibility
 type DeploymentManagementServiceServer interface {
+	GetDeploymentsForUser(*GetDeploymentsForUserRequest, DeploymentManagementService_GetDeploymentsForUserServer) error
 	CreateDeployment(context.Context, *NewDeployment) (*Deployment, error)
 	GetDeployment(context.Context, *GetDeploymentRequest) (*Deployment, error)
 	RemoveDeployment(context.Context, *RemoveDeploymentRequest) (*Empty, error)
@@ -71,6 +105,9 @@ type DeploymentManagementServiceServer interface {
 type UnimplementedDeploymentManagementServiceServer struct {
 }
 
+func (UnimplementedDeploymentManagementServiceServer) GetDeploymentsForUser(*GetDeploymentsForUserRequest, DeploymentManagementService_GetDeploymentsForUserServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetDeploymentsForUser not implemented")
+}
 func (UnimplementedDeploymentManagementServiceServer) CreateDeployment(context.Context, *NewDeployment) (*Deployment, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDeployment not implemented")
 }
@@ -92,6 +129,27 @@ type UnsafeDeploymentManagementServiceServer interface {
 
 func RegisterDeploymentManagementServiceServer(s *grpc.Server, srv DeploymentManagementServiceServer) {
 	s.RegisterService(&_DeploymentManagementService_serviceDesc, srv)
+}
+
+func _DeploymentManagementService_GetDeploymentsForUser_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDeploymentsForUserRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DeploymentManagementServiceServer).GetDeploymentsForUser(m, &deploymentManagementServiceGetDeploymentsForUserServer{stream})
+}
+
+type DeploymentManagementService_GetDeploymentsForUserServer interface {
+	Send(*Deployment) error
+	grpc.ServerStream
+}
+
+type deploymentManagementServiceGetDeploymentsForUserServer struct {
+	grpc.ServerStream
+}
+
+func (x *deploymentManagementServiceGetDeploymentsForUserServer) Send(m *Deployment) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _DeploymentManagementService_CreateDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -165,6 +223,12 @@ var _DeploymentManagementService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _DeploymentManagementService_RemoveDeployment_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetDeploymentsForUser",
+			Handler:       _DeploymentManagementService_GetDeploymentsForUser_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "deployment.proto",
 }

@@ -24,6 +24,10 @@ message NewDeployment {
   string ownerUserId = 1;
 }
 
+message GetDeploymentsForUserRequest {
+  string userId = 1;
+}
+
 message GetDeploymentRequest {
   string ownerUserId = 1;
   string deploymentId = 2;
@@ -34,6 +38,7 @@ message RemoveDeploymentRequest {
 }
 
 service DeploymentManagementService {
+  rpc GetDeploymentsForUser(GetDeploymentsForUserRequest) returns (stream Deployment);
   rpc CreateDeployment(NewDeployment) returns (Deployment);
   rpc GetDeployment(GetDeploymentRequest) returns (Deployment);
   rpc RemoveDeployment(RemoveDeploymentRequest) returns (Empty);
