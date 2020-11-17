@@ -14,7 +14,18 @@ func ScanOnePeripheral(result Scannable, saveToPeripheral *api.Peripheral) error
 	var deploymentId string
 	var peripheralType string
 	var hardwareId string
-	err := result(&id, &ownerUserId, &deploymentId, &hardwareId, &peripheralType)
+	var unit string
+	var name string
+
+	err := result(
+		&id,
+		&ownerUserId,
+		&deploymentId,
+		&hardwareId,
+		&peripheralType,
+		&unit,
+		&name,
+	)
 
 	*saveToPeripheral = api.Peripheral{
 		OwnerUserId:  ownerUserId,
@@ -22,6 +33,8 @@ func ScanOnePeripheral(result Scannable, saveToPeripheral *api.Peripheral) error
 		Id:           id,
 		HardwareId:   hardwareId,
 		Type:         api.Peripheral_PeripheralType(api.Peripheral_PeripheralType_value[peripheralType]),
+		Unit:         unit,
+		Name:         name,
 	}
 
 	return err

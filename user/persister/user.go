@@ -12,7 +12,8 @@ func initTable(ctx context.Context, pool *sql.DB) error {
 	_, userTableCreateErr := pool.ExecContext(ctx,
 		`CREATE TABLE IF NOT EXISTS Users (
                 Id varchar(36) PRIMARY KEY NOT NULL,
-				Email varchar(255) NOT NULL UNIQUE
+                Email varchar(255) NOT NULL UNIQUE,
+                Name varchar(255) NOT NULL
             );`,
 	)
 
@@ -64,13 +65,14 @@ func findById(ctx context.Context, db *sql.DB, userId string) (*api.User, error)
 	return &user, nil
 }
 
-func CreateUser(ctx context.Context, newUserEmail string) (*api.User, error) {
+func CreateUser(ctx context.Context, newUserEmail string, newUserName string) (*api.User, error) {
 	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
-		`INSERT INTO Users (Id, Email) VALUES (UUID(), ?);`,
+		`INSERT INTO Users (Id, Email, Name) VALUES (UUID(), ?, ?);`,
 		&newUserEmail,
+		&newUserName,
 	)
 
 	if err != nil {
@@ -88,8 +90,8 @@ func UpdateUserEmail(ctx context.Context, userId string, newEmail string) (*api.
 	_, err := db.ExecContext(
 		ctx,
 		`UPDATE Users
-		SET Email = ?
-		WHERE Id = ?;`,
+        SET Email = ?
+        WHERE Id = ?;`,
 		&newEmail,
 		&userId,
 	)
@@ -109,7 +111,7 @@ func RemoveUser(ctx context.Context, userId string) (*api.Empty, error) {
 	_, err := db.ExecContext(
 		ctx,
 		`DELETE FROM Users
-		WHERE Id = ?;`,
+        WHERE Id = ?;`,
 		&userId,
 	)
 

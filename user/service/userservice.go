@@ -16,7 +16,7 @@ func (s *UserServiceServer) CreateUser(ctx context.Context, request *api.NewUser
 	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 
-	user, err := persister.CreateUser(cancellableCtx, request.Email)
+	user, err := persister.CreateUser(cancellableCtx, request.Email, request.Name)
 	if err != nil {
 		log.Printf("Failed to create new user %v, error %v", request, err)
 	}

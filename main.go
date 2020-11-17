@@ -89,10 +89,11 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting deployment test")
 
-	ownerUserId := "cbd94dc1-2828-11eb-bccb-0242ac190002"
+	ownerUserId := "a6f9e25c-28f3-11eb-8364-0242ac1c0002"
 
 	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
 		OwnerUserId: ownerUserId,
+		Name:        "my apartment 123",
 	})
 
 	//_, err = client.CreateDeployment(ctx, &api.NewDeployment{
@@ -148,7 +149,7 @@ func testUser(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting user test")
 
-	u, err := client.CreateUser(ctx, &api.NewUser{Email: "niolenelson@gmail.com"})
+	u, err := client.CreateUser(ctx, &api.NewUser{Email: "niolenelson@gmail.com", Name: "niole"})
 	log.Print(u)
 	log.Print(err)
 
@@ -172,10 +173,12 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 	log.Print("starting peripheral test")
 
 	p, err := client.CreatePeripheral(ctx, &api.NewPeripheral{
-		OwnerUserId:  "cbd94dc1-2828-11eb-bccb-0242ac190002",
-		DeploymentId: "e1cddf14-2828-11eb-bccb-0242ac190002",
+		OwnerUserId:  "a6f9e25c-28f3-11eb-8364-0242ac1c0002",
+		DeploymentId: "bb510637-28f3-11eb-8364-0242ac1c0002",
 		HardwareId:   newUuidString(),
 		Type:         api.NewPeripheral_PARTICLE,
+		Unit:         "PM2.5",
+		Name:         "garage particle sensor",
 	})
 
 	log.Print(p)
@@ -208,7 +211,7 @@ func main() {
 
 	//testDeployment(conn)
 
-	testEvent(conn)
+	//testEvent(conn)
 	//testPeripheral(conn)
 	//testUser(conn)
 }

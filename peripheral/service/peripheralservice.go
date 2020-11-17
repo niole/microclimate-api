@@ -15,7 +15,15 @@ type PeripheralManagementService struct {
 func (s PeripheralManagementService) CreatePeripheral(ctx context.Context, newPeripheral *api.NewPeripheral) (*api.Peripheral, error) {
 	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
-	peripheral, err := persister.CreatePeripheral(cancellableCtx, newPeripheral)
+	peripheral, err := persister.CreatePeripheral(
+		cancellableCtx,
+		newPeripheral.OwnerUserId,
+		newPeripheral.DeploymentId,
+		newPeripheral.HardwareId,
+		newPeripheral.Type,
+		newPeripheral.Unit,
+		newPeripheral.Name,
+	)
 	if err != nil {
 		log.Printf("Failed to create peripheral: %v, err: %v", newPeripheral, err)
 	}

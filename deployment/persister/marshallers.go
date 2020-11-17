@@ -18,15 +18,15 @@ var statusMap = map[string]api.Deployment_Status{
 func scanOneDeployment(scanner func(dest ...interface{}) error, saveToDeployment *api.Deployment) error {
 	var id string
 	var ownerUserId string
-	var domain string
 	var status string
-	err := scanner(&id, &ownerUserId, &domain, &status)
+	var name string
+	err := scanner(&id, &ownerUserId, &status, &name)
 
 	*saveToDeployment = api.Deployment{
 		Id:          id,
 		OwnerUserId: ownerUserId,
-		Domain:      domain,
 		Status:      statusMap[status],
+		Name:        name,
 	}
 
 	return err

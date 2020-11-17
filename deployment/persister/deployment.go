@@ -21,21 +21,26 @@ func GetDeploymentsForUser(ctx context.Context, userId string) ([]api.Deployment
 }
 
 // creates deployment for user
-func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*api.Deployment, error) {
+func CreateDeployment(
+	ctx context.Context,
+	ownerId string,
+	deploymentName string,
+) (*api.Deployment, error) {
 	db := database.Get(initTable)
 
 	_, err := db.ExecContext(
 		ctx,
-		`INSERT INTO Deployments (Id, OwnerUserId, Domain, Status) VALUES (UUID(), ?, ?, ?)`,
-		&newDeployment.OwnerUserId,
-		"localhost",
+		`INSERT INTO Deployments (Id, OwnerUserId, Status, Name) VALUES (UUID(), ?, ?, ?)`,
+		&ownerId,
 		"unreachable",
+		&deploymentName,
 	)
 
 	if err != nil {
 		log.Printf(
-			"Failed to insert new deployment: %v, err: %v",
-			&newDeployment,
+			"Failed to insert new deployment: %v, owner id %v, err: %v",
+			&deploymentName,
+			&ownerId,
 			err,
 		)
 		return nil, err
@@ -46,7 +51,7 @@ func CreateDeployment(ctx context.Context, newDeployment *api.NewDeployment) (*a
 	err = ScanOneDeployment(db.QueryRowContext(
 		ctx,
 		"SELECT * FROM Deployments WHERE OwnerUserId = ? LIMIT 1;",
-		&newDeployment.OwnerUserId,
+		&ownerId,
 	), &deployment)
 
 	return &deployment, err
@@ -79,8 +84,8 @@ func initTable(ctx context.Context, pool *sql.DB) error {
 		`CREATE TABLE IF NOT EXISTS Deployments (
                 Id varchar(36) PRIMARY KEY NOT NULL,
                 OwnerUserId varchar(36) NOT NULL,
-                Domain varchar(255) NOT NULL,
-                Status ENUM('unreachable', 'starting_up', 'failed', 'running', 'shutting_down') NOT NULL
+                Status ENUM('unreachable', 'starting_up', 'failed', 'running', 'shutting_down') NOT NULL,
+                Name varchar(255) NOT NULL UNIQUE
             );`,
 	)
 	if deploymentTableCreateErr != nil {

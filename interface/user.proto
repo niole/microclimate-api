@@ -8,10 +8,12 @@ option go_package = "api/protobuf";
 message User {
   string id = 1;
   string email = 2;
+  string name = 3;
 }
 
 message NewUser {
   string email = 1;
+  string name = 2;
 }
 
 message UpdateUserEmailRequest {

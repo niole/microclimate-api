@@ -40,7 +40,7 @@ func (s DeploymentManagementService) CreateDeployment(ctx context.Context, newDe
 	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 
-	deployment, err := persister.CreateDeployment(cancellableCtx, newDeployment)
+	deployment, err := persister.CreateDeployment(cancellableCtx, newDeployment.OwnerUserId, newDeployment.Name)
 
 	if err != nil {
 		log.Printf(
