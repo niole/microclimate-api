@@ -22,7 +22,7 @@ message NewMeasurementEvent {
 }
 
 message MeasurementEventFilterRequest {
-  repeated string peripheralIds = 1;
+  string peripheralId = 1;
   string deploymentId = 2;
   google.protobuf.Timestamp start_time = 3;
   google.protobuf.Timestamp end_time = 4;

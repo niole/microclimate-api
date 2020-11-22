@@ -30,43 +30,54 @@ func testEvent(conn grpc.ClientConnInterface) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	peripheralId := "142b9f43-2829-11eb-bccb-0242ac190002"
-	deploymentId := "e1cddf14-2828-11eb-bccb-0242ac190002"
+	//perfIds := []string{"1e8b843e-2a31-11eb-96aa-0242ac1d0002", "1e8d604c-2a31-11eb-96aa-0242ac1d0002", "6c376575-2b49-11eb-96aa-0242ac1d0002"}
+	perfIds := "1e8b843e-2a31-11eb-96aa-0242ac1d0002"
+	deploymentId := "f27f9b03-2a30-11eb-96aa-0242ac1d0002"
 
-	for i := 0; i < 5; i++ {
-		thetime, err := ptypes.TimestampProto(
-			time.Date(2020, 10, 31, 19, 2*i, 0, 0, time.UTC),
-		)
-		_, err = client.SendEvent(
-			ctx,
-			&api.NewMeasurementEvent{
-				PeripheralId: peripheralId,
-				DeploymentId: deploymentId,
-				Value:        80,
-				TimeStamp:    thetime,
-			},
-		)
+	//for _, peripheralId := range perfIds {
+	//	deploymentId := "f27f9b03-2a30-11eb-96aa-0242ac1d0002"
 
-		log.Printf("Sent a request did it fail %v", err)
-	}
-	start, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 0, 0, 0, time.UTC))
-	end, err := ptypes.TimestampProto(time.Date(2020, 10, 31, 19, 7, 0, 0, time.UTC))
+	//	for i := 0; i < 5; i++ {
+	//		thetime, err := ptypes.TimestampProto(
+	//			time.Date(2020, 10, 31, 19, 2*i, 0, 0, time.UTC),
+	//		)
+	//		_, err = client.SendEvent(
+	//			ctx,
+	//			&api.NewMeasurementEvent{
+	//				PeripheralId: peripheralId,
+	//				DeploymentId: deploymentId,
+	//				Value:        80,
+	//				TimeStamp:    thetime,
+	//			},
+	//		)
+
+	//		log.Printf("Sent a request did it fail %v", err)
+	//	}
+	//}
+
+	start, err := ptypes.TimestampProto(time.Date(1979, 10, 31, 19, 0, 0, 0, time.UTC))
+	end, err := ptypes.TimestampProto(time.Now())
+	log.Print(start)
+	log.Print(end)
 	if err != nil {
 		log.Fatalf("The times are bad, err %v", err)
 	}
 	eventStreamClient, streamError := client.FilterEvents(ctx, &api.MeasurementEventFilterRequest{
-		PeripheralIds: []string{peripheralId},
-		DeploymentId:  deploymentId,
-		StartTime:     start,
-		EndTime:       end,
+		PeripheralId: perfIds,
+		DeploymentId: deploymentId,
+		StartTime:    start,
+		EndTime:      end,
 	})
 
 	if streamError != nil {
 		log.Fatalf("Failed to start receiving events, error %v", streamError)
 	}
 
+	log.Print("HEY")
+
 	for {
 		newEvent, err := eventStreamClient.Recv()
+		log.Print(err)
 		if err == io.EOF {
 			return
 		}
@@ -89,7 +100,7 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting deployment test")
 
-	ownerUserId := "a6f9e25c-28f3-11eb-8364-0242ac1c0002"
+	ownerUserId := "70576cd4-2a2f-11eb-96aa-0242ac1d0002"
 
 	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
 		OwnerUserId: ownerUserId,
@@ -173,12 +184,21 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 	log.Print("starting peripheral test")
 
 	p, err := client.CreatePeripheral(ctx, &api.NewPeripheral{
-		OwnerUserId:  "a6f9e25c-28f3-11eb-8364-0242ac1c0002",
-		DeploymentId: "bb510637-28f3-11eb-8364-0242ac1c0002",
+		OwnerUserId:  "70576cd4-2a2f-11eb-96aa-0242ac1d0002",
+		DeploymentId: "f27f9b03-2a30-11eb-96aa-0242ac1d0002",
 		HardwareId:   newUuidString(),
 		Type:         api.NewPeripheral_PARTICLE,
 		Unit:         "PM2.5",
 		Name:         "garage particle sensor",
+	})
+
+	client.CreatePeripheral(ctx, &api.NewPeripheral{
+		OwnerUserId:  "70576cd4-2a2f-11eb-96aa-0242ac1d0002",
+		DeploymentId: "f27f9b03-2a30-11eb-96aa-0242ac1d0002",
+		HardwareId:   newUuidString(),
+		Type:         api.NewPeripheral_PARTICLE,
+		Unit:         "PM2.5",
+		Name:         "livingroom",
 	})
 
 	log.Print(p)
@@ -211,7 +231,7 @@ func main() {
 
 	//testDeployment(conn)
 
-	//testEvent(conn)
+	testEvent(conn)
 	//testPeripheral(conn)
 	//testUser(conn)
 }

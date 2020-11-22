@@ -8,7 +8,6 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"log"
-	"strings"
 	"time"
 )
 
@@ -34,39 +33,46 @@ func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterRequest) ([]api.MeasurementEvent, error) {
 	db := database.Get(initTable)
 
-	in := strings.Join(request.PeripheralIds, ",")
-
 	endtime, _ := ConvertPBTimeToTime(request.EndTime)
 	starttime, _ := ConvertPBTimeToTime(request.StartTime)
+
+	log.Printf(
+		"Getting events. start time %v, end time %v, peripheral id %v, deploymentid %v",
+		starttime,
+		endtime,
+		request.PeripheralId,
+		request.DeploymentId,
+	)
 
 	events, err := ScanEvents(db.QueryContext(
 		ctx,
 		`SELECT * FROM PeripheralEvents WHERE
 		Timestamp BETWEEN ? AND ?
 		AND DeploymentId = ?
-		AND PeripheralId IN (?);`,
+		AND PeripheralId = ?;`,
 		starttime,
 		endtime,
 		&request.DeploymentId,
-		&in,
+		&request.PeripheralId,
 	))
 
 	if err != nil {
 		log.Printf("Failed to get events out of db, error %v", err)
 	}
 
+	log.Printf("Found %v events", len(events))
+
 	return events, err
 }
 
 func initTable(ctx context.Context, pool *sql.DB) error {
-	_, peripheralEventsTableCreateErr := pool.ExecContext(ctx,
-		`CREATE TABLE IF NOT EXISTS PeripheralEvents (
-                Id varchar(36) PRIMARY KEY NOT NULL,
-				PeripheralId varchar(36) NOT NULL,
-                DeploymentId varchar(36) NOT NULL,
-                Value smallint NOT NULL,
-				Timestamp timestamp NOT NULL
-            );`,
+	_, peripheralEventsTableCreateErr := pool.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS PeripheralEvents (
+Id varchar(36) PRIMARY KEY NOT NULL,
+		PeripheralId varchar(36) NOT NULL,
+		DeploymentId varchar(36) NOT NULL,
+		Value smallint NOT NULL,
+		Timestamp timestamp NOT NULL
+	    );`,
 	)
 	if peripheralEventsTableCreateErr != nil {
 		log.Fatalf(
