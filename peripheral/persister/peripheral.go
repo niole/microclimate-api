@@ -40,10 +40,11 @@ func CreatePeripheral(
 	_, err := db.ExecContext(
 		ctx,
 		`INSERT INTO Peripherals
-        (Id, OwnerUserId, DeploymentId, HardwareId, Type, Unit, Name) VALUES (UUID(), ?, ?, ?, ?, ?, ?)`,
+        (Id, OwnerUserId, DeploymentId, HardwareId, Type, Unit, Name) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+		&hardwareId,
 		&ownerId,
 		&deploymentId,
-		&hardwareId,
+		&hardwareId, // TODO get rid of hardware id
 		api.Peripheral_PeripheralType_name[int32(pType)],
 		&unit,
 		&name,
