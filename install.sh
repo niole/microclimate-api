@@ -14,8 +14,14 @@ then
     exit 1
 fi
 
-./install_grpc_java.sh
+echo "Install java stuff"
+
+./client-generators/java/install_grpc_java.sh
 
 echo "Install go stuff"
 
 go install all
+
+echo "Install python stuff"
+
+cd ./client-generators/python && ./env_setup.sh && pip install -r requirements.txt
