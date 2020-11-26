@@ -75,7 +75,7 @@ Id varchar(36) PRIMARY KEY NOT NULL,
 	    );`,
 	)
 	if peripheralEventsTableCreateErr != nil {
-		log.Fatalf(
+		log.Printf(
 			"Failed to create peripheral events table. error: %v",
 			peripheralEventsTableCreateErr,
 		)
@@ -86,7 +86,7 @@ Id varchar(36) PRIMARY KEY NOT NULL,
 func ConvertPBTimeToTime(pbtime *timestamppb.Timestamp) (time.Time, error) {
 	time, err := ptypes.Timestamp(pbtime)
 	if err != nil {
-		log.Fatalf("Failed to convert timestamp to sql consumable type, error %v", err)
+		log.Printf("Failed to convert timestamp to sql consumable type, error %v", err)
 	}
 
 	return time, err

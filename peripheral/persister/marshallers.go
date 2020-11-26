@@ -47,13 +47,13 @@ func ScanPeripherals(rows *sql.Rows, err error) ([]api.Peripheral, error) {
 	for rows.Next() {
 		var peripheral api.Peripheral
 		if err = ScanOnePeripheral(rows.Scan, &peripheral); err != nil {
-			log.Fatal(err)
+			log.Print(err)
 		}
 		peripherals = append(peripherals, peripheral)
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 
 	return peripherals, err

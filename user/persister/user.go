@@ -18,7 +18,7 @@ func initTable(ctx context.Context, pool *sql.DB) error {
 	)
 
 	if userTableCreateErr != nil {
-		log.Fatalf(
+		log.Printf(
 			"Failed to create user table. error: %v",
 			userTableCreateErr,
 		)

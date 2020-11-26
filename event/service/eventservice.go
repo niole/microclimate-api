@@ -19,7 +19,7 @@ func (s PeripheralEventService) SendEvent(ctx context.Context, in *api.NewMeasur
 	saveError := persister.SaveEvent(cancellableCtx, in)
 
 	if saveError != nil {
-		log.Fatalf("Failed to save event %v, error %v", in, saveError)
+		log.Printf("Failed to save event %v, error %v", in, saveError)
 	}
 
 	return &api.Empty{}, saveError

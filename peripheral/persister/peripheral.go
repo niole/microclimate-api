@@ -21,7 +21,7 @@ func initTable(ctx context.Context, pool *sql.DB) error {
         );`,
 	)
 	if peripheralTableCreateErr != nil {
-		log.Fatalf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
+		log.Printf("Failed to create peripherals table. error: %v", peripheralTableCreateErr)
 	}
 	return peripheralTableCreateErr
 }
@@ -99,7 +99,7 @@ func GetDeploymentPeripherals(ctx context.Context, deploymentId string) ([]api.P
 	))
 
 	if err != nil {
-		log.Fatalf("Failed to get peripherals for deployment: %v, err: %v", deploymentId, err)
+		log.Printf("Failed to get peripherals for deployment: %v, err: %v", deploymentId, err)
 	}
 
 	return peripherals, err

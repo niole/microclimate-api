@@ -89,7 +89,7 @@ func initTable(ctx context.Context, pool *sql.DB) error {
             );`,
 	)
 	if deploymentTableCreateErr != nil {
-		log.Fatalf("Failed to create deployments table. error: %v", deploymentTableCreateErr)
+		log.Printf("Failed to create deployments table. error: %v", deploymentTableCreateErr)
 	}
 	return deploymentTableCreateErr
 }
