@@ -32,6 +32,7 @@ services:
       - "6004:8080"
     links:
       - db
+      - peripheral
   db:
     image: mysql:8.0.22
     environment:

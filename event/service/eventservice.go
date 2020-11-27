@@ -1,6 +1,7 @@
 package service
 
 import (
+	"api/clients"
 	"api/event/persister"
 	api "api/protobuf"
 	"context"
@@ -18,13 +19,24 @@ func (s PeripheralEventService) SendEvent(ctx context.Context, in *api.NewMeasur
 
 	log.Printf("Received event from peripheral %v, value %v", in.PeripheralId, in.Value)
 
-	saveError := persister.SaveEvent(cancellableCtx, in)
+	conn, err := clients.PeripheralClientConnection()
+	defer conn.Close()
+	client := api.NewPeripheralManagementServiceClient(conn)
+	p, err := client.GetPeripheral(ctx, &api.GetPeripheralRequest{
+		PeripheralId: in.PeripheralId,
+	})
 
-	if saveError != nil {
-		log.Printf("Failed to save event %v, error %v", in, saveError)
+	if err == nil && p != nil && p.Id == in.PeripheralId {
+		err = persister.SaveEvent(cancellableCtx, in)
+
+		if err != nil {
+			log.Printf("Failed to save event %v, error %v", in, err)
+		}
+	} else {
+		log.Printf("Failed to verify inputs %v", err)
 	}
 
-	return &api.Empty{}, saveError
+	return &api.Empty{}, err
 }
 
 func (s PeripheralEventService) FilterEvents(

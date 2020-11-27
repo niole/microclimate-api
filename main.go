@@ -231,7 +231,7 @@ func main() {
 
 	//testDeployment(conn)
 
-	testEvent(conn)
+	//	testEvent(conn)
 	//testPeripheral(conn)
 	//testUser(conn)
 }
