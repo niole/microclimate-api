@@ -74,6 +74,30 @@ func DeletePeripheralEvents(ctx context.Context, peripheralId string) error {
 	return err
 }
 
+func MostRecentDeploymentEvents(ctx context.Context, deploymentId string) ([]api.MeasurementEvent, error) {
+	db := database.Get(initTable)
+
+	events, err := ScanEvents(db.QueryContext(
+		ctx,
+		`SELECT * from PeripheralEvents WHERE (PeripheralId, Timestamp)
+		IN (
+			SELECT PeripheralId, MAX(Timestamp) AS Timestamp
+			FROM PeripheralEvents
+			WHERE DeploymentId = ?
+			GROUP BY PeripheralId
+		);	`,
+		&deploymentId,
+	))
+
+	if err != nil {
+		log.Printf("Failed to get events out of db, error %v", err)
+	}
+
+	log.Printf("Found %v events", len(events))
+
+	return events, err
+}
+
 func initTable(ctx context.Context, pool *sql.DB) error {
 	_, peripheralEventsTableCreateErr := pool.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS PeripheralEvents (
         Id varchar(36) PRIMARY KEY NOT NULL,

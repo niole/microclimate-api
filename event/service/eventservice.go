@@ -75,3 +75,27 @@ func (s PeripheralEventService) DeletePeripheralEvents(ctx context.Context, in *
 
 	return &api.Empty{}, err
 }
+
+func (s PeripheralEventService) MostRecentDeploymentEvents(
+	in *api.MostRecentEventsForDeploymentRequest,
+	stream api.PeripheralMeasurementEventService_MostRecentDeploymentEventsServer,
+) error {
+	cancellableCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	log.Printf("Getting most recent events for deployment %v", in.DeploymentId)
+
+	events, err := persister.MostRecentDeploymentEvents(cancellableCtx, in.DeploymentId)
+	if err != nil {
+		log.Printf("Failed to get most recent events for deployment requested events %v, error %v", in.DeploymentId, err)
+	} else {
+		for _, s := range events {
+			err = stream.Send(&s)
+			if err != nil {
+				log.Printf("Failed to send element over stream, error %v", err)
+			}
+		}
+	}
+
+	return err
+}

@@ -20,6 +20,7 @@ type PeripheralMeasurementEventServiceClient interface {
 	SendEvent(ctx context.Context, in *NewMeasurementEvent, opts ...grpc.CallOption) (*Empty, error)
 	FilterEvents(ctx context.Context, in *MeasurementEventFilterRequest, opts ...grpc.CallOption) (PeripheralMeasurementEventService_FilterEventsClient, error)
 	DeletePeripheralEvents(ctx context.Context, in *DeletePeripheralEventsRequest, opts ...grpc.CallOption) (*Empty, error)
+	MostRecentDeploymentEvents(ctx context.Context, in *MostRecentEventsForDeploymentRequest, opts ...grpc.CallOption) (PeripheralMeasurementEventService_MostRecentDeploymentEventsClient, error)
 }
 
 type peripheralMeasurementEventServiceClient struct {
@@ -80,6 +81,38 @@ func (c *peripheralMeasurementEventServiceClient) DeletePeripheralEvents(ctx con
 	return out, nil
 }
 
+func (c *peripheralMeasurementEventServiceClient) MostRecentDeploymentEvents(ctx context.Context, in *MostRecentEventsForDeploymentRequest, opts ...grpc.CallOption) (PeripheralMeasurementEventService_MostRecentDeploymentEventsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PeripheralMeasurementEventService_serviceDesc.Streams[1], "/api.PeripheralMeasurementEventService/MostRecentDeploymentEvents", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &peripheralMeasurementEventServiceMostRecentDeploymentEventsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PeripheralMeasurementEventService_MostRecentDeploymentEventsClient interface {
+	Recv() (*MeasurementEvent, error)
+	grpc.ClientStream
+}
+
+type peripheralMeasurementEventServiceMostRecentDeploymentEventsClient struct {
+	grpc.ClientStream
+}
+
+func (x *peripheralMeasurementEventServiceMostRecentDeploymentEventsClient) Recv() (*MeasurementEvent, error) {
+	m := new(MeasurementEvent)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PeripheralMeasurementEventServiceServer is the server API for PeripheralMeasurementEventService service.
 // All implementations must embed UnimplementedPeripheralMeasurementEventServiceServer
 // for forward compatibility
@@ -87,6 +120,7 @@ type PeripheralMeasurementEventServiceServer interface {
 	SendEvent(context.Context, *NewMeasurementEvent) (*Empty, error)
 	FilterEvents(*MeasurementEventFilterRequest, PeripheralMeasurementEventService_FilterEventsServer) error
 	DeletePeripheralEvents(context.Context, *DeletePeripheralEventsRequest) (*Empty, error)
+	MostRecentDeploymentEvents(*MostRecentEventsForDeploymentRequest, PeripheralMeasurementEventService_MostRecentDeploymentEventsServer) error
 	mustEmbedUnimplementedPeripheralMeasurementEventServiceServer()
 }
 
@@ -102,6 +136,9 @@ func (UnimplementedPeripheralMeasurementEventServiceServer) FilterEvents(*Measur
 }
 func (UnimplementedPeripheralMeasurementEventServiceServer) DeletePeripheralEvents(context.Context, *DeletePeripheralEventsRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePeripheralEvents not implemented")
+}
+func (UnimplementedPeripheralMeasurementEventServiceServer) MostRecentDeploymentEvents(*MostRecentEventsForDeploymentRequest, PeripheralMeasurementEventService_MostRecentDeploymentEventsServer) error {
+	return status.Errorf(codes.Unimplemented, "method MostRecentDeploymentEvents not implemented")
 }
 func (UnimplementedPeripheralMeasurementEventServiceServer) mustEmbedUnimplementedPeripheralMeasurementEventServiceServer() {
 }
@@ -174,6 +211,27 @@ func _PeripheralMeasurementEventService_DeletePeripheralEvents_Handler(srv inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PeripheralMeasurementEventService_MostRecentDeploymentEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(MostRecentEventsForDeploymentRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PeripheralMeasurementEventServiceServer).MostRecentDeploymentEvents(m, &peripheralMeasurementEventServiceMostRecentDeploymentEventsServer{stream})
+}
+
+type PeripheralMeasurementEventService_MostRecentDeploymentEventsServer interface {
+	Send(*MeasurementEvent) error
+	grpc.ServerStream
+}
+
+type peripheralMeasurementEventServiceMostRecentDeploymentEventsServer struct {
+	grpc.ServerStream
+}
+
+func (x *peripheralMeasurementEventServiceMostRecentDeploymentEventsServer) Send(m *MeasurementEvent) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _PeripheralMeasurementEventService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.PeripheralMeasurementEventService",
 	HandlerType: (*PeripheralMeasurementEventServiceServer)(nil),
@@ -191,6 +249,11 @@ var _PeripheralMeasurementEventService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "FilterEvents",
 			Handler:       _PeripheralMeasurementEventService_FilterEvents_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "MostRecentDeploymentEvents",
+			Handler:       _PeripheralMeasurementEventService_MostRecentDeploymentEvents_Handler,
 			ServerStreams: true,
 		},
 	},
