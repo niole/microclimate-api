@@ -49,7 +49,8 @@ func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterReques
 		`SELECT * FROM PeripheralEvents WHERE
         Timestamp BETWEEN ? AND ?
         AND DeploymentId = ?
-        AND PeripheralId = ?;`,
+        AND PeripheralId = ?
+		ORDER BY Timestamp ASC;`,
 		starttime,
 		endtime,
 		&request.DeploymentId,

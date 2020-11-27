@@ -3,6 +3,7 @@ package clients
 import (
 	"google.golang.org/grpc"
 	"log"
+	"os"
 )
 
 var (
@@ -21,7 +22,7 @@ func clientConnection(serverAddr string) (*grpc.ClientConn, error) {
 
 func PeripheralClientConnection() (*grpc.ClientConn, error) {
 	addr := peripheralServerAddr
-	if peripheralServerAddr == nil {
+	if peripheralServerAddr == "" {
 		addr = "0.0.0.0:6001"
 	}
 	return clientConnection(addr)
