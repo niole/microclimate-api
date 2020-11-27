@@ -66,6 +66,14 @@ func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterReques
 	return events, err
 }
 
+func DeletePeripheralEvents(ctx context.Context, peripheralId string) error {
+	db := database.Get(initTable)
+
+	_, err := db.ExecContext(ctx, `DELETE FROM PeripheralEvents WHERE PeripheralId = ?;`, peripheralId)
+
+	return err
+}
+
 func initTable(ctx context.Context, pool *sql.DB) error {
 	_, peripheralEventsTableCreateErr := pool.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS PeripheralEvents (
         Id varchar(36) PRIMARY KEY NOT NULL,

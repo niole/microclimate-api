@@ -60,3 +60,18 @@ func (s PeripheralEventService) FilterEvents(
 
 	return err
 }
+
+func (s PeripheralEventService) DeletePeripheralEvents(ctx context.Context, in *api.DeletePeripheralEventsRequest) (*api.Empty, error) {
+	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	log.Printf("Deleting events for peripheral %v", in.PeripheralId)
+
+	err := persister.DeletePeripheralEvents(cancellableCtx, in.PeripheralId)
+
+	if err != nil {
+		log.Printf("Failed to remove events for peripheral %v, error %v", in.PeripheralId, err)
+	}
+
+	return &api.Empty{}, err
+}

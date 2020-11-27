@@ -1,6 +1,7 @@
 package service
 
 import (
+	"api/clients"
 	"api/peripheral/persister"
 	api "api/protobuf"
 	"context"
@@ -36,6 +37,16 @@ func (s PeripheralManagementService) RemovePeripheral(ctx context.Context, perip
 
 	err := persister.RemovePeripheral(cancellableCtx, peripheral)
 
+	if err == nil {
+		log.Printf("Removing events for peripheral %v", peripheral.Id)
+		conn, err := clients.EventsClientConnection()
+		eventsClient := api.NewPeripheralMeasurementEventServiceClient(conn)
+		_, err = eventsClient.DeletePeripheralEvents(cancellableCtx, &api.DeletePeripheralEventsRequest{PeripheralId: peripheral.Id})
+		if err != nil {
+			log.Printf("Failed to delete events for peripheral %v", peripheral.Id)
+		}
+	}
+
 	return &api.Empty{}, err
 }
 
@@ -45,6 +56,8 @@ func (s PeripheralManagementService) GetDeploymentPeripherals(
 ) error {
 	cancellableCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+
+	log.Printf("Getting deployment %v peripherals", request.DeploymentId)
 
 	peripherals, err := persister.GetDeploymentPeripherals(cancellableCtx, request.DeploymentId)
 	if err != nil {

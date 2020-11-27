@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 type PeripheralMeasurementEventServiceClient interface {
 	SendEvent(ctx context.Context, in *NewMeasurementEvent, opts ...grpc.CallOption) (*Empty, error)
 	FilterEvents(ctx context.Context, in *MeasurementEventFilterRequest, opts ...grpc.CallOption) (PeripheralMeasurementEventService_FilterEventsClient, error)
+	DeletePeripheralEvents(ctx context.Context, in *DeletePeripheralEventsRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type peripheralMeasurementEventServiceClient struct {
@@ -70,12 +71,22 @@ func (x *peripheralMeasurementEventServiceFilterEventsClient) Recv() (*Measureme
 	return m, nil
 }
 
+func (c *peripheralMeasurementEventServiceClient) DeletePeripheralEvents(ctx context.Context, in *DeletePeripheralEventsRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/api.PeripheralMeasurementEventService/DeletePeripheralEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PeripheralMeasurementEventServiceServer is the server API for PeripheralMeasurementEventService service.
 // All implementations must embed UnimplementedPeripheralMeasurementEventServiceServer
 // for forward compatibility
 type PeripheralMeasurementEventServiceServer interface {
 	SendEvent(context.Context, *NewMeasurementEvent) (*Empty, error)
 	FilterEvents(*MeasurementEventFilterRequest, PeripheralMeasurementEventService_FilterEventsServer) error
+	DeletePeripheralEvents(context.Context, *DeletePeripheralEventsRequest) (*Empty, error)
 	mustEmbedUnimplementedPeripheralMeasurementEventServiceServer()
 }
 
@@ -88,6 +99,9 @@ func (UnimplementedPeripheralMeasurementEventServiceServer) SendEvent(context.Co
 }
 func (UnimplementedPeripheralMeasurementEventServiceServer) FilterEvents(*MeasurementEventFilterRequest, PeripheralMeasurementEventService_FilterEventsServer) error {
 	return status.Errorf(codes.Unimplemented, "method FilterEvents not implemented")
+}
+func (UnimplementedPeripheralMeasurementEventServiceServer) DeletePeripheralEvents(context.Context, *DeletePeripheralEventsRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePeripheralEvents not implemented")
 }
 func (UnimplementedPeripheralMeasurementEventServiceServer) mustEmbedUnimplementedPeripheralMeasurementEventServiceServer() {
 }
@@ -142,6 +156,24 @@ func (x *peripheralMeasurementEventServiceFilterEventsServer) Send(m *Measuremen
 	return x.ServerStream.SendMsg(m)
 }
 
+func _PeripheralMeasurementEventService_DeletePeripheralEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePeripheralEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PeripheralMeasurementEventServiceServer).DeletePeripheralEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.PeripheralMeasurementEventService/DeletePeripheralEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PeripheralMeasurementEventServiceServer).DeletePeripheralEvents(ctx, req.(*DeletePeripheralEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _PeripheralMeasurementEventService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.PeripheralMeasurementEventService",
 	HandlerType: (*PeripheralMeasurementEventServiceServer)(nil),
@@ -149,6 +181,10 @@ var _PeripheralMeasurementEventService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendEvent",
 			Handler:    _PeripheralMeasurementEventService_SendEvent_Handler,
+		},
+		{
+			MethodName: "DeletePeripheralEvents",
+			Handler:    _PeripheralMeasurementEventService_DeletePeripheralEvents_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

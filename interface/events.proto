@@ -28,7 +28,12 @@ message MeasurementEventFilterRequest {
   google.protobuf.Timestamp end_time = 4;
 }
 
+message DeletePeripheralEventsRequest {
+  string peripheralId = 1;
+}
+
 service PeripheralMeasurementEventService {
   rpc SendEvent(NewMeasurementEvent) returns (Empty);
   rpc FilterEvents(MeasurementEventFilterRequest) returns (stream MeasurementEvent);
+  rpc DeletePeripheralEvents(DeletePeripheralEventsRequest) returns (Empty);
 }

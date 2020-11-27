@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	eventServerAddr      = os.Getenv("EVENT_SERVER_ADDR")
 	peripheralServerAddr = os.Getenv("PERIPHERAL_SERVER_ADDR")
 )
 
@@ -24,6 +25,14 @@ func PeripheralClientConnection() (*grpc.ClientConn, error) {
 	addr := peripheralServerAddr
 	if peripheralServerAddr == "" {
 		addr = "0.0.0.0:6001"
+	}
+	return clientConnection(addr)
+}
+
+func EventsClientConnection() (*grpc.ClientConn, error) {
+	addr := eventServerAddr
+	if eventServerAddr == "" {
+		addr = "0.0.0.0:6004"
 	}
 	return clientConnection(addr)
 }

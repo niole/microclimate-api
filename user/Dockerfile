@@ -16,10 +16,6 @@ WORKDIR /go/src
 
 ENV GO111MODULE=on
 
-ENV DB_HOST=db
-
-ENV PERIPHERAL_SERVER_ADDR="peripheral:8080"
-
 RUN go install all
 
 ENTRYPOINT go run ./user/main/server.go -serverPort 8080

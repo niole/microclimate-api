@@ -1,6 +1,13 @@
 version: "3.8"
+
+x-common-variables: &common-variables
+  DB_HOST: "db"
+  PERIPHERAL_SERVER_ADDR: "peripheral:8080"
+  EVENT_SERVER_ADDR: "events:8080"
+
 services:
   peripheral:
+    environment: *common-variables
     build:
       context: .
       dockerfile: ./peripheral/Dockerfile
@@ -9,6 +16,7 @@ services:
     links:
       - db
   deployment:
+    environment: *common-variables
     build:
       context: .
       dockerfile: ./deployment/Dockerfile
@@ -17,6 +25,7 @@ services:
     links:
       - db
   user:
+    environment: *common-variables
     build:
       context: .
       dockerfile: ./user/Dockerfile
@@ -25,6 +34,7 @@ services:
     links:
       - db
   events:
+    environment: *common-variables
     build:
       context: .
       dockerfile: ./event/Dockerfile
