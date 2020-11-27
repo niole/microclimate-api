@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\014api/protobuf',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0c\x65vents.proto\x12\x03\x61pi\x1a\x0b\x65mpty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x89\x01\n\x10MeasurementEvent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x14\n\x0cperipheralId\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x03 \x01(\t\x12\r\n\x05value\x18\x04 \x01(\x05\x12.\n\ntime_stamp\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x80\x01\n\x13NewMeasurementEvent\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\x05\x12.\n\ntime_stamp\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa9\x01\n\x1dMeasurementEventFilterRequest\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2\xa3\x01\n!PeripheralMeasurementEventService\x12\x31\n\tSendEvent\x12\x18.api.NewMeasurementEvent\x1a\n.api.Empty\x12K\n\x0c\x46ilterEvents\x12\".api.MeasurementEventFilterRequest\x1a\x15.api.MeasurementEvent0\x01\x42\x0eZ\x0c\x61pi/protobufb\x06proto3'
+  serialized_pb=b'\n\x0c\x65vents.proto\x12\x03\x61pi\x1a\x0b\x65mpty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x89\x01\n\x10MeasurementEvent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x14\n\x0cperipheralId\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x03 \x01(\t\x12\r\n\x05value\x18\x04 \x01(\x02\x12.\n\ntime_stamp\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x80\x01\n\x13NewMeasurementEvent\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\x02\x12.\n\ntime_stamp\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa9\x01\n\x1dMeasurementEventFilterRequest\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12.\n\nstart_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2\xa3\x01\n!PeripheralMeasurementEventService\x12\x31\n\tSendEvent\x12\x18.api.NewMeasurementEvent\x1a\n.api.Empty\x12K\n\x0c\x46ilterEvents\x12\".api.MeasurementEventFilterRequest\x1a\x15.api.MeasurementEvent0\x01\x42\x0eZ\x0c\x61pi/protobufb\x06proto3'
   ,
   dependencies=[empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -59,8 +59,8 @@ _MEASUREMENTEVENT = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='value', full_name='api.MeasurementEvent.value', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -112,8 +112,8 @@ _NEWMEASUREMENTEVENT = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='value', full_name='api.NewMeasurementEvent.value', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),

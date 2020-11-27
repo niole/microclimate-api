@@ -10,14 +10,14 @@ message MeasurementEvent {
   string id = 1;
   string peripheralId = 2;
   string deploymentId = 3;
-  int32 value = 4;
+  float value = 4;
   google.protobuf.Timestamp time_stamp = 5;
 }
 
 message NewMeasurementEvent {
   string peripheralId = 1;
   string deploymentId = 2;
-  int32 value = 3;
+  float value = 3;
   google.protobuf.Timestamp time_stamp = 4;
 }
 

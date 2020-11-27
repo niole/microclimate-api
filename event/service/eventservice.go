@@ -16,6 +16,8 @@ func (s PeripheralEventService) SendEvent(ctx context.Context, in *api.NewMeasur
 	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 
+	log.Printf("Received event from peripheral %v, value %v", in.PeripheralId, in.Value)
+
 	saveError := persister.SaveEvent(cancellableCtx, in)
 
 	if saveError != nil {

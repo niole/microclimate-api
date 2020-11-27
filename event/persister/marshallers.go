@@ -14,7 +14,7 @@ func ScanOneEvent(scan Scannable, event *api.MeasurementEvent) error {
 	var id string
 	var peripheralId string
 	var deploymentId string
-	var value int32
+	var value float32
 	var timestamp *sql.NullTime
 	var parsedTimestamp *timestamppb.Timestamp
 
