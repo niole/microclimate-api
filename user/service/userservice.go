@@ -40,10 +40,15 @@ func (s *UserServiceServer) UpdateUserEmail(ctx context.Context, request *api.Up
 func (s *UserServiceServer) GetUserByEmail(ctx context.Context, request *api.GetUserByEmailRequest) (*api.User, error) {
 	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
+
+	log.Printf("Getting user by email %v", request.Email)
+
 	user, err := persister.GetUser(cancellableCtx, nil, &request.Email)
 
 	if err != nil {
 		log.Printf("Couldn't get user %v, error %v", request, err)
+	} else if user != nil {
+		log.Printf("Found user %v", user.Id)
 	}
 
 	return user, err

@@ -80,7 +80,7 @@ func (s PeripheralEventService) MostRecentDeploymentEvents(
 	in *api.MostRecentEventsForDeploymentRequest,
 	stream api.PeripheralMeasurementEventService_MostRecentDeploymentEventsServer,
 ) error {
-	cancellableCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	cancellableCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	log.Printf("Getting most recent events for deployment %v", in.DeploymentId)

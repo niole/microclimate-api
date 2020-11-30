@@ -8,6 +8,7 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"log"
+	"math"
 	"time"
 )
 
@@ -19,8 +20,8 @@ func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 	_, err := db.ExecContext(
 		ctx,
 		`INSERT INTO PeripheralEvents
-        (Id, PeripheralId, DeploymentId, Value, Timestamp)
-        VALUES (UUID(), ?, ?, ?, ?);`,
+		(Id, PeripheralId, DeploymentId, Value, Timestamp)
+		VALUES (UUID(), ?, ?, ?, ?);`,
 		&event.PeripheralId,
 		&event.DeploymentId,
 		&event.Value,
@@ -33,6 +34,13 @@ func SaveEvent(ctx context.Context, event *api.NewMeasurementEvent) error {
 func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterRequest) ([]api.MeasurementEvent, error) {
 	db := database.Get(initTable)
 
+	// TODO the averaging doesn't average right
+	// the average looks like its a kind of rolling average, when it should be a smooth average
+	// also the last window looks like it doesn't get averaged
+	// also the UI should treat "end" dates as "the end of the whole day"
+	// also doing this operation over thousands of events takes a while
+	// 5 second deadline exceeds (easily) when 15000 events are
+	// processed by the filter query
 	endtime, _ := ConvertPBTimeToTime(request.EndTime)
 	starttime, _ := ConvertPBTimeToTime(request.StartTime)
 
@@ -44,26 +52,58 @@ func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterReques
 		request.DeploymentId,
 	)
 
-	events, err := ScanEvents(db.QueryContext(
+	var count float64
+	countRows, err := db.QueryContext(
 		ctx,
-		`SELECT * FROM PeripheralEvents WHERE
-        Timestamp BETWEEN ? AND ?
-        AND DeploymentId = ?
-        AND PeripheralId = ?
-		ORDER BY Timestamp ASC;`,
+		`SELECT COUNT(*) as count FROM PeripheralEvents WHERE
+		Timestamp BETWEEN ? AND ?
+		AND DeploymentId = ?
+		AND PeripheralId = ?
+		;`,
 		starttime,
 		endtime,
 		&request.DeploymentId,
 		&request.PeripheralId,
-	))
-
-	if err != nil {
-		log.Printf("Failed to get events out of db, error %v", err)
+	)
+	for countRows.Next() {
+		err = countRows.Scan(&count)
 	}
 
-	log.Printf("Found %v events", len(events))
+	if err != nil {
+		log.Printf("Failed to count events, %v", err)
+	} else {
+		//select *, average from (select *, avg(Value) over (order by Timestamp rows 3 preceding) as average, row_number() over (order by Timestamp) as n from PeripheralEvents) x where n%3 = 0;
+		maxBuckets := 100.0
+		windowSize := int(math.Max(math.Ceil(count/maxBuckets), 1.0))
+		log.Printf("window size %v", windowSize)
+		events, err := ScanAggregatedEvents(db.QueryContext(
+			ctx,
+			`SELECT * FROM (
+				SELECT *,
+				AVG(Value) OVER (ORDER BY Timestamp ROWS ? PRECEDING) AS average,
+				ROW_NUMBER() OVER (ORDER BY Timestamp) AS n FROM PeripheralEvents
+			) x WHERE n % ? = 0
+			AND Timestamp BETWEEN ? AND ?
+			AND DeploymentId = ?
+			AND PeripheralId = ?
+			;`,
+			windowSize,
+			windowSize,
+			starttime,
+			endtime,
+			&request.DeploymentId,
+			&request.PeripheralId,
+		))
 
-	return events, err
+		if err != nil {
+			log.Printf("Failed to get events out of db, error %v", err)
+		}
+
+		log.Printf("Found %v events", len(events))
+		return events, err
+	}
+
+	return make([]api.MeasurementEvent, 0), err
 }
 
 func DeletePeripheralEvents(ctx context.Context, peripheralId string) error {
@@ -85,7 +125,7 @@ func MostRecentDeploymentEvents(ctx context.Context, deploymentId string) ([]api
 			FROM PeripheralEvents
 			WHERE DeploymentId = ?
 			GROUP BY PeripheralId
-		);	`,
+		);  `,
 		&deploymentId,
 	))
 
@@ -99,13 +139,15 @@ func MostRecentDeploymentEvents(ctx context.Context, deploymentId string) ([]api
 }
 
 func initTable(ctx context.Context, pool *sql.DB) error {
+	// make sure floats are formatted to two decimal points
+	// get rid of deployment id
 	_, peripheralEventsTableCreateErr := pool.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS PeripheralEvents (
-        Id varchar(36) PRIMARY KEY NOT NULL,
-        PeripheralId varchar(36) NOT NULL,
-        DeploymentId varchar(36) NOT NULL,
-        Value float NOT NULL,
-        Timestamp timestamp NOT NULL
-        );`,
+		Id varchar(36) PRIMARY KEY NOT NULL,
+		PeripheralId varchar(36) NOT NULL,
+		DeploymentId varchar(36) NOT NULL,
+		Value float NOT NULL,
+		Timestamp timestamp NOT NULL
+		);`,
 	)
 	if peripheralEventsTableCreateErr != nil {
 		log.Printf(
