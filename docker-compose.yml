@@ -5,9 +5,16 @@ x-common-variables: &common-variables
   PERIPHERAL_SERVER_ADDR: "peripheral:8080"
   EVENT_SERVER_ADDR: "events:8080"
 
+x-logging-options: &logging-options
+  driver: "json-file"
+  options:
+      max-file: "5"
+      max-size: "10m"
+
 services:
   peripheral:
     environment: *common-variables
+    logging: *logging-options
     build:
       context: .
       dockerfile: ./peripheral/Dockerfile
@@ -17,6 +24,7 @@ services:
       - db
   deployment:
     environment: *common-variables
+    logging: *logging-options
     build:
       context: .
       dockerfile: ./deployment/Dockerfile
@@ -26,6 +34,7 @@ services:
       - db
   user:
     environment: *common-variables
+    logging: *logging-options
     build:
       context: .
       dockerfile: ./user/Dockerfile
@@ -35,6 +44,7 @@ services:
       - db
   events:
     environment: *common-variables
+    logging: *logging-options
     build:
       context: .
       dockerfile: ./event/Dockerfile
@@ -45,6 +55,7 @@ services:
       - peripheral
   db:
     image: mysql:8.0.22
+    logging: *logging-options
     environment:
       - MYSQL_ROOT_PASSWORD=pw
       - MYSQL_USER=niole
