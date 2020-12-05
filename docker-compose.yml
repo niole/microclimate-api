@@ -55,11 +55,15 @@ services:
       - peripheral
   db:
     image: mysql:8.0.22
+    command: ["--secure-file-priv=docker-entrypoint-initdb.d"]
+    volumes:
+      - "./docker/init_db/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "./docker/init_db/init_data:/docker-entrypoint-initdb.d/init_data"
     logging: *logging-options
     environment:
       - MYSQL_ROOT_PASSWORD=pw
       - MYSQL_USER=niole
       - MYSQL_PASSWORD=pw
-      - MYSQL_DATABASE=default
+      - MYSQL_DATABASE=microclimates
     ports:
       - "3306:3306"

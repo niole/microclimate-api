@@ -26,7 +26,7 @@ func Get(initBlock func(context.Context, *sql.DB) error) *sql.DB {
 
 		log.Print("Pool was nil. Creating database connection pool")
 		// TODO this needs to timeout
-		pool, err = sql.Open("mysql", fmt.Sprintf("niole:pw@tcp(%v:3306)/default?parseTime=true", dbHost))
+		pool, err = sql.Open("mysql", fmt.Sprintf("niole:pw@tcp(%v:3306)/microclimates?parseTime=true", dbHost))
 		if err != nil {
 			panic(err)
 		}
