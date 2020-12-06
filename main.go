@@ -33,23 +33,23 @@ func testEvent(conn grpc.ClientConnInterface) {
 	peripheralId := "p1"
 	deploymentId := "deploymentuid"
 
-	//for i := 0; i < 500; i++ {
-	//	thetime, err := ptypes.TimestampProto(
-	//		time.Date(2020, 10, 31, 19, 2*i, 0, 0, time.UTC),
-	//	)
-	//	_, err = client.SendEvent(
-	//		ctx,
-	//		&api.NewMeasurementEvent{
-	//			PeripheralId: peripheralId,
-	//			DeploymentId: deploymentId,
-	//			Value:        0,
-	//			TimeStamp:    thetime,
-	//		},
-	//	)
-	//	if err != nil {
-	//		log.Printf("Sent the requests did they fail %v", err)
-	//	}
-	//}
+	for i := 0; i < 5; i++ {
+		thetime, err := ptypes.TimestampProto(
+			time.Date(2020, 10, 31, 19, 2*i, 0, 0, time.UTC),
+		)
+		_, err = client.SendEvent(
+			ctx,
+			&api.NewMeasurementEvent{
+				PeripheralId: peripheralId,
+				DeploymentId: deploymentId,
+				Value:        0,
+				TimeStamp:    thetime,
+			},
+		)
+		if err != nil {
+			log.Printf("Sent the requests did they fail %v", err)
+		}
+	}
 
 	start, err := ptypes.TimestampProto(time.Date(2019, 12, 31, 19, 0, 0, 0, time.UTC))
 	end, err := ptypes.TimestampProto(time.Now())
@@ -246,7 +246,7 @@ func main() {
 
 	//testDeployment(conn)
 
-	//testEvent(conn)
-	testPeripheral(conn)
+	testEvent(conn)
+	//testPeripheral(conn)
 	//testUser(conn)
 }

@@ -31,6 +31,8 @@ func (s PeripheralEventService) SendEvent(ctx context.Context, in *api.NewMeasur
 
 		if err != nil {
 			log.Printf("Failed to save event %v, error %v", in, err)
+		} else {
+			log.Printf("Saved new event for peripheral with id %v", in.PeripheralId)
 		}
 	} else {
 		log.Printf("Failed to verify inputs %v", err)
@@ -50,6 +52,8 @@ func (s PeripheralEventService) FilterEvents(
 	if err != nil {
 		log.Printf("Failed to get requested events %v, error %v", request, err)
 	} else {
+		log.Printf("Got %v events for peripheral with id %v", len(events), request.PeripheralId)
+
 		for _, s := range events {
 			err = stream.Send(&s)
 			if err != nil {
@@ -71,6 +75,8 @@ func (s PeripheralEventService) DeletePeripheralEvents(ctx context.Context, in *
 
 	if err != nil {
 		log.Printf("Failed to remove events for peripheral %v, error %v", in.PeripheralId, err)
+	} else {
+		log.Printf("Deleted events for peripheral %v", in.PeripheralId)
 	}
 
 	return &api.Empty{}, err
@@ -89,6 +95,8 @@ func (s PeripheralEventService) MostRecentDeploymentEvents(
 	if err != nil {
 		log.Printf("Failed to get most recent events for deployment requested events %v, error %v", in.DeploymentId, err)
 	} else {
+		log.Printf("Got %v recent events for peripherals in deployment with id %v", len(events), in.DeploymentId)
+
 		for _, s := range events {
 			err = stream.Send(&s)
 			if err != nil {

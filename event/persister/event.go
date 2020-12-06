@@ -72,7 +72,6 @@ func FilterEvents(ctx context.Context, request *api.MeasurementEventFilterReques
 	if err != nil {
 		log.Printf("Failed to count events, %v", err)
 	} else {
-		//select *, average from (select *, avg(Value) over (order by Timestamp rows 3 preceding) as average, row_number() over (order by Timestamp) as n from PeripheralEvents) x where n%3 = 0;
 		maxBuckets := 100.0
 		windowSize := int(math.Max(math.Ceil(count/maxBuckets), 1.0))
 		log.Printf("window size %v", windowSize)

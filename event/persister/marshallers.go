@@ -22,8 +22,6 @@ func ScanOneAggregatedEvent(scan Scannable, event *api.MeasurementEvent) error {
 
 	err := scan(&id, &peripheralId, &deploymentId, &value, &timestamp, &average, &n)
 
-	log.Printf("%v %v %v", n, average, timestamp)
-
 	if err != nil {
 		log.Printf("Something went wrong while scanning an event for the aggregated events query, error %v", err)
 	} else {
