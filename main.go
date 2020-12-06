@@ -156,20 +156,21 @@ func testUser(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting user test")
 
-	u, err := client.CreateUser(ctx, &api.NewUser{Email: "niolenelson@gmail.com", Name: "niole"})
+	email := "newuser@gmail.com"
+	u, err := client.CreateUser(ctx, &api.NewUser{Email: email, Name: "newuserName"})
 	log.Print(u)
 	log.Print(err)
 
-	//u, err := client.GetUserByEmail(ctx, &api.GetUserByEmailRequest{Email: "niolenelson@gmail"})
-	//log.Print(u)
-	//log.Print(err)
+	u, err = client.GetUserByEmail(ctx, &api.GetUserByEmailRequest{Email: email})
+	log.Print(u)
+	log.Print(err)
 
-	//u, err = client.UpdateUserEmail(ctx, &api.UpdateUserEmailRequest{UserId: u.Id, Email: "newemail"})
-	//log.Print(u)
-	//log.Print(err)
+	u, err = client.UpdateUserEmail(ctx, &api.UpdateUserEmailRequest{UserId: u.Id, Email: "newemail"})
+	log.Print(u)
+	log.Print(err)
 
-	//_, err = client.RemoveUser(ctx, &api.RemoveUserRequest{UserId: u.Id})
-	//log.Print(err)
+	_, err = client.RemoveUser(ctx, &api.RemoveUserRequest{UserId: u.Id})
+	log.Print(err)
 
 }
 
@@ -246,7 +247,7 @@ func main() {
 
 	//testDeployment(conn)
 
-	testEvent(conn)
+	//testEvent(conn)
 	//testPeripheral(conn)
-	//testUser(conn)
+	testUser(conn)
 }

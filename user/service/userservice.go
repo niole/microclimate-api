@@ -19,6 +19,8 @@ func (s *UserServiceServer) CreateUser(ctx context.Context, request *api.NewUser
 	user, err := persister.CreateUser(cancellableCtx, request.Email, request.Name)
 	if err != nil {
 		log.Printf("Failed to create new user %v, error %v", request, err)
+	} else {
+		log.Printf("Successfully created a user with name %v", request.Name)
 	}
 
 	return user, err
@@ -32,6 +34,8 @@ func (s *UserServiceServer) UpdateUserEmail(ctx context.Context, request *api.Up
 
 	if err != nil {
 		log.Printf("Failed to update user email %v, error %v", request, err)
+	} else {
+		log.Printf("Successfully updated user email for user with name %v", user.Name)
 	}
 
 	return user, err
@@ -62,6 +66,8 @@ func (s *UserServiceServer) RemoveUser(ctx context.Context, request *api.RemoveU
 
 	if err != nil {
 		log.Printf("Failed to remove user %v, error %v", request, err)
+	} else {
+		log.Printf("Successfully removed user with id %v", request.UserId)
 	}
 
 	return &api.Empty{}, err
