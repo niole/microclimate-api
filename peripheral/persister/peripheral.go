@@ -5,6 +5,7 @@ import (
 	api "api/protobuf"
 	"context"
 	"database/sql"
+	"github.com/google/uuid"
 	"log"
 )
 
@@ -14,7 +15,7 @@ func initTable(ctx context.Context, pool *sql.DB) error {
             Id varchar(36) PRIMARY KEY NOT NULL,
             OwnerUserId varchar(36) NOT NULL,
             DeploymentId varchar(36) NOT NULL,
-            HardwareId varchar(36) NOT NULL,
+            HardwareId varchar(36),
             Type ENUM('THERMAL', 'PARTICLE') NOT NULL,
             Unit ENUM('F', 'C', 'PM2.5', '%') NOT NULL,
             Name varchar(255) NOT NULL
@@ -30,21 +31,23 @@ func CreatePeripheral(
 	ctx context.Context,
 	ownerId string,
 	deploymentId string,
-	hardwareId string,
+	hardwareId *string,
 	pType api.NewPeripheral_PeripheralType,
 	unit string,
 	name string,
 ) (*api.Peripheral, error) {
 	db := database.Get(initTable)
 
+	newPeripheralId := uuid.New().String()
+
 	_, err := db.ExecContext(
 		ctx,
 		`INSERT INTO Peripherals
         (Id, OwnerUserId, DeploymentId, HardwareId, Type, Unit, Name) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-		&hardwareId,
+		&newPeripheralId,
 		&ownerId,
 		&deploymentId,
-		&hardwareId, // TODO get rid of hardware id
+		hardwareId,
 		api.Peripheral_PeripheralType_name[int32(pType)],
 		&unit,
 		&name,
@@ -65,11 +68,9 @@ func CreatePeripheral(
 	err = ScanOnePeripheral(db.QueryRowContext(
 		ctx,
 		`SELECT * FROM Peripherals
-        WHERE OwnerUserId = ? AND DeploymentId = ? AND HardwareId = ?
+        WHERE Id = ?
         LIMIT 1;`,
-		&ownerId,
-		&deploymentId,
-		&hardwareId,
+		&newPeripheralId,
 	).Scan, &peripheral)
 
 	return &peripheral, err
@@ -119,4 +120,22 @@ func GetPeripheralById(ctx context.Context, peripheralId string) (*api.Periphera
 	).Scan, &peripheral)
 
 	return &peripheral, err
+}
+
+func LinkHardware(ctx context.Context, peripheralId string, hardwareId string) (*api.Peripheral, error) {
+	db := database.Get(initTable)
+
+	_, err := db.ExecContext(
+		ctx,
+		`UPDATE Peripherals SET HardwareId = ? WHERE Id = ?;`,
+		hardwareId,
+		peripheralId,
+	)
+
+	if err != nil {
+		log.Printf("Failed to set hardware id %v for peripheral with id %v", hardwareId, peripheralId)
+		return nil, err
+	}
+
+	return GetPeripheralById(ctx, peripheralId)
 }

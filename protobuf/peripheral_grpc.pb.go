@@ -20,6 +20,7 @@ type PeripheralManagementServiceClient interface {
 	GetPeripheral(ctx context.Context, in *GetPeripheralRequest, opts ...grpc.CallOption) (*Peripheral, error)
 	CreatePeripheral(ctx context.Context, in *NewPeripheral, opts ...grpc.CallOption) (*Peripheral, error)
 	RemovePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Empty, error)
+	LinkHardware(ctx context.Context, in *LinkHardwareRequest, opts ...grpc.CallOption) (*Peripheral, error)
 	GetDeploymentPeripherals(ctx context.Context, in *GetDeploymentPeripheralsRequest, opts ...grpc.CallOption) (PeripheralManagementService_GetDeploymentPeripheralsClient, error)
 }
 
@@ -52,6 +53,15 @@ func (c *peripheralManagementServiceClient) CreatePeripheral(ctx context.Context
 func (c *peripheralManagementServiceClient) RemovePeripheral(ctx context.Context, in *Peripheral, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/api.PeripheralManagementService/RemovePeripheral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *peripheralManagementServiceClient) LinkHardware(ctx context.Context, in *LinkHardwareRequest, opts ...grpc.CallOption) (*Peripheral, error) {
+	out := new(Peripheral)
+	err := c.cc.Invoke(ctx, "/api.PeripheralManagementService/LinkHardware", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -97,6 +107,7 @@ type PeripheralManagementServiceServer interface {
 	GetPeripheral(context.Context, *GetPeripheralRequest) (*Peripheral, error)
 	CreatePeripheral(context.Context, *NewPeripheral) (*Peripheral, error)
 	RemovePeripheral(context.Context, *Peripheral) (*Empty, error)
+	LinkHardware(context.Context, *LinkHardwareRequest) (*Peripheral, error)
 	GetDeploymentPeripherals(*GetDeploymentPeripheralsRequest, PeripheralManagementService_GetDeploymentPeripheralsServer) error
 	mustEmbedUnimplementedPeripheralManagementServiceServer()
 }
@@ -113,6 +124,9 @@ func (UnimplementedPeripheralManagementServiceServer) CreatePeripheral(context.C
 }
 func (UnimplementedPeripheralManagementServiceServer) RemovePeripheral(context.Context, *Peripheral) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePeripheral not implemented")
+}
+func (UnimplementedPeripheralManagementServiceServer) LinkHardware(context.Context, *LinkHardwareRequest) (*Peripheral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LinkHardware not implemented")
 }
 func (UnimplementedPeripheralManagementServiceServer) GetDeploymentPeripherals(*GetDeploymentPeripheralsRequest, PeripheralManagementService_GetDeploymentPeripheralsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetDeploymentPeripherals not implemented")
@@ -185,6 +199,24 @@ func _PeripheralManagementService_RemovePeripheral_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PeripheralManagementService_LinkHardware_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LinkHardwareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PeripheralManagementServiceServer).LinkHardware(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.PeripheralManagementService/LinkHardware",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PeripheralManagementServiceServer).LinkHardware(ctx, req.(*LinkHardwareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PeripheralManagementService_GetDeploymentPeripherals_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetDeploymentPeripheralsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -221,6 +253,10 @@ var _PeripheralManagementService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemovePeripheral",
 			Handler:    _PeripheralManagementService_RemovePeripheral_Handler,
+		},
+		{
+			MethodName: "LinkHardware",
+			Handler:    _PeripheralManagementService_LinkHardware_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

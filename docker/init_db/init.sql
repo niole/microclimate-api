@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS microclimates.Peripherals (
     Id varchar(36) PRIMARY KEY NOT NULL,
     OwnerUserId varchar(36) NOT NULL,
     DeploymentId varchar(36) NOT NULL,
-    HardwareId varchar(36) NOT NULL,
+    HardwareId varchar(36),
     Type ENUM('THERMAL', 'PARTICLE') NOT NULL,
     Unit ENUM('F', 'C', 'PM2.5', '%') NOT NULL,
     Name varchar(255) NOT NULL

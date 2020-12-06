@@ -179,42 +179,58 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting peripheral test")
 
-	//ownerUserId := "nioleuid"
-	//deploymentId := "deploymentuid"
+	p, err := client.LinkHardware(ctx, &api.LinkHardwareRequest{HardwareId: newUuidString(), PeripheralId: "fakep2"})
 
-	//p, err := client.CreatePeripheral(ctx, &api.NewPeripheral{
-	//	OwnerUserId:  ownerUserId,
-	//	DeploymentId: deploymentId,
-	//	HardwareId:   newUuidString(),
-	//	Type:         api.NewPeripheral_PARTICLE,
-	//	Unit:         "PM2.5",
-	//	Name:         "garage particle sensor",
-	//})
+	log.Print(p)
+	log.Print(err)
+
+	p, err = client.LinkHardware(ctx, &api.LinkHardwareRequest{HardwareId: newUuidString(), PeripheralId: "p2"})
+
+	log.Print(p)
+	log.Print(err)
+
+	ownerUserId := "nioleuid"
+	deploymentId := "deploymentuid"
+	p, err = client.CreatePeripheral(ctx, &api.NewPeripheral{
+		OwnerUserId:  ownerUserId,
+		DeploymentId: deploymentId,
+		HardwareId: &api.NullableString{
+			Kind: &api.NullableString_Null{},
+		},
+		Type: api.NewPeripheral_PARTICLE,
+		Unit: "PM2.5",
+		Name: "with null id",
+	})
+	newP := p
 
 	//client.CreatePeripheral(ctx, &api.NewPeripheral{
 	//	OwnerUserId:  ownerUserId,
 	//	DeploymentId: deploymentId,
-	//	HardwareId:   newUuidString(),
-	//	Type:         api.NewPeripheral_PARTICLE,
-	//	Unit:         "PM2.5",
-	//	Name:         "livingroom",
+	//	HardwareId: &api.NullableString{
+	//		Kind: &api.NullableString_Data{
+	//			Data: newUuidString(),
+	//		},
+	//	},
+	//	Type: api.NewPeripheral_PARTICLE,
+	//	Unit: "PM2.5",
+	//	Name: "livingroom",
 	//})
 
-	//log.Print(p)
-	//log.Print(err)
+	log.Print(p)
+	log.Print(err)
 
 	peripheralId := "p2"
 
-	p, err := client.GetPeripheral(ctx, &api.GetPeripheralRequest{
+	p, err = client.GetPeripheral(ctx, &api.GetPeripheralRequest{
 		PeripheralId: peripheralId,
 	})
 
 	log.Print(p)
 	log.Print(err)
 
-	//_, err = client.RemovePeripheral(ctx, p)
+	_, err = client.RemovePeripheral(ctx, newP)
 
-	//log.Print(err)
+	log.Print(err)
 }
 
 func main() {
@@ -231,6 +247,6 @@ func main() {
 	//testDeployment(conn)
 
 	//testEvent(conn)
-	//testPeripheral(conn)
+	testPeripheral(conn)
 	//testUser(conn)
 }

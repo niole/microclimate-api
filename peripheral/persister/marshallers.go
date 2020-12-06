@@ -13,7 +13,7 @@ func ScanOnePeripheral(result Scannable, saveToPeripheral *api.Peripheral) error
 	var ownerUserId string
 	var deploymentId string
 	var peripheralType string
-	var hardwareId string
+	var hardwareId sql.NullString
 	var unit string
 	var name string
 
@@ -27,11 +27,23 @@ func ScanOnePeripheral(result Scannable, saveToPeripheral *api.Peripheral) error
 		&name,
 	)
 
+	var nullableHardwareId = &api.NullableString{
+		Kind: &api.NullableString_Null{},
+	}
+
+	if hardwareId.Valid {
+		nullableHardwareId = &api.NullableString{
+			Kind: &api.NullableString_Data{
+				Data: hardwareId.String,
+			},
+		}
+	}
+
 	*saveToPeripheral = api.Peripheral{
 		OwnerUserId:  ownerUserId,
 		DeploymentId: deploymentId,
 		Id:           id,
-		HardwareId:   hardwareId,
+		HardwareId:   nullableHardwareId,
 		Type:         api.Peripheral_PeripheralType(api.Peripheral_PeripheralType_value[peripheralType]),
 		Unit:         unit,
 		Name:         name,
