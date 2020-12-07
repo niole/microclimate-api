@@ -45,7 +45,7 @@ func (s PeripheralEventService) FilterEvents(
 	request *api.MeasurementEventFilterRequest,
 	stream api.PeripheralMeasurementEventService_FilterEventsServer,
 ) error {
-	cancellableCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	cancellableCtx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
 
 	events, err := persister.FilterEvents(cancellableCtx, request)
