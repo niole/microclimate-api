@@ -25,6 +25,8 @@ func (s DeploymentManagementService) GetDeploymentsForUser(
 	if err != nil {
 		log.Printf("Failed to get requested deployments %v, error %v", request, err)
 	} else {
+		log.Printf("Successfully got %v deployments for user %v", len(deployments), request.UserId)
+
 		for _, s := range deployments {
 			err = stream.Send(&s)
 			if err != nil {
@@ -48,6 +50,8 @@ func (s DeploymentManagementService) CreateDeployment(ctx context.Context, newDe
 			&newDeployment,
 			err,
 		)
+	} else {
+		log.Printf("Successfully created deployment %v", newDeployment.Name)
 	}
 
 	return deployment, err
@@ -65,6 +69,8 @@ func (s DeploymentManagementService) GetDeployment(ctx context.Context, in *api.
 			&in,
 			err,
 		)
+	} else {
+		log.Printf("Successfully got deployment %v", deployment.Name)
 	}
 
 	return deployment, err
@@ -78,6 +84,8 @@ func (s DeploymentManagementService) RemoveDeployment(ctx context.Context, in *a
 
 	if err != nil {
 		log.Printf("Failed to remove deployment %v", in)
+	} else {
+		log.Printf("Successfully removed deployment %v", in.DeploymentId)
 	}
 
 	return &api.Empty{}, err

@@ -98,56 +98,56 @@ func testDeployment(conn grpc.ClientConnInterface) {
 
 	ownerUserId := "nioleuid"
 
-	//d, err := client.CreateDeployment(ctx, &api.NewDeployment{
-	//	OwnerUserId: ownerUserId,
-	//	Name:        "my apartment 123",
-	//})
+	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
+		OwnerUserId: ownerUserId,
+		Name:        "gmy apartment 123",
+	})
 
 	////_, err = client.CreateDeployment(ctx, &api.NewDeployment{
 	////	OwnerUserId: ownerUserId,
 	////})
 
-	//log.Print(d)
-	//log.Print(err)
+	log.Print(d)
+	log.Print(err)
 
-	//deploymentStreamClient, streamError := client.GetDeploymentsForUser(ctx, &api.GetDeploymentsForUserRequest{
-	//	UserId: ownerUserId,
-	//})
+	deploymentStreamClient, streamError := client.GetDeploymentsForUser(ctx, &api.GetDeploymentsForUserRequest{
+		UserId: ownerUserId,
+	})
 
-	//if streamError != nil {
-	//	log.Fatalf("Failed to start receiving deployments, error %v", streamError)
-	//}
+	if streamError != nil {
+		log.Fatalf("Failed to start receiving deployments, error %v", streamError)
+	}
 
-	//for {
-	//	newEvent, err := deploymentStreamClient.Recv()
-	//	if err == io.EOF {
-	//		break
-	//	}
-	//	if err != nil {
-	//		log.Fatalf("Failed to receive single deployment, error %v", err)
-	//		break
-	//	}
-	//	if newEvent != nil {
-	//		log.Print(newEvent)
-	//	} else {
-	//		log.Print("DONE")
-	//		break
-	//	}
-	//}
+	for {
+		newEvent, err := deploymentStreamClient.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Failed to receive single deployment, error %v", err)
+			break
+		}
+		if newEvent != nil {
+			log.Print(newEvent)
+		} else {
+			log.Print("DONE")
+			break
+		}
+	}
 
-	d, err := client.GetDeployment(ctx, &api.GetDeploymentRequest{
+	gottenD, err := client.GetDeployment(ctx, &api.GetDeploymentRequest{
 		OwnerUserId:  ownerUserId,
 		DeploymentId: "deploymentuid",
 	})
 
-	log.Print(d)
+	log.Print(gottenD)
 	log.Print(err)
 
-	//_, err = client.RemoveDeployment(ctx, &api.RemoveDeploymentRequest{
-	//	DeploymentId: d.Id,
-	//})
+	_, err = client.RemoveDeployment(ctx, &api.RemoveDeploymentRequest{
+		DeploymentId: d.Id,
+	})
 
-	//log.Print(err)
+	log.Print(err)
 }
 
 func testUser(conn grpc.ClientConnInterface) {
@@ -249,5 +249,5 @@ func main() {
 
 	//testEvent(conn)
 	//testPeripheral(conn)
-	testUser(conn)
+	//testUser(conn)
 }
