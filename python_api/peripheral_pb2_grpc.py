@@ -30,6 +30,11 @@ class PeripheralManagementServiceStub(object):
                 request_serializer=peripheral__pb2.Peripheral.SerializeToString,
                 response_deserializer=empty__pb2.Empty.FromString,
                 )
+        self.LinkHardware = channel.unary_unary(
+                '/api.PeripheralManagementService/LinkHardware',
+                request_serializer=peripheral__pb2.LinkHardwareRequest.SerializeToString,
+                response_deserializer=peripheral__pb2.Peripheral.FromString,
+                )
         self.GetDeploymentPeripherals = channel.unary_stream(
                 '/api.PeripheralManagementService/GetDeploymentPeripherals',
                 request_serializer=peripheral__pb2.GetDeploymentPeripheralsRequest.SerializeToString,
@@ -58,6 +63,12 @@ class PeripheralManagementServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def LinkHardware(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetDeploymentPeripherals(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -81,6 +92,11 @@ def add_PeripheralManagementServiceServicer_to_server(servicer, server):
                     servicer.RemovePeripheral,
                     request_deserializer=peripheral__pb2.Peripheral.FromString,
                     response_serializer=empty__pb2.Empty.SerializeToString,
+            ),
+            'LinkHardware': grpc.unary_unary_rpc_method_handler(
+                    servicer.LinkHardware,
+                    request_deserializer=peripheral__pb2.LinkHardwareRequest.FromString,
+                    response_serializer=peripheral__pb2.Peripheral.SerializeToString,
             ),
             'GetDeploymentPeripherals': grpc.unary_stream_rpc_method_handler(
                     servicer.GetDeploymentPeripherals,
@@ -145,6 +161,23 @@ class PeripheralManagementService(object):
         return grpc.experimental.unary_unary(request, target, '/api.PeripheralManagementService/RemovePeripheral',
             peripheral__pb2.Peripheral.SerializeToString,
             empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def LinkHardware(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/api.PeripheralManagementService/LinkHardware',
+            peripheral__pb2.LinkHardwareRequest.SerializeToString,
+            peripheral__pb2.Peripheral.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
