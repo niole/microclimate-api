@@ -139,3 +139,35 @@ func LinkHardware(ctx context.Context, peripheralId string, hardwareId string) (
 
 	return GetPeripheralById(ctx, peripheralId)
 }
+
+func EditPeripheral(ctx context.Context, peripheralId string, newName *string, newType *api.Peripheral_PeripheralType) (*api.Peripheral, error) {
+	db := database.Get(initTable)
+
+	var err error
+
+	if newName != nil {
+		_, err = db.ExecContext(
+			ctx,
+			`UPDATE Peripherals SET Name = ? WHERE Id = ?;`,
+			newName,
+			peripheralId,
+		)
+
+	}
+
+	if newType != nil {
+		_, err = db.ExecContext(
+			ctx,
+			`UPDATE Peripherals SET Type = ? WHERE Id = ?;`,
+			api.Peripheral_PeripheralType_name[int32(*newType)],
+			peripheralId,
+		)
+
+	}
+
+	if err == nil {
+		return GetPeripheralById(ctx, peripheralId)
+	}
+
+	return nil, err
+}

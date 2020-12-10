@@ -48,7 +48,14 @@ message LinkHardwareRequest {
   string peripheralId = 2;
 }
 
+message EditPeripheralRequest {
+  string peripheralId = 1;
+  NullableString newName = 2;
+  NullablePType newType = 3;
+}
+
 service PeripheralManagementService {
+  rpc EditPeripheral(EditPeripheralRequest) returns (Peripheral);
   rpc GetPeripheral(GetPeripheralRequest) returns (Peripheral);
   rpc CreatePeripheral(NewPeripheral) returns (Peripheral);
   rpc RemovePeripheral(Peripheral) returns (Empty);
@@ -60,5 +67,12 @@ message NullableString {
   oneof kind {
     google.protobuf.NullValue null = 1;
     string data = 2;
+  }
+}
+
+message NullablePType {
+  oneof kind {
+    google.protobuf.NullValue null = 1;
+    api.Peripheral.PeripheralType data = 2;
   }
 }

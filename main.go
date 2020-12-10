@@ -220,12 +220,32 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 	log.Print(p)
 	log.Print(err)
 
-	peripheralId := "p2"
-
 	p, err = client.GetPeripheral(ctx, &api.GetPeripheralRequest{
-		PeripheralId: peripheralId,
+		PeripheralId: newP.Id,
 	})
 
+	log.Print(p)
+	log.Print(err)
+
+	p, err = client.EditPeripheral(ctx, &api.EditPeripheralRequest{
+		NewName: &api.NullableString{
+			Kind: &api.NullableString_Data{
+				Data: "NAMENAME",
+			},
+		},
+		NewType: &api.NullablePType{
+			Kind: &api.NullablePType_Data{
+				Data: api.Peripheral_THERMAL,
+			},
+		},
+		PeripheralId: newP.Id,
+	})
+
+	log.Print(p)
+	log.Print(err)
+	p, err = client.GetPeripheral(ctx, &api.GetPeripheralRequest{
+		PeripheralId: newP.Id,
+	})
 	log.Print(p)
 	log.Print(err)
 
@@ -248,6 +268,6 @@ func main() {
 	//testDeployment(conn)
 
 	//testEvent(conn)
-	//testPeripheral(conn)
+	testPeripheral(conn)
 	//testUser(conn)
 }

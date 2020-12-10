@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\014api/protobuf',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10peripheral.proto\x12\x03\x61pi\x1a\x0b\x65mpty.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xdd\x01\n\rNewPeripheral\x12\x13\n\x0bownerUserId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12\'\n\nhardwareId\x18\x03 \x01(\x0b\x32\x13.api.NullableString\x12/\n\x04type\x18\x04 \x01(\x0e\x32!.api.NewPeripheral.PeripheralType\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x0c\n\x04unit\x18\x06 \x01(\t\"+\n\x0ePeripheralType\x12\x0b\n\x07THERMAL\x10\x00\x12\x0c\n\x08PARTICLE\x10\x01\"\xe3\x01\n\nPeripheral\x12\x13\n\x0bownerUserId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\x12\'\n\nhardwareId\x18\x04 \x01(\x0b\x32\x13.api.NullableString\x12,\n\x04type\x18\x05 \x01(\x0e\x32\x1e.api.Peripheral.PeripheralType\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x0c\n\x04unit\x18\x07 \x01(\t\"+\n\x0ePeripheralType\x12\x0b\n\x07THERMAL\x10\x00\x12\x0c\n\x08PARTICLE\x10\x01\"7\n\x1fGetDeploymentPeripheralsRequest\x12\x14\n\x0c\x64\x65ploymentId\x18\x01 \x01(\t\",\n\x14GetPeripheralRequest\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\"?\n\x13LinkHardwareRequest\x12\x12\n\nhardwareId\x18\x01 \x01(\t\x12\x14\n\x0cperipheralId\x18\x02 \x01(\t\"T\n\x0eNullableString\x12*\n\x04null\x18\x01 \x01(\x0e\x32\x1a.google.protobuf.NullValueH\x00\x12\x0e\n\x04\x64\x61ta\x18\x02 \x01(\tH\x00\x42\x06\n\x04kind2\xd4\x02\n\x1bPeripheralManagementService\x12;\n\rGetPeripheral\x12\x19.api.GetPeripheralRequest\x1a\x0f.api.Peripheral\x12\x37\n\x10\x43reatePeripheral\x12\x12.api.NewPeripheral\x1a\x0f.api.Peripheral\x12/\n\x10RemovePeripheral\x12\x0f.api.Peripheral\x1a\n.api.Empty\x12\x39\n\x0cLinkHardware\x12\x18.api.LinkHardwareRequest\x1a\x0f.api.Peripheral\x12S\n\x18GetDeploymentPeripherals\x12$.api.GetDeploymentPeripheralsRequest\x1a\x0f.api.Peripheral0\x01\x42\x0eZ\x0c\x61pi/protobufb\x06proto3'
+  serialized_pb=b'\n\x10peripheral.proto\x12\x03\x61pi\x1a\x0b\x65mpty.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xdd\x01\n\rNewPeripheral\x12\x13\n\x0bownerUserId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12\'\n\nhardwareId\x18\x03 \x01(\x0b\x32\x13.api.NullableString\x12/\n\x04type\x18\x04 \x01(\x0e\x32!.api.NewPeripheral.PeripheralType\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x0c\n\x04unit\x18\x06 \x01(\t\"+\n\x0ePeripheralType\x12\x0b\n\x07THERMAL\x10\x00\x12\x0c\n\x08PARTICLE\x10\x01\"\xe3\x01\n\nPeripheral\x12\x13\n\x0bownerUserId\x18\x01 \x01(\t\x12\x14\n\x0c\x64\x65ploymentId\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\x12\'\n\nhardwareId\x18\x04 \x01(\x0b\x32\x13.api.NullableString\x12,\n\x04type\x18\x05 \x01(\x0e\x32\x1e.api.Peripheral.PeripheralType\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x0c\n\x04unit\x18\x07 \x01(\t\"+\n\x0ePeripheralType\x12\x0b\n\x07THERMAL\x10\x00\x12\x0c\n\x08PARTICLE\x10\x01\"7\n\x1fGetDeploymentPeripheralsRequest\x12\x14\n\x0c\x64\x65ploymentId\x18\x01 \x01(\t\",\n\x14GetPeripheralRequest\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\"?\n\x13LinkHardwareRequest\x12\x12\n\nhardwareId\x18\x01 \x01(\t\x12\x14\n\x0cperipheralId\x18\x02 \x01(\t\"x\n\x15\x45\x64itPeripheralRequest\x12\x14\n\x0cperipheralId\x18\x01 \x01(\t\x12$\n\x07newName\x18\x02 \x01(\x0b\x32\x13.api.NullableString\x12#\n\x07newType\x18\x03 \x01(\x0b\x32\x12.api.NullablePType\"T\n\x0eNullableString\x12*\n\x04null\x18\x01 \x01(\x0e\x32\x1a.google.protobuf.NullValueH\x00\x12\x0e\n\x04\x64\x61ta\x18\x02 \x01(\tH\x00\x42\x06\n\x04kind\"s\n\rNullablePType\x12*\n\x04null\x18\x01 \x01(\x0e\x32\x1a.google.protobuf.NullValueH\x00\x12.\n\x04\x64\x61ta\x18\x02 \x01(\x0e\x32\x1e.api.Peripheral.PeripheralTypeH\x00\x42\x06\n\x04kind2\x93\x03\n\x1bPeripheralManagementService\x12=\n\x0e\x45\x64itPeripheral\x12\x1a.api.EditPeripheralRequest\x1a\x0f.api.Peripheral\x12;\n\rGetPeripheral\x12\x19.api.GetPeripheralRequest\x1a\x0f.api.Peripheral\x12\x37\n\x10\x43reatePeripheral\x12\x12.api.NewPeripheral\x1a\x0f.api.Peripheral\x12/\n\x10RemovePeripheral\x12\x0f.api.Peripheral\x1a\n.api.Empty\x12\x39\n\x0cLinkHardware\x12\x18.api.LinkHardwareRequest\x1a\x0f.api.Peripheral\x12S\n\x18GetDeploymentPeripherals\x12$.api.GetDeploymentPeripheralsRequest\x1a\x0f.api.Peripheral0\x01\x42\x0eZ\x0c\x61pi/protobufb\x06proto3'
   ,
   dependencies=[empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,])
 
@@ -324,6 +324,52 @@ _LINKHARDWAREREQUEST = _descriptor.Descriptor(
 )
 
 
+_EDITPERIPHERALREQUEST = _descriptor.Descriptor(
+  name='EditPeripheralRequest',
+  full_name='api.EditPeripheralRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peripheralId', full_name='api.EditPeripheralRequest.peripheralId', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='newName', full_name='api.EditPeripheralRequest.newName', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='newType', full_name='api.EditPeripheralRequest.newType', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=690,
+  serialized_end=810,
+)
+
+
 _NULLABLESTRING = _descriptor.Descriptor(
   name='NullableString',
   full_name='api.NullableString',
@@ -363,8 +409,52 @@ _NULLABLESTRING = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=690,
-  serialized_end=774,
+  serialized_start=812,
+  serialized_end=896,
+)
+
+
+_NULLABLEPTYPE = _descriptor.Descriptor(
+  name='NullablePType',
+  full_name='api.NullablePType',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='null', full_name='api.NullablePType.null', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='api.NullablePType.data', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='kind', full_name='api.NullablePType.kind',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=898,
+  serialized_end=1013,
 )
 
 _NEWPERIPHERAL.fields_by_name['hardwareId'].message_type = _NULLABLESTRING
@@ -373,6 +463,8 @@ _NEWPERIPHERAL_PERIPHERALTYPE.containing_type = _NEWPERIPHERAL
 _PERIPHERAL.fields_by_name['hardwareId'].message_type = _NULLABLESTRING
 _PERIPHERAL.fields_by_name['type'].enum_type = _PERIPHERAL_PERIPHERALTYPE
 _PERIPHERAL_PERIPHERALTYPE.containing_type = _PERIPHERAL
+_EDITPERIPHERALREQUEST.fields_by_name['newName'].message_type = _NULLABLESTRING
+_EDITPERIPHERALREQUEST.fields_by_name['newType'].message_type = _NULLABLEPTYPE
 _NULLABLESTRING.fields_by_name['null'].enum_type = google_dot_protobuf_dot_struct__pb2._NULLVALUE
 _NULLABLESTRING.oneofs_by_name['kind'].fields.append(
   _NULLABLESTRING.fields_by_name['null'])
@@ -380,12 +472,22 @@ _NULLABLESTRING.fields_by_name['null'].containing_oneof = _NULLABLESTRING.oneofs
 _NULLABLESTRING.oneofs_by_name['kind'].fields.append(
   _NULLABLESTRING.fields_by_name['data'])
 _NULLABLESTRING.fields_by_name['data'].containing_oneof = _NULLABLESTRING.oneofs_by_name['kind']
+_NULLABLEPTYPE.fields_by_name['null'].enum_type = google_dot_protobuf_dot_struct__pb2._NULLVALUE
+_NULLABLEPTYPE.fields_by_name['data'].enum_type = _PERIPHERAL_PERIPHERALTYPE
+_NULLABLEPTYPE.oneofs_by_name['kind'].fields.append(
+  _NULLABLEPTYPE.fields_by_name['null'])
+_NULLABLEPTYPE.fields_by_name['null'].containing_oneof = _NULLABLEPTYPE.oneofs_by_name['kind']
+_NULLABLEPTYPE.oneofs_by_name['kind'].fields.append(
+  _NULLABLEPTYPE.fields_by_name['data'])
+_NULLABLEPTYPE.fields_by_name['data'].containing_oneof = _NULLABLEPTYPE.oneofs_by_name['kind']
 DESCRIPTOR.message_types_by_name['NewPeripheral'] = _NEWPERIPHERAL
 DESCRIPTOR.message_types_by_name['Peripheral'] = _PERIPHERAL
 DESCRIPTOR.message_types_by_name['GetDeploymentPeripheralsRequest'] = _GETDEPLOYMENTPERIPHERALSREQUEST
 DESCRIPTOR.message_types_by_name['GetPeripheralRequest'] = _GETPERIPHERALREQUEST
 DESCRIPTOR.message_types_by_name['LinkHardwareRequest'] = _LINKHARDWAREREQUEST
+DESCRIPTOR.message_types_by_name['EditPeripheralRequest'] = _EDITPERIPHERALREQUEST
 DESCRIPTOR.message_types_by_name['NullableString'] = _NULLABLESTRING
+DESCRIPTOR.message_types_by_name['NullablePType'] = _NULLABLEPTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 NewPeripheral = _reflection.GeneratedProtocolMessageType('NewPeripheral', (_message.Message,), {
@@ -423,12 +525,26 @@ LinkHardwareRequest = _reflection.GeneratedProtocolMessageType('LinkHardwareRequ
   })
 _sym_db.RegisterMessage(LinkHardwareRequest)
 
+EditPeripheralRequest = _reflection.GeneratedProtocolMessageType('EditPeripheralRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EDITPERIPHERALREQUEST,
+  '__module__' : 'peripheral_pb2'
+  # @@protoc_insertion_point(class_scope:api.EditPeripheralRequest)
+  })
+_sym_db.RegisterMessage(EditPeripheralRequest)
+
 NullableString = _reflection.GeneratedProtocolMessageType('NullableString', (_message.Message,), {
   'DESCRIPTOR' : _NULLABLESTRING,
   '__module__' : 'peripheral_pb2'
   # @@protoc_insertion_point(class_scope:api.NullableString)
   })
 _sym_db.RegisterMessage(NullableString)
+
+NullablePType = _reflection.GeneratedProtocolMessageType('NullablePType', (_message.Message,), {
+  'DESCRIPTOR' : _NULLABLEPTYPE,
+  '__module__' : 'peripheral_pb2'
+  # @@protoc_insertion_point(class_scope:api.NullablePType)
+  })
+_sym_db.RegisterMessage(NullablePType)
 
 
 DESCRIPTOR._options = None
@@ -440,13 +556,23 @@ _PERIPHERALMANAGEMENTSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=777,
-  serialized_end=1117,
+  serialized_start=1016,
+  serialized_end=1419,
   methods=[
+  _descriptor.MethodDescriptor(
+    name='EditPeripheral',
+    full_name='api.PeripheralManagementService.EditPeripheral',
+    index=0,
+    containing_service=None,
+    input_type=_EDITPERIPHERALREQUEST,
+    output_type=_PERIPHERAL,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
   _descriptor.MethodDescriptor(
     name='GetPeripheral',
     full_name='api.PeripheralManagementService.GetPeripheral',
-    index=0,
+    index=1,
     containing_service=None,
     input_type=_GETPERIPHERALREQUEST,
     output_type=_PERIPHERAL,
@@ -456,7 +582,7 @@ _PERIPHERALMANAGEMENTSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreatePeripheral',
     full_name='api.PeripheralManagementService.CreatePeripheral',
-    index=1,
+    index=2,
     containing_service=None,
     input_type=_NEWPERIPHERAL,
     output_type=_PERIPHERAL,
@@ -466,7 +592,7 @@ _PERIPHERALMANAGEMENTSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='RemovePeripheral',
     full_name='api.PeripheralManagementService.RemovePeripheral',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_PERIPHERAL,
     output_type=empty__pb2._EMPTY,
@@ -476,7 +602,7 @@ _PERIPHERALMANAGEMENTSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='LinkHardware',
     full_name='api.PeripheralManagementService.LinkHardware',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_LINKHARDWAREREQUEST,
     output_type=_PERIPHERAL,
@@ -486,7 +612,7 @@ _PERIPHERALMANAGEMENTSERVICE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetDeploymentPeripherals',
     full_name='api.PeripheralManagementService.GetDeploymentPeripherals',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_GETDEPLOYMENTPERIPHERALSREQUEST,
     output_type=_PERIPHERAL,

@@ -134,3 +134,52 @@ func (s PeripheralManagementService) GetPeripheral(ctx context.Context, request 
 
 	return peripheral, err
 }
+
+func (s PeripheralManagementService) EditPeripheral(ctx context.Context, request *api.EditPeripheralRequest) (*api.Peripheral, error) {
+	cancellableCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	log.Printf("Editing peripheral with id %v", request.PeripheralId)
+
+	peripheral, err := persister.GetPeripheralById(cancellableCtx, request.PeripheralId)
+
+	if peripheral != nil {
+		var newName *string
+		foundName := request.NewName.GetData()
+		if foundName != "" {
+			newName = &foundName
+		}
+
+		var newType *api.Peripheral_PeripheralType
+		if x, ok := request.NewType.GetKind().(*api.NullablePType_Data); ok {
+			newType = &x.Data
+		}
+
+		updatedPeripheral, err := persister.EditPeripheral(
+			cancellableCtx,
+			request.PeripheralId,
+			newName,
+			newType,
+		)
+
+		if err != nil {
+			log.Printf("Failed to edit peripheral with id %v. error: %v", request.PeripheralId, err)
+		}
+
+		return updatedPeripheral, err
+	} else {
+		if err != nil {
+			log.Printf("Couldn't get peripheral with id %v. error: %v", request.PeripheralId, err)
+		} else {
+			log.Printf("Peripheral with id %v does not exist", request.PeripheralId)
+		}
+	}
+
+	if err != nil {
+		log.Printf("Failed to get peripheral %v error %v", request, err)
+	} else {
+		log.Printf("Successfully got peripheral with id %v", request.PeripheralId)
+	}
+
+	return peripheral, err
+}

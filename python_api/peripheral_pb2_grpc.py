@@ -15,6 +15,11 @@ class PeripheralManagementServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.EditPeripheral = channel.unary_unary(
+                '/api.PeripheralManagementService/EditPeripheral',
+                request_serializer=peripheral__pb2.EditPeripheralRequest.SerializeToString,
+                response_deserializer=peripheral__pb2.Peripheral.FromString,
+                )
         self.GetPeripheral = channel.unary_unary(
                 '/api.PeripheralManagementService/GetPeripheral',
                 request_serializer=peripheral__pb2.GetPeripheralRequest.SerializeToString,
@@ -44,6 +49,12 @@ class PeripheralManagementServiceStub(object):
 
 class PeripheralManagementServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def EditPeripheral(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def GetPeripheral(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -78,6 +89,11 @@ class PeripheralManagementServiceServicer(object):
 
 def add_PeripheralManagementServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'EditPeripheral': grpc.unary_unary_rpc_method_handler(
+                    servicer.EditPeripheral,
+                    request_deserializer=peripheral__pb2.EditPeripheralRequest.FromString,
+                    response_serializer=peripheral__pb2.Peripheral.SerializeToString,
+            ),
             'GetPeripheral': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPeripheral,
                     request_deserializer=peripheral__pb2.GetPeripheralRequest.FromString,
@@ -112,6 +128,23 @@ def add_PeripheralManagementServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class PeripheralManagementService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def EditPeripheral(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/api.PeripheralManagementService/EditPeripheral',
+            peripheral__pb2.EditPeripheralRequest.SerializeToString,
+            peripheral__pb2.Peripheral.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetPeripheral(request,
