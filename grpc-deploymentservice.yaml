@@ -1,0 +1,103 @@
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: my-backendconfig
+spec:
+  healthCheck:
+    timeoutSec: 29
+    checkIntervalSec: 30
+    port: 3000
+    type: HTTP
+    requestPath: /
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-service
+  template:
+    metadata:
+      labels:
+        app: deployment-service
+    spec:
+      volumes:
+        - name: esp-tls-creds
+          secret:
+            secretName: esp-tls-creds
+        - name: service-account-creds
+          secret:
+            secretName: service-account-creds
+      containers:
+      - name: echo
+        image: jmalloc/echo-server:latest
+        env:
+          - name: PORT
+            value: "3000"
+        ports:
+          - containerPort: 3000
+      - name: esp
+        image: gcr.io/endpoints-release/endpoints-runtime:1
+        args: [
+          "--ssl_port=9000",
+          "--service=deployment.endpoints.microclimates-299418.cloud.goog",
+          "--rollout_strategy=managed",
+          "--backend=grpc://127.0.0.1:8080",
+          "-z", "healthz"
+        ]
+        volumeMounts:
+          - mountPath: /etc/nginx/ssl
+            name: esp-tls-creds
+            readOnly: true
+          - mountPath: /etc/nginx/creds
+            name: service-account-creds
+            readOnly: true
+        ports:
+          - name: esp-port
+            containerPort: 9000
+      - name: deploymentservice
+        image: docker.io/niole/deploymentservice:2
+        env:
+          - name: DB_HOST
+            value: "database.default.svc.cluster.local"
+          - name: PERIPHERAL_SERVER_ADDR
+            value: "peripheral:80"
+          - name: EVENT_SERVER_ADDR
+            value: "events:80"
+        ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-service
+  labels:
+    app: deployment-service
+  annotations:
+    cloud.google.com/app-protocols: '{"http2":"HTTP2"}'
+    service.alpha.kubernetes.io/app-protocols: '{"http2":"HTTP2"}'
+    cloud.google.com/backend-config: '{"ports":{"443": "my-backendconfig"}}'
+spec:
+  type: NodePort
+  ports:
+  - name: http2
+    port: 443
+    targetPort: 9000
+    protocol: TCP
+  selector:
+    app: deployment-service
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: deploymentservice-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: deployment-api-addr
+    networking.gke.io/managed-certificates: deployment-api
+spec:
+  backend:
+    serviceName: deployment-service
+    servicePort: 443

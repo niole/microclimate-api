@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api/clients"
 	api "api/protobuf"
 	"context"
 	"flag"
@@ -15,9 +16,11 @@ import (
 )
 
 var port int
+var host string
 
 func init() {
-	flag.IntVar(&port, "serverPort", 8080, "Port client")
+	flag.IntVar(&port, "serverPort", 8080, "Service's port")
+	flag.StringVar(&host, "host", "localhost", "Service's host")
 	flag.Parse()
 }
 
@@ -92,16 +95,18 @@ func testEvent(conn grpc.ClientConnInterface) {
 
 func testDeployment(conn grpc.ClientConnInterface) {
 	client := api.NewDeploymentManagementServiceClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
 	log.Print("starting deployment test")
 
 	ownerUserId := "nioleuid"
 
+	log.Print("Creating deployment")
 	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
 		OwnerUserId: ownerUserId,
 		Name:        "gmy apartment 123",
 	})
+	log.Print("AFTER Creating deployment")
 
 	////_, err = client.CreateDeployment(ctx, &api.NewDeployment{
 	////	OwnerUserId: ownerUserId,
@@ -109,6 +114,8 @@ func testDeployment(conn grpc.ClientConnInterface) {
 
 	log.Print(d)
 	log.Print(err)
+
+	log.Print("Get user deployments")
 
 	deploymentStreamClient, streamError := client.GetDeploymentsForUser(ctx, &api.GetDeploymentsForUserRequest{
 		UserId: ownerUserId,
@@ -256,18 +263,17 @@ func testPeripheral(conn grpc.ClientConnInterface) {
 
 func main() {
 	log.Println(quote.Go())
-	opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
-	serverAddr := fmt.Sprintf("localhost:%d", port)
+	serverAddr := fmt.Sprintf("%s:%d", host, port)
 	log.Println(serverAddr)
-	conn, err := grpc.Dial(serverAddr, opts...)
+	conn, err := clients.ClientConnection(serverAddr)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
 	defer conn.Close()
 
-	//testDeployment(conn)
+	testDeployment(conn)
 
 	//testEvent(conn)
-	testPeripheral(conn)
+	//testPeripheral(conn)
 	//testUser(conn)
 }

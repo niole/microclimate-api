@@ -58,6 +58,6 @@ func Get(initBlock func(context.Context, *sql.DB) error) *sql.DB {
 
 func DoPing(ctx context.Context, pool *sql.DB) {
 	if err := pool.PingContext(ctx); err != nil {
-		log.Fatalf("unable to connect to database: %v", err)
+		log.Printf("unable to connect to database: %v", err)
 	}
 }

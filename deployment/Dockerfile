@@ -20,4 +20,4 @@ RUN go install all
 
 ENTRYPOINT go run ./deployment/main/server.go -serverPort 8080
 
-EXPOSE 6003
+EXPOSE 8080
