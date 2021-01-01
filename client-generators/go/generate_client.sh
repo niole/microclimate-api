@@ -18,12 +18,3 @@ protoc -I=$SRC_DIR \
 --go-grpc_out=$DST_DIR  \
 --descriptor_set_out=$DST_DIR/api_descriptor.pb \
 $SRC_DIR/*.proto
-
-#python -m grpc_tools.protoc \
-#    --include_imports \
-#    --include_source_info \
-#    --proto_path=. \
-#    --descriptor_set_out=api_descriptor.pb \
-#    --python_out=generated_pb2 \
-#    --grpc_python_out=generated_pb2 \
-#    bookstore.proto
