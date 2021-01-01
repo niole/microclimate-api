@@ -1,56 +1,29 @@
-# general install
+# dev
 
-- install go1.15.3
-- Clone git project to $GOPATH directory.
-- `./install.sh`
-- `./generate_client.sh`
-
-# development
-
-## run
-
-- start db
 ```sh
-docker run \
---name dev_db \
--e MYSQL_ROOT_PASSWORD=pw \
--e MYSQL_USER=niole \
--e MYSQL_PASSWORD=pw \
--e MYSQL_DATABASE=default \
--p 3306:3306 \
--it mysql:8.0.22
-```
-- Test stuff out by running the server.go and then
-hitting it with the code in the main.go
+# install stuff
 
-run the server
-```sh
-export DB_HOST="0.0.0.0"
-go run src/server/impl/server.go
+./install.sh
+
+# generate clients
+
+./client-generators/go/generate_client.sh
+
+# run stuff
+
+docker-compose run --service-ports db
+go run ./event/main/server.go -serverPort 8080
+go run ./main.go
+
+# or
+
+docker-compose up
 ```
 
-run the client
-```sh
-go run src/main.go
+# prod
+
+Production code depends on GKE.
+
 ```
-
-stop the db
-```sh
-docker stop dev_db
+./production/install.sh
 ```
-
-# production
-
-## dependencies
-
-- docker 19
-- docker-compose 1.27.4
-
-## run services
-
-- `docker-compose up`
-
-## generate java client
-
-- `./generate_java_client.sh`
-- `cd ./java_api/api && ls`
