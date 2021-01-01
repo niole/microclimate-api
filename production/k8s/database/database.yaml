@@ -31,12 +31,24 @@ spec:
         image: mysql:8.0.22
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: pw
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_root_password
           - name: MYSQL_USER
-            value: niole
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_user
           - name: MYSQL_PASSWORD
-            value: pw
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_password
           - name: MYSQL_DATABASE
-            value: microclimates
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_database
         ports:
           - containerPort: 3306

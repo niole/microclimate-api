@@ -8,8 +8,11 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
+	"golang.org/x/oauth2/google"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 	"io"
+	"io/ioutil"
 	"log"
 	"rsc.io/quote"
 	"time"
@@ -17,10 +20,18 @@ import (
 
 var port int
 var host string
+var token string
+var keyfile string
+var audience string
+var key string
 
 func init() {
 	flag.IntVar(&port, "serverPort", 8080, "Service's port")
+	flag.StringVar(&key, "api-key", "", "API key.")
 	flag.StringVar(&host, "host", "localhost", "Service's host")
+	flag.StringVar(&token, "token", "", "Authentication token.")
+	flag.StringVar(&keyfile, "keyfile", "", "Path to a Google service account key file.")
+	flag.StringVar(&audience, "audience", "", "Audience.")
 	flag.Parse()
 }
 
@@ -99,12 +110,43 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	defer cancel()
 	log.Print("starting deployment test")
 
+	if key != "" {
+		log.Printf("Using API key: %s", key)
+		ctx = metadata.AppendToOutgoingContext(ctx, "x-api-key", key)
+	} else if keyfile != "" {
+		log.Printf("Authenticating using Google service account key in %s", keyfile)
+		keyBytes, err := ioutil.ReadFile(keyfile)
+		if err != nil {
+			log.Fatalf("Unable to read service account key file %s: %v", keyfile, err)
+		}
+
+		tokenSource, err := google.JWTAccessTokenSourceFromJSON(keyBytes, audience)
+		if err != nil {
+			log.Fatalf("Error building JWT access token source: %v", err)
+		}
+		jwt, err := tokenSource.Token()
+		if err != nil {
+			log.Fatalf("Unable to generate JWT token: %v", err)
+		}
+		token = jwt.AccessToken
+		// NOTE: the generated JWT token has a 1h TTL.
+		// Make sure to refresh the token before it expires by calling TokenSource.Token() for each outgoing requests.
+		// Calls to this particular implementation of TokenSource.Token() are cheap.
+	}
+
+	if token != "" {
+		log.Printf("Using authentication token: %s", token)
+		ctx = metadata.AppendToOutgoingContext(ctx, "Authorization", fmt.Sprintf("Bearer %s", token))
+	} else {
+		log.Print("No jwt token provided")
+	}
+
 	ownerUserId := "nioleuid"
 
 	log.Print("Creating deployment")
 	d, err := client.CreateDeployment(ctx, &api.NewDeployment{
 		OwnerUserId: ownerUserId,
-		Name:        "gmy apartment 123",
+		Name:        "anotherone3",
 	})
 	log.Print("AFTER Creating deployment")
 

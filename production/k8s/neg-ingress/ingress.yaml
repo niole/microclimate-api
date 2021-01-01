@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: deploymentservice-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: deployment-api-addr
+    networking.gke.io/managed-certificates: deployment-api
+spec:
+  rules:
+  - host: deployment.api.microclimatehome.com
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: deployment-service
+          servicePort: 80

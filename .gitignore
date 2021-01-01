@@ -1,2 +1,5 @@
 *.sum
 grpc-java
+python_api
+protobuf
+production/**/secrets

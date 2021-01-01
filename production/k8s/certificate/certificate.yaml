@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1beta2
+kind: ManagedCertificate
+metadata:
+  name: deployment-api
+spec:
+  domains:
+    - deployment.api.microclimatehome.com
+    - user.api.microclimatehome.com
+    - events.api.microclimatehome.com
+    - peripheral.api.microclimatehome.com

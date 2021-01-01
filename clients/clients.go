@@ -16,18 +16,25 @@ var (
 	peripheralServerAddr = os.Getenv("PERIPHERAL_SERVER_ADDR")
 )
 
+type myPerRPC struct {
+	credentials.PerRPCCredentials
+}
+
+func (m myPerRPC) RequireTransportSecurity() bool { return false }
 func ClientConnection(serverAddr string) (*grpc.ClientConn, error) {
 	pool, err := x509.SystemCertPool()
 	creds := credentials.NewClientTLSFromCert(pool, "")
 	scope := "read-write"
 
 	perRPC, err := oauth.NewServiceAccountFromFile(serviceAccountJson, scope)
+
 	if err != nil {
 		log.Printf("Failed to create jwt %v", err)
 	}
 	fmt.Println(perRPC)
 	conn, err := grpc.Dial(
 		serverAddr,
+		//grpc.WithInsecure(),
 		grpc.WithTransportCredentials(creds),
 		grpc.WithPerRPCCredentials(perRPC),
 	)

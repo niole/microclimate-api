@@ -6,13 +6,16 @@ import (
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 )
 
 var port int
+var enableReflection bool
 
 func init() {
+	flag.BoolVar(&enableReflection, "withReflection", false, "Whether or not to enable reflection")
 	flag.IntVar(&port, "serverPort", 6001, "Port for deploymentservice server")
 	flag.Parse()
 }
@@ -25,6 +28,11 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
+
+	if enableReflection {
+		reflection.Register(grpcServer)
+	}
+
 	api.RegisterDeploymentManagementServiceServer(
 		grpcServer,
 		new(service.DeploymentManagementService),

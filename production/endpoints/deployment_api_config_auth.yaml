@@ -34,7 +34,17 @@ apis:
 #
 usage:
   rules:
-  - selector: "*"
+  # get all deployments that belong to a user
+  - selector: api.DeploymentManagementService.GetDeploymentsForUser
+    allow_unregistered_calls: true
+  # create a deployment for a user
+  - selector: api.DeploymentManagementService.CreateDeployment
+    allow_unregistered_calls: true
+  # get a deployment
+  - selector: api.DeploymentManagementService.GetDeployment
+    allow_unregistered_calls: true
+  # remove a deployment
+  - selector: api.DeploymentManagementService.RemoveDeployment
     allow_unregistered_calls: true
 
 authentication:
@@ -42,7 +52,16 @@ authentication:
   - id: google_service_account
     issuer: microclimates-consumer@microclimates-consumer.iam.gserviceaccount.com
     jwks_uri: https://www.googleapis.com/robot/v1/metadata/x509/microclimates-consumer@microclimates-consumer.iam.gserviceaccount.com
+  - id: firebase
+    jwks_uri: https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com
+    audiences: microclimates-client
+    issuer: https://securetoken.google.com/microclimates-client
+    jwt_locations:
+    - header: "jwt-header-foo"
+      value_prefix: "jwt-prefix-foo"
+    - query: "jwt_query_bar"
   rules:
   - selector: "*"
     requirements:
+      - provider_id: firebase
       - provider_id: google_service_account
