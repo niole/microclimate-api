@@ -2,6 +2,9 @@ version: "3.8"
 
 x-common-variables: &common-variables
   DB_HOST: "db"
+  DB_USER: "niole"
+  DB_PASSWORD: "pw"
+  DB_NAME: "microclimates"
   PERIPHERAL_SERVER_ADDR: "peripheral:8080"
   EVENT_SERVER_ADDR: "events:8080"
 
