@@ -10,7 +10,20 @@ spec:
   - host: deployment.api.microclimatehome.com
     http:
       paths:
-      - path: /*
+      - path: /api.DeploymentManagementService/*
         backend:
           serviceName: deployment-service
           servicePort: 80
+      - path: /api.UserService/*
+        backend:
+          serviceName: user-service
+          servicePort: 80
+      - path: /api.PeripheralManagementService/*
+        backend:
+          serviceName: peripheral-service
+          servicePort: 80
+      - path: /api.PeripheralMeasurementEventService/*
+        backend:
+          serviceName: event-service
+          servicePort: 80
+

@@ -21,6 +21,34 @@ type myPerRPC struct {
 }
 
 func (m myPerRPC) RequireTransportSecurity() bool { return false }
+
+func JwtOnlyClientConnection(serverAddr string) (*grpc.ClientConn, error) {
+	scope := "read-write"
+	perRPC, err := oauth.NewServiceAccountFromFile(serviceAccountJson, scope)
+
+	conn, err := grpc.Dial(
+		serverAddr,
+		grpc.WithInsecure(),
+		grpc.WithPerRPCCredentials(myPerRPC{perRPC}),
+	)
+
+	if err != nil {
+		log.Printf("fail to dial: %v", err)
+		return nil, err
+	}
+	return conn, err
+}
+
+func InsecureClientConnection(serverAddr string) (*grpc.ClientConn, error) {
+	opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
+	conn, err := grpc.Dial(serverAddr, opts...)
+	if err != nil {
+		log.Printf("fail to dial: %v", err)
+		return nil, err
+	}
+	return conn, err
+}
+
 func ClientConnection(serverAddr string) (*grpc.ClientConn, error) {
 	pool, err := x509.SystemCertPool()
 	creds := credentials.NewClientTLSFromCert(pool, "")
@@ -34,13 +62,10 @@ func ClientConnection(serverAddr string) (*grpc.ClientConn, error) {
 	fmt.Println(perRPC)
 	conn, err := grpc.Dial(
 		serverAddr,
-		//grpc.WithInsecure(),
 		grpc.WithTransportCredentials(creds),
 		grpc.WithPerRPCCredentials(perRPC),
 	)
 
-	//opts := []grpc.DialOption{grpc.WithBlock(), grpc.WithInsecure()}
-	//conn, err := grpc.Dial(serverAddr, opts...)
 	if err != nil {
 		log.Printf("fail to dial: %v", err)
 		return nil, err

@@ -39,10 +39,8 @@ func newUuidString() string {
 	return uuid.New().String()
 }
 
-func testEvent(conn grpc.ClientConnInterface) {
+func testEvent(ctx context.Context, conn grpc.ClientConnInterface) {
 	client := api.NewPeripheralMeasurementEventServiceClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
 
 	peripheralId := "p1"
 	deploymentId := "deploymentuid"
@@ -104,42 +102,9 @@ func testEvent(conn grpc.ClientConnInterface) {
 	}
 }
 
-func testDeployment(conn grpc.ClientConnInterface) {
+func testDeployment(ctx context.Context, conn grpc.ClientConnInterface) {
 	client := api.NewDeploymentManagementServiceClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-	defer cancel()
 	log.Print("starting deployment test")
-
-	if key != "" {
-		log.Printf("Using API key: %s", key)
-		ctx = metadata.AppendToOutgoingContext(ctx, "x-api-key", key)
-	} else if keyfile != "" {
-		log.Printf("Authenticating using Google service account key in %s", keyfile)
-		keyBytes, err := ioutil.ReadFile(keyfile)
-		if err != nil {
-			log.Fatalf("Unable to read service account key file %s: %v", keyfile, err)
-		}
-
-		tokenSource, err := google.JWTAccessTokenSourceFromJSON(keyBytes, audience)
-		if err != nil {
-			log.Fatalf("Error building JWT access token source: %v", err)
-		}
-		jwt, err := tokenSource.Token()
-		if err != nil {
-			log.Fatalf("Unable to generate JWT token: %v", err)
-		}
-		token = jwt.AccessToken
-		// NOTE: the generated JWT token has a 1h TTL.
-		// Make sure to refresh the token before it expires by calling TokenSource.Token() for each outgoing requests.
-		// Calls to this particular implementation of TokenSource.Token() are cheap.
-	}
-
-	if token != "" {
-		log.Printf("Using authentication token: %s", token)
-		ctx = metadata.AppendToOutgoingContext(ctx, "Authorization", fmt.Sprintf("Bearer %s", token))
-	} else {
-		log.Print("No jwt token provided")
-	}
 
 	ownerUserId := "nioleuid"
 
@@ -199,10 +164,8 @@ func testDeployment(conn grpc.ClientConnInterface) {
 	log.Print(err)
 }
 
-func testUser(conn grpc.ClientConnInterface) {
+func testUser(ctx context.Context, conn grpc.ClientConnInterface) {
 	client := api.NewUserServiceClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
 	log.Print("starting user test")
 
 	email := "newuser@gmail.com"
@@ -223,10 +186,8 @@ func testUser(conn grpc.ClientConnInterface) {
 
 }
 
-func testPeripheral(conn grpc.ClientConnInterface) {
+func testPeripheral(ctx context.Context, conn grpc.ClientConnInterface) {
 	client := api.NewPeripheralManagementServiceClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
 	log.Print("starting peripheral test")
 
 	p, err := client.LinkHardware(ctx, &api.LinkHardwareRequest{HardwareId: newUuidString(), PeripheralId: "fakep2"})
@@ -307,15 +268,51 @@ func main() {
 	log.Println(quote.Go())
 	serverAddr := fmt.Sprintf("%s:%d", host, port)
 	log.Println(serverAddr)
+	//conn, err := clients.InsecureClientConnection(serverAddr)
+	// conn, err := clients.JwtOnlyClientConnection(serverAddr)
 	conn, err := clients.ClientConnection(serverAddr)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
 	defer conn.Close()
 
-	testDeployment(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
 
-	//testEvent(conn)
-	//testPeripheral(conn)
-	//testUser(conn)
+	if key != "" {
+		log.Printf("Using API key: %s", key)
+		ctx = metadata.AppendToOutgoingContext(ctx, "x-api-key", key)
+	} else if keyfile != "" {
+		log.Printf("Authenticating using Google service account key in %s", keyfile)
+		keyBytes, err := ioutil.ReadFile(keyfile)
+		if err != nil {
+			log.Fatalf("Unable to read service account key file %s: %v", keyfile, err)
+		}
+
+		tokenSource, err := google.JWTAccessTokenSourceFromJSON(keyBytes, audience)
+		if err != nil {
+			log.Fatalf("Error building JWT access token source: %v", err)
+		}
+		jwt, err := tokenSource.Token()
+		if err != nil {
+			log.Fatalf("Unable to generate JWT token: %v", err)
+		}
+		token = jwt.AccessToken
+		// NOTE: the generated JWT token has a 1h TTL.
+		// Make sure to refresh the token before it expires by calling TokenSource.Token() for each outgoing requests.
+		// Calls to this particular implementation of TokenSource.Token() are cheap.
+	}
+
+	if token != "" {
+		log.Printf("Using authentication token: %s", token)
+		ctx = metadata.AppendToOutgoingContext(ctx, "jwt-header-foo", fmt.Sprintf("jwt-prefix-foo%s", token))
+	} else {
+		log.Print("No jwt token provided")
+	}
+
+	//testDeployment(ctx, conn)
+
+	//testEvent(ctx, conn)
+	//testPeripheral(ctx, conn)
+	testUser(ctx, conn)
 }

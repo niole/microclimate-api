@@ -1,0 +1,64 @@
+# Copyright 2016 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# The configuration schema is defined by service.proto file
+# https://github.com/googleapis/googleapis/blob/master/google/api/service.proto
+type: google.api.Service
+config_version: 3
+
+name: peripheral.endpoints.microclimates-299418.cloud.goog
+
+title: Read-write Peripheral Service API
+apis:
+- name: api.PeripheralManagementService
+
+usage:
+  rules:
+  # edit a peripheral's name or type
+  - selector: api.PeripheralManagementService.EditPeripheral
+    allow_unregistered_calls: true
+  # get a specific peripheral
+  - selector: api.PeripheralManagementService.GetPeripheral
+    allow_unregistered_calls: true
+  # create a new peripheral
+  - selector: api.PeripheralManagementService.CreatePeripheral
+    allow_unregistered_calls: true
+  # remove a peripheral
+  - selector: api.PeripheralManagementService.RemovePeripheral
+    allow_unregistered_calls: true
+  # link hardware to an existing peripheral
+  - selector: api.PeripheralManagementService.LinkHardware
+    allow_unregistered_calls: true
+  # get all peripherals in a deployment
+  - selector: api.PeripheralManagementService.GetDeploymentPeripherals
+    allow_unregistered_calls: true
+
+authentication:
+  providers:
+  - id: google_service_account
+    issuer: microclimates-consumer@microclimates-consumer.iam.gserviceaccount.com
+    jwks_uri: https://www.googleapis.com/robot/v1/metadata/x509/microclimates-consumer@microclimates-consumer.iam.gserviceaccount.com
+  - id: firebase
+    jwks_uri: https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com
+    audiences: microclimates-client
+    issuer: https://securetoken.google.com/microclimates-client
+    jwt_locations:
+    - header: "jwt-header-foo"
+      value_prefix: "jwt-prefix-foo"
+    - query: "jwt_query_bar"
+  rules:
+  - selector: "*"
+    requirements:
+      - provider_id: firebase
+      - provider_id: google_service_account
