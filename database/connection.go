@@ -36,6 +36,7 @@ func Get(initBlock func(context.Context, *sql.DB) error) *sql.DB {
 		log.Print("Done creating database connection pool")
 		//defer pool.Close()
 
+		// TODO external configuration for max # of connections
 		pool.SetConnMaxLifetime(time.Minute * 3)
 		pool.SetMaxOpenConns(3)
 		pool.SetMaxIdleConns(3)
