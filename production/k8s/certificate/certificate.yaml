@@ -5,6 +5,3 @@ metadata:
 spec:
   domains:
     - deployment.api.microclimatehome.com
-    - user.api.microclimatehome.com
-    - events.api.microclimatehome.com
-    - peripheral.api.microclimatehome.com
