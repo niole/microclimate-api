@@ -37,7 +37,7 @@ spec:
         ports:
           - containerPort: 9000
       - name: backend
-        image: docker.io/niole/eventservice:1
+        image: docker.io/niole/eventservice:2
         env:
           - name: DB_HOST
             value: "database.default.svc.cluster.local"
@@ -57,9 +57,9 @@ spec:
                 name: database
                 key: mysql_database
           - name: PERIPHERAL_SERVER_ADDR
-            value: "peripheral-service.default.svc.cluster.local"
+            value: "peripheral-service.default.svc.cluster.local:3000"
           - name: EVENT_SERVER_ADDR
-            value: "event-service.default.svc.cluster.local"
+            value: "event-service.default.svc.cluster.local:3000"
         ports:
           - containerPort: 8080
 ---
@@ -79,6 +79,10 @@ spec:
   - name: http2
     port: 80
     targetPort: 9000
+    protocol: TCP
+  - name: internal
+    port: 3000
+    targetPort: 8080
     protocol: TCP
   selector:
     app: event-service

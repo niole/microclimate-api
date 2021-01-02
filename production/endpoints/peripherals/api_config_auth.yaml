@@ -25,24 +25,10 @@ apis:
 
 usage:
   rules:
-  # edit a peripheral's name or type
-  - selector: api.PeripheralManagementService.EditPeripheral
+  - selector: "*"
     allow_unregistered_calls: true
-  # get a specific peripheral
-  - selector: api.PeripheralManagementService.GetPeripheral
-    allow_unregistered_calls: true
-  # create a new peripheral
-  - selector: api.PeripheralManagementService.CreatePeripheral
-    allow_unregistered_calls: true
-  # remove a peripheral
-  - selector: api.PeripheralManagementService.RemovePeripheral
-    allow_unregistered_calls: true
-  # link hardware to an existing peripheral
   - selector: api.PeripheralManagementService.LinkHardware
-    allow_unregistered_calls: true
-  # get all peripherals in a deployment
-  - selector: api.PeripheralManagementService.GetDeploymentPeripherals
-    allow_unregistered_calls: true
+    allow_unregistered_calls: false
 
 authentication:
   providers:
@@ -58,7 +44,18 @@ authentication:
       value_prefix: "jwt-prefix-foo"
     - query: "jwt_query_bar"
   rules:
-  - selector: "*"
+  - selector: api.PeripheralManagementService.EditPeripheral
     requirements:
       - provider_id: firebase
-      - provider_id: google_service_account
+  - selector: api.PeripheralManagementService.GetPeripheral
+    requirements:
+      - provider_id: firebase
+  - selector: api.PeripheralManagementService.CreatePeripheral
+    requirements:
+      - provider_id: firebase
+  - selector: api.PeripheralManagementService.RemovePeripheral
+    requirements:
+      - provider_id: firebase
+  - selector: api.PeripheralManagementService.GetDeploymentPeripherals
+    requirements:
+      - provider_id: firebase

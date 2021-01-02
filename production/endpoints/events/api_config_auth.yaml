@@ -25,18 +25,10 @@ apis:
 
 usage:
   rules:
-  # send an sensor event
+  - selector: "*"
+    allow_unregistered_calls: true
   - selector: api.PeripheralMeasurementEventService.SendEvent
-    allow_unregistered_calls: true
-  # get events in a date range
-  - selector: api.PeripheralMeasurementEventService.FilterEvents
-    allow_unregistered_calls: true
-  # remove all events linked to a peripheral
-  - selector: api.PeripheralMeasurementEventService.DeletePeripheralEvents
-    allow_unregistered_calls: true
-  # get recent events summary for a deployment
-  - selector: api.PeripheralMeasurementEventService.MostRecentDeploymentEvents
-    allow_unregistered_calls: true
+    allow_unregistered_calls: false
 
 authentication:
   providers:
@@ -52,7 +44,12 @@ authentication:
       value_prefix: "jwt-prefix-foo"
     - query: "jwt_query_bar"
   rules:
-  - selector: "*"
+  - selector: api.PeripheralMeasurementEventService.FilterEvents
     requirements:
       - provider_id: firebase
-      - provider_id: google_service_account
+  - selector: api.PeripheralMeasurementEventService.DeletePeripheralEvents
+    requirements:
+      - provider_id: firebase
+  - selector: api.PeripheralMeasurementEventService.MostRecentDeploymentEvents
+    requirements:
+      - provider_id: firebase

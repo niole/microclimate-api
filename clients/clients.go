@@ -78,7 +78,7 @@ func PeripheralClientConnection() (*grpc.ClientConn, error) {
 	if peripheralServerAddr == "" {
 		addr = "0.0.0.0:6001"
 	}
-	return ClientConnection(addr)
+	return InsecureClientConnection(addr)
 }
 
 func EventsClientConnection() (*grpc.ClientConn, error) {
@@ -86,5 +86,5 @@ func EventsClientConnection() (*grpc.ClientConn, error) {
 	if eventServerAddr == "" {
 		addr = "0.0.0.0:6004"
 	}
-	return ClientConnection(addr)
+	return InsecureClientConnection(addr)
 }
