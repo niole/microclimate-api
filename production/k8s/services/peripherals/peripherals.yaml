@@ -1,7 +1,7 @@
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: event-service-bc
+  name: peripheral-service-bc
 spec:
   healthCheck:
     port: 9000
@@ -11,16 +11,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: event-deploy
+  name: peripheral-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: event-service
+      app: peripheral-service
   template:
     metadata:
       labels:
-        app: event-service
+        app: peripheral-service
     spec:
       containers:
       - name: esp
@@ -28,7 +28,7 @@ spec:
         args: [
           "--listener_port=9000",
           "--generate_self_signed_cert",
-          "--service=event.endpoints.microclimates-299418.cloud.goog",
+          "--service=peripheral.endpoints.microclimates-299418.cloud.goog",
           "--rollout_strategy=managed",
           "--backend=grpc://127.0.0.1:8080",
           "--enable_debug",
@@ -37,7 +37,7 @@ spec:
         ports:
           - containerPort: 9000
       - name: backend
-        image: docker.io/niole/eventservice:2
+        image: docker.io/niole/peripheralservice:3
         env:
           - name: DB_HOST
             value: "database.default.svc.cluster.local"
@@ -66,12 +66,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: event-service
+  name: peripheral-service
   labels:
-    app: event-service
+    app: peripheral-service
   annotations:
     cloud.google.com/app-protocols: '{"http2":"HTTP2"}'
-    cloud.google.com/backend-config: '{"default":"event-service-bc"}'
+    cloud.google.com/backend-config: '{"default":"peripheral-service-bc"}'
     cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: NodePort
@@ -85,5 +85,4 @@ spec:
     targetPort: 8080
     protocol: TCP
   selector:
-    app: event-service
-
+    app: peripheral-service

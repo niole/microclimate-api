@@ -1,7 +1,7 @@
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: user-service-bc
+  name: my-backendconfig
 spec:
   healthCheck:
     port: 9000
@@ -11,16 +11,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-deploy
+  name: deployment-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: deployment-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: deployment-service
     spec:
       containers:
       - name: esp
@@ -28,16 +28,16 @@ spec:
         args: [
           "--listener_port=9000",
           "--generate_self_signed_cert",
-          "--service=user.read-only.endpoints.microclimates-299418.cloud.goog",
+          "--service=deployment.endpoints.microclimates-299418.cloud.goog",
           "--rollout_strategy=managed",
-          "--backend=grpc://127.0.0.1:8080",
           "--enable_debug",
+          "--backend=grpc://127.0.0.1:8080",
           "-z", "healthz"
         ]
         ports:
           - containerPort: 9000
-      - name: backend
-        image: docker.io/niole/userservice:3
+      - name: deploymentservice
+        image: docker.io/niole/deploymentservice:6
         env:
           - name: DB_HOST
             value: "database.default.svc.cluster.local"
@@ -66,12 +66,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: deployment-service
   labels:
-    app: user-service
+    app: deployment-service
   annotations:
     cloud.google.com/app-protocols: '{"http2":"HTTP2"}'
-    cloud.google.com/backend-config: '{"default":"user-service-bc"}'
+    cloud.google.com/backend-config: '{"default":"my-backendconfig"}'
     cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: NodePort
@@ -81,4 +81,4 @@ spec:
     targetPort: 9000
     protocol: TCP
   selector:
-    app: user-service
+    app: deployment-service

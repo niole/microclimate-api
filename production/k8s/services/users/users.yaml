@@ -1,7 +1,7 @@
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: peripheral-service-bc
+  name: user-service-bc
 spec:
   healthCheck:
     port: 9000
@@ -11,16 +11,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: peripheral-deploy
+  name: user-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: peripheral-service
+      app: user-service
   template:
     metadata:
       labels:
-        app: peripheral-service
+        app: user-service
     spec:
       containers:
       - name: esp
@@ -28,7 +28,7 @@ spec:
         args: [
           "--listener_port=9000",
           "--generate_self_signed_cert",
-          "--service=peripheral.endpoints.microclimates-299418.cloud.goog",
+          "--service=user.read-only.endpoints.microclimates-299418.cloud.goog",
           "--rollout_strategy=managed",
           "--backend=grpc://127.0.0.1:8080",
           "--enable_debug",
@@ -37,7 +37,7 @@ spec:
         ports:
           - containerPort: 9000
       - name: backend
-        image: docker.io/niole/peripheralservice:2
+        image: docker.io/niole/userservice:4
         env:
           - name: DB_HOST
             value: "database.default.svc.cluster.local"
@@ -66,12 +66,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: peripheral-service
+  name: user-service
   labels:
-    app: peripheral-service
+    app: user-service
   annotations:
     cloud.google.com/app-protocols: '{"http2":"HTTP2"}'
-    cloud.google.com/backend-config: '{"default":"peripheral-service-bc"}'
+    cloud.google.com/backend-config: '{"default":"user-service-bc"}'
     cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: NodePort
@@ -80,9 +80,5 @@ spec:
     port: 80
     targetPort: 9000
     protocol: TCP
-  - name: internal
-    port: 3000
-    targetPort: 8080
-    protocol: TCP
   selector:
-    app: peripheral-service
+    app: user-service

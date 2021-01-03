@@ -46,20 +46,8 @@ fi
 echo -e "\nApplying secrets"
 kubectl apply -f ./production/k8s/secrets/
 
-echo -e "\nApplying database service"
-kubectl apply -f ./production/k8s/database/
-
-echo -e "\nApplying deployment service"
-kubectl apply -f ./production/k8s/deployment/
-
-echo -e "\nApplying user service"
-kubectl apply -f ./production/k8s/users/
-
-echo -e "\nApplying peripheral service"
-kubectl apply -f ./production/k8s/peripherals/
-
-echo -e "\nApplying event service"
-kubectl apply -f ./production/k8s/events/
+echo -e "\nApplying all services"
+kubectl apply -Rf ./production/k8s/services/
 
 echo -e "\nApplying neg ingress"
 kubectl apply -f ./production/k8s/neg-ingress/
