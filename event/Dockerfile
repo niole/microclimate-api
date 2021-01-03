@@ -4,11 +4,9 @@ RUN mkdir -p /go/src
 
 ADD go.mod /go/src/
 
-ADD ./clients /go/src/clients
+ADD ./shared /go/src/shared
 
 ADD ./event /go/src/event
-
-ADD ./database /go/src/database
 
 ADD ./protobuf /go/src/protobuf
 
@@ -18,6 +16,10 @@ ENV GO111MODULE=on
 
 RUN go install all
 
-ENTRYPOINT go run ./event/main/server.go -serverPort 8080
+ENV ENABLE_REFLECTION=$ENABLE_REFLECTION
+
+ENTRYPOINT go run ./event/main/server.go \
+-serverPort=8080 \
+-withReflection=${ENABLE_REFLECTION:-false}
 
 EXPOSE 6004

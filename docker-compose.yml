@@ -1,6 +1,7 @@
 version: "3.8"
 
 x-common-variables: &common-variables
+  ENABLE_REFLECTION: "true"
   DB_HOST: "db"
   DB_USER: "niole"
   DB_PASSWORD: "pw"

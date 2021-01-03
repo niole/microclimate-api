@@ -1,8 +1,8 @@
 package persister
 
 import (
-	"api/database"
 	api "api/protobuf"
+	"api/shared/database"
 	"context"
 	"database/sql"
 	"github.com/golang/protobuf/ptypes"

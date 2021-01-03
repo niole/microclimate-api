@@ -1,8 +1,8 @@
 package main
 
 import (
-	"api/clients"
 	api "api/protobuf"
+	"api/shared/clients"
 	"context"
 	"flag"
 	"fmt"
@@ -268,9 +268,9 @@ func main() {
 	log.Println(quote.Go())
 	serverAddr := fmt.Sprintf("%s:%d", host, port)
 	log.Println(serverAddr)
-	//conn, err := clients.InsecureClientConnection(serverAddr)
+	conn, err := clients.InsecureClientConnection(serverAddr)
 	// conn, err := clients.JwtOnlyClientConnection(serverAddr)
-	conn, err := clients.ClientConnection(serverAddr)
+	//conn, err := clients.ClientConnection(serverAddr)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
@@ -314,5 +314,5 @@ func main() {
 
 	//testEvent(ctx, conn)
 	//testPeripheral(ctx, conn)
-	testUser(ctx, conn)
+	//testUser(ctx, conn)
 }

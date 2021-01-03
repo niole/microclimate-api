@@ -1,9 +1,9 @@
 package service
 
 import (
-	"api/clients"
 	"api/peripheral/persister"
 	api "api/protobuf"
+	"api/shared/clients"
 	"context"
 	"log"
 	"time"
