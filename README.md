@@ -25,5 +25,7 @@ docker-compose up
 Production code depends on GKE.
 
 ```
+./production/container_cluster_create.sh us-central1-c
+kubectl apply -f production/k8s/certificate/certificate.yaml
 ./production/install.sh
 ```

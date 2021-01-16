@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-pvc
+  namespace: default
+spec:
+  storageClassName: database-storage
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+    name: http2
+  selector:
+    app: database
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      tolerations:
+      - key: cloud.google.com/gke-preemptible
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+      volumes:
+      - name: database-storage
+        persistentVolumeClaim:
+          claimName: database-pvc
+      containers:
+      - name: db
+        image: mysql:8.0.22
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: database-storage
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_root_password
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_user
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: database
+                key: mysql_database
+        ports:
+          - containerPort: 3306

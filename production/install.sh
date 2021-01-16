@@ -32,6 +32,9 @@ then
     echo -e "\nListing active container clusters"
     gcloud container clusters list
 
+    echo -e "\nGetting managed certificate resource"
+    kubectl get managedcertificate deployment-api
+
     while true; do
         read -p "Verify that context is correct. Do you wish to continue?" yn
         case $yn in
@@ -46,8 +49,14 @@ fi
 echo -e "\nApplying secrets"
 kubectl apply -f ./production/k8s/secrets/
 
-echo -e "\nApplying all services"
+echo -e "\nApplying storage"
+kubectl apply -f ./production/k8s/storage/
+
+echo -e "\nApplying database"
+kubectl apply -Rf ./production/k8s/database/
+
+echo -e "\nApplying services"
 kubectl apply -Rf ./production/k8s/services/
 
 echo -e "\nApplying neg ingress"
-kubectl apply -f ./production/k8s/neg-ingress/
+kubectl apply -f ./production/k8s/neg-ingress/ingress.yaml
