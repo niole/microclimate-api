@@ -27,8 +27,6 @@ usage:
   rules:
   - selector: "*"
     allow_unregistered_calls: true
-  - selector: api.PeripheralManagementService.LinkHardware
-    allow_unregistered_calls: false
 
 authentication:
   providers:
@@ -44,6 +42,9 @@ authentication:
       value_prefix: "jwt-prefix-foo"
     - query: "jwt_query_bar"
   rules:
+  - selector: api.PeripheralManagementService.LinkHardware
+    requirements:
+      - provider_id: google_service_account
   - selector: api.PeripheralManagementService.EditPeripheral
     requirements:
       - provider_id: firebase
